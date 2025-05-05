@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Big Day at the Park</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 14px;
+      background: #f9f9f9;
+      color: #222;
+    }
+    .text-container {
+      background: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+      margin-bottom: 30px;
+    }
+    .word {
+      text-decoration: underline;
+      cursor: pointer;
+      color: #2a6eea;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .word:active {
+      background: #cde3fa;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 20%;
+      transform: translate(-50%, 0);
+      background: #fff;
+      border: 2px solid #2a6eea;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      padding: 18px 16px 10px 16px;
+      z-index: 1000;
+      max-width: 90vw;
+      min-width: 220px;
+    }
+    .popup h3 {
+      margin-top: 0;
+      font-size: 1.2em;
+      color: #2a6eea;
+    }
+    .popup ul {
+      padding-left: 18px;
+      margin-bottom: 0;
+    }
+    .close-btn {
+      background: #2a6eea;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 1em;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .popup {
+        top: 8%;
+        font-size: 1em;
+        min-width: 150px;
+        padding: 12px 8px 8px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container" id="main-text">
+    <span class="word" data-word="Sam">Sam</span> and <span class="word" data-word="Tim">Tim</span> <span class="word" data-word="ran">ran</span> to the <span class="word" data-word="park">park</span>. <span class="word" data-word="It's">It's</span> a <span class="word" data-word="sunny">sunny</span> <span class="word" data-word="day">day</span> for <span class="word" data-word="playing">playing</span>. The <span class="word" data-word="boys">boys</span> <span class="word" data-word="brought">brought</span> a <span class="word" data-word="red">red</span> <span class="word" data-word="ball">ball</span> with <span class="word" data-word="them">them</span>. <span class="word" data-word="Under">Under</span> the <span class="word" data-word="big">big</span> <span class="word" data-word="tree">tree</span>, <span class="word" data-word="they">they</span> <span class="word" data-word="saw">saw</span> their <span class="word" data-word="friends">friends</span>. <span class="word" data-word="Mom">Mom</span> <span class="word" data-word="set up">set up</span> <span class="word" data-word="lunch">lunch</span> on the <span class="word" data-word="bench">bench</span>. The <span class="word" data-word="kids">kids</span> <span class="word" data-word="played">played</span> <span class="word" data-word="like crazy">like crazy</span> until <span class="word" data-word="noon">noon</span>. <span class="word" data-word="After">After</span> <span class="word" data-word="lunch">lunch</span>, <span class="word" data-word="they">they</span> all <span class="word" data-word="had">had</span> <span class="word" data-word="ice cream">ice cream</span>. <span class="word" data-word="Sam's">Sam's</span> <span class="word" data-word="dog">dog</span> <span class="word" data-word="jumped">jumped</span> <span class="word" data-word="over">over</span> the <span class="word" data-word="fence">fence</span>. <span class="word" data-word="They">They</span> <span class="word" data-word="couldn't">couldn't</span> <span class="word" data-word="stop">stop</span> <span class="word" data-word="laughing">laughing</span> at the <span class="word" data-word="funny">funny</span> <span class="word" data-word="dog">dog</span>. <span class="word" data-word="In the end">In the end</span>, <span class="word" data-word="they">they</span> <span class="word" data-word="were">were</span> <span class="word" data-word="happy">happy</span> but <span class="word" data-word="tired">tired</span>.
+  </div>
+
+  <div id="popup" class="popup">
+    <button class="close-btn" onclick="closePopup()">Close</button>
+    <h3 id="popup-word"></h3>
+    <div id="popup-def"></div>
+    <ul id="popup-examples"></ul>
+  </div>
+
+  <script>
+    // Definitions and examples for every word/idiom/contraction in the text
+    const wordData = {
+      "Sam": {
+        def: "Sam is a boy's name.",
+        ex: [
+          "Sam likes to play outside.",
+          "Sam has a blue hat.",
+          "Sam eats lunch with his friends.",
+          "Sam runs fast in the park.",
+          "Sam helps his mom.",
+          "Sam has a pet dog."
+        ]
+      },
+      "Tim": {
+        def: "Tim is a boy's name.",
+        ex: [
+          "Tim likes to read books.",
+          "Tim has a red ball.",
+          "Tim plays with Sam.",
+          "Tim is happy today.",
+          "Tim eats ice cream.",
+          "Tim jumps over the log."
+        ]
+      },
+      "ran": {
+        def: "Moved quickly on foot.",
+        ex: [
+          "The dog ran in the yard.",
+          "I ran to my mom.",
+          "He ran after the ball.",
+          "We ran to school.",
+          "She ran to the bus.",
+          "They ran home fast."
+        ]
+      },
+      "park": {
+        def: "A place outside with grass and trees where people can play.",
+        ex: [
+          "We go to the park to play.",
+          "The park has swings.",
+          "I see ducks at the park.",
+          "The park is big and green.",
+          "We eat lunch at the park.",
+          "My friends run in the park."
+        ]
+      },
+      "It's": {
+        def: "Short for 'it is.'",
+        ex: [
+          "It's sunny today.",
+          "It's time to go.",
+          "It's my turn.",
+          "It's a big dog.",
+          "It's fun to play.",
+          "It's cold outside."
+        ]
+      },
+      "sunny": {
+        def: "When the sun is shining and it is bright outside.",
+        ex: [
+          "It is a sunny day.",
+          "We play outside when it is sunny.",
+          "The sky is sunny and blue.",
+          "I wear a hat on sunny days.",
+          "Sunny days are warm.",
+          "We eat ice cream on sunny days."
+        ]
+      },
+      "day": {
+        def: "A period of 24 hours or the time when it is light outside.",
+        ex: [
+          "Today is a good day.",
+          "We play every day.",
+          "My birthday is one day.",
+          "Day is bright and night is dark.",
+          "I go to school in the day.",
+          "We eat lunch during the day."
+        ]
+      },
+      "playing": {
+        def: "Doing something fun, like a game.",
+        ex: [
+          "I like playing with my toys.",
+          "The kids are playing tag.",
+          "We are playing outside.",
+          "Playing is fun.",
+          "My dog loves playing.",
+          "She is playing with her doll."
+        ]
+      },
+      "boys": {
+        def: "More than one boy.",
+        ex: [
+          "The boys play soccer.",
+          "Two boys run fast.",
+          "The boys have a ball.",
+          "Boys and girls are friends.",
+          "The boys laugh together.",
+          "The boys jump high."
+        ]
+      },
+      "brought": {
+        def: "Carried something to a place.",
+        ex: [
+          "I brought my book to school.",
+          "She brought a snack.",
+          "We brought a ball to the park.",
+          "Dad brought pizza home.",
+          "He brought his toy.",
+          "They brought lunch."
+        ]
+      },
+      "red": {
+        def: "A color like an apple or a fire truck.",
+        ex: [
+          "My shirt is red.",
+          "I have a red ball.",
+          "The apple is red.",
+          "She wears a red hat.",
+          "The car is red.",
+          "Red is a bright color."
+        ]
+      },
+      "ball": {
+        def: "A round object used for playing games.",
+        ex: [
+          "I throw the ball.",
+          "The ball is blue.",
+          "We kick the ball.",
+          "She catches the ball.",
+          "The dog likes the ball.",
+          "The ball rolls fast."
+        ]
+      },
+      "them": {
+        def: "Refers to other people or things.",
+        ex: [
+          "Give the books to them.",
+          "I see them at school.",
+          "They like to play with them.",
+          "Mom helps them.",
+          "The toys belong to them.",
+          "We talk to them."
+        ]
+      },
+      "Under": {
+        def: "Below something.",
+        ex: [
+          "The cat is under the table.",
+          "We sit under the tree.",
+          "The ball is under the chair.",
+          "He hid under the bed.",
+          "The dog sleeps under the bench.",
+          "She found her shoe under the couch."
+        ]
+      },
+      "big": {
+        def: "Large in size.",
+        ex: [
+          "The elephant is big.",
+          "I have a big dog.",
+          "The tree is big.",
+          "My house is big.",
+          "The box is big.",
+          "She has a big smile."
+        ]
+      },
+      "tree": {
+        def: "A tall plant with a trunk and branches.",
+        ex: [
+          "A bird sits in the tree.",
+          "The tree is tall.",
+          "We climb the tree.",
+          "Leaves grow on the tree.",
+          "The tree gives shade.",
+          "Squirrels run up the tree."
+        ]
+      },
+      "they": {
+        def: "A word for more than one person or thing.",
+        ex: [
+          "They are my friends.",
+          "They play together.",
+          "They eat lunch.",
+          "They run fast.",
+          "They laugh a lot.",
+          "They like dogs."
+        ]
+      },
+      "saw": {
+        def: "Looked at something.",
+        ex: [
+          "I saw a bird.",
+          "She saw her friend.",
+          "We saw a dog.",
+          "He saw the ball.",
+          "They saw the park.",
+          "Mom saw me run."
+        ]
+      },
+      "friends": {
+        def: "People you like to spend time with.",
+        ex: [
+          "I play with my friends.",
+          "My friends are nice.",
+          "We eat with friends.",
+          "Friends help each other.",
+          "She has many friends.",
+          "Friends laugh together."
+        ]
+      },
+      "Mom": {
+        def: "Another word for mother.",
+        ex: [
+          "Mom makes lunch.",
+          "I love my mom.",
+          "Mom helps me.",
+          "Mom reads to me.",
+          "My mom is kind.",
+          "Mom takes me to the park."
+        ]
+      },
+      "set up": {
+        def: "Put things in place to get ready.",
+        ex: [
+          "Dad set up the tent.",
+          "We set up the game.",
+          "She set up the table.",
+          "They set up chairs.",
+          "Mom set up a picnic.",
+          "I set up my toys."
+        ]
+      },
+      "lunch": {
+        def: "A meal you eat in the middle of the day.",
+        ex: [
+          "I eat lunch at school.",
+          "Lunch is my favorite meal.",
+          "We have sandwiches for lunch.",
+          "Lunch is at noon.",
+          "Mom makes lunch for us.",
+          "We eat lunch at the park."
+        ]
+      },
+      "bench": {
+        def: "A long seat for more than one person.",
+        ex: [
+          "We sit on the bench.",
+          "The bench is in the park.",
+          "She rests on the bench.",
+          "The dog jumps on the bench.",
+          "Friends share the bench.",
+          "The bench is made of wood."
+        ]
+      },
+      "kids": {
+        def: "Children; young people.",
+        ex: [
+          "The kids play outside.",
+          "Kids like ice cream.",
+          "Kids run fast.",
+          "Kids laugh a lot.",
+          "Kids go to school.",
+          "The kids are happy."
+        ]
+      },
+      "played": {
+        def: "Did something fun.",
+        ex: [
+          "We played a game.",
+          "She played with her doll.",
+          "He played soccer.",
+          "They played together.",
+          "I played in the park.",
+          "The kids played tag."
+        ]
+      },
+      "like crazy": {
+        def: "A lot, very much, or with a lot of energy.",
+        ex: [
+          "The kids ran like crazy.",
+          "We laughed like crazy.",
+          "He jumped like crazy.",
+          "They played like crazy.",
+          "She danced like crazy.",
+          "The dog barked like crazy."
+        ]
+      },
+      "noon": {
+        def: "12 o'clock in the middle of the day.",
+        ex: [
+          "We eat lunch at noon.",
+          "The sun is high at noon.",
+          "School starts after noon.",
+          "It is hot at noon.",
+          "Noon is in the middle of the day.",
+          "We rest at noon."
+        ]
+      },
+      "After": {
+        def: "When something happens later than another thing.",
+        ex: [
+          "We eat dessert after dinner.",
+          "I wash my hands after I play.",
+          "She reads after school.",
+          "They go home after lunch.",
+          "I nap after noon.",
+          "He runs after the dog."
+        ]
+      },
+      "had": {
+        def: "Owned or did something in the past.",
+        ex: [
+          "I had a sandwich.",
+          "She had a red ball.",
+          "We had fun.",
+          "They had ice cream.",
+          "He had a dog.",
+          "Mom had a hat."
+        ]
+      },
+      "ice cream": {
+        def: "A cold, sweet treat you eat.",
+        ex: [
+          "I love ice cream.",
+          "We eat ice cream in summer.",
+          "Ice cream is cold.",
+          "She has chocolate ice cream.",
+          "The kids share ice cream.",
+          "Ice cream melts fast."
+        ]
+      },
+      "Sam's": {
+        def: "Belonging to Sam.",
+        ex: [
+          "Sam's dog is brown.",
+          "Sam's hat is blue.",
+          "Sam's ball is red.",
+          "Sam's mom is nice.",
+          "Sam's lunch is yummy.",
+          "Sam's friends are here."
+        ]
+      },
+      "dog": {
+        def: "An animal that barks and can be a pet.",
+        ex: [
+          "The dog runs fast.",
+          "I pet the dog.",
+          "The dog barks.",
+          "Dogs like to play.",
+          "She has a small dog.",
+          "The dog jumps high."
+        ]
+      },
+      "jumped": {
+        def: "Pushed off the ground with your legs.",
+        ex: [
+          "The frog jumped.",
+          "I jumped over the rock.",
+          "She jumped high.",
+          "The dog jumped up.",
+          "We jumped in the puddle.",
+          "He jumped with joy."
+        ]
+      },
+      "over": {
+        def: "From one side to the other, above something.",
+        ex: [
+          "The cat jumps over the box.",
+          "We walk over the bridge.",
+          "She looks over the fence.",
+          "He runs over the hill.",
+          "The bird flies over the tree.",
+          "I reach over the table."
+        ]
+      },
+      "fence": {
+        def: "A barrier that separates spaces, usually outside.",
+        ex: [
+          "The dog jumps over the fence.",
+          "The fence is white.",
+          "We paint the fence.",
+          "The ball hit the fence.",
+          "Birds sit on the fence.",
+          "The fence is tall."
+        ]
+      },
+      "They": {
+        def: "A word for more than one person or thing.",
+        ex: [
+          "They run fast.",
+          "They play in the park.",
+          "They laugh together.",
+          "They eat lunch.",
+          "They are happy.",
+          "They see the dog."
+        ]
+      },
+      "couldn't": {
+        def: "Short for 'could not.' Means not able to do something.",
+        ex: [
+          "I couldn't find my shoes.",
+          "She couldn't stop laughing.",
+          "He couldn't jump high.",
+          "They couldn't open the door.",
+          "We couldn't go outside.",
+          "Mom couldn't hear me."
+        ]
+      },
+      "stop": {
+        def: "To not do something anymore.",
+        ex: [
+          "Please stop running.",
+          "I stop when the light is red.",
+          "She can't stop laughing.",
+          "We stop to rest.",
+          "He stops at the door.",
+          "They stop playing."
+        ]
+      },
+      "laughing": {
+        def: "Making happy sounds when something is funny.",
+        ex: [
+          "The kids are laughing.",
+          "I am laughing at the joke.",
+          "She starts laughing.",
+          "We can't stop laughing.",
+          "He is laughing with his friend.",
+          "Mom is laughing, too."
+        ]
+      },
+      "funny": {
+        def: "Makes you laugh.",
+        ex: [
+          "The clown is funny.",
+          "That joke is funny.",
+          "My dog is funny.",
+          "He told a funny story.",
+          "She made a funny face.",
+          "The movie is funny."
+        ]
+      },
+      "In the end": {
+        def: "When everything is finished.",
+        ex: [
+          "In the end, we went home.",
+          "In the end, she won the game.",
+          "In the end, it was okay.",
+          "In the end, they were friends.",
+          "In the end, I found my toy.",
+          "In the end, we were happy."
+        ]
+      },
+      "were": {
+        def: "Past tense of 'are.'",
+        ex: [
+          "We were at the park.",
+          "They were happy.",
+          "You were late.",
+          "The dogs were loud.",
+          "The kids were tired.",
+          "The shoes were new."
+        ]
+      },
+      "happy": {
+        def: "Feeling good or glad.",
+        ex: [
+          "I am happy today.",
+          "She is happy with her toy.",
+          "We are happy to play.",
+          "He is happy to see you.",
+          "The kids are happy.",
+          "Mom is happy, too."
+        ]
+      },
+      "tired": {
+        def: "Needing to rest or sleep.",
+        ex: [
+          "I am tired after running.",
+          "She is tired at night.",
+          "We are tired from playing.",
+          "He feels tired.",
+          "The dog is tired.",
+          "Mom looks tired."
+        ]
+      }
+    };
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function showPopup(word) {
+      const data = wordData[word];
+      if (!data) return;
+      document.getElementById('popup-word').textContent = word;
+      document.getElementById('popup-def').textContent = data.def;
+      const ul = document.getElementById('popup-examples');
+      ul.innerHTML = '';
+      data.ex.forEach(ex => {
+        const li = document.createElement('li');
+        li.textContent = ex;
+        ul.appendChild(li);
+      });
+      document.getElementById('popup').style.display = 'block';
+    }
+
+    document.querySelectorAll('.word').forEach(span => {
+      span.addEventListener('click', function() {
+        showPopup(this.getAttribute('data-word'));
+      });
+    });
+
+    // Close popup when clicking outside
+    window.onclick = function(event) {
+      const popup = document.getElementById('popup');
+      if (event.target === popup) {
+        closePopup();
+      }
+    };
+  </script>
+</body>
+</html>
