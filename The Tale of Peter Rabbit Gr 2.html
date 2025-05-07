@@ -2,718 +2,767 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Tale of Peter Rabbit - Learning Page</title>
+  <title>The Tale of Peter Rabbit</title>
   <style>
     body {
+      background: #fff8f0;
+      color: #222;
+      font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
       font-size: 2em;
       font-weight: bold;
-      font-family: Arial, sans-serif;
-      background: #fffbe7;
-      color: #2d2d2d;
-      padding: 2em;
-      margin: 0;
+      padding: 1em;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .text {
-      margin-bottom: 2em;
-      line-height: 1.5em;
-    }
-    .word {
+    .clickable {
       text-decoration: underline;
       cursor: pointer;
-      position: relative;
+      text-underline-offset: 0.2em;
+      text-decoration-thickness: 0.14em;
+      color: #005fa3;
+      padding: 0 0.07em;
+      border-radius: 0.15em;
       transition: background 0.2s;
     }
-    .word:hover {
-      background: #ffe4b5;
+    .clickable:hover {
+      background: #e0f0ff;
     }
-    .popup {
+    #popup {
       display: none;
-      position: fixed;
-      left: 50%;
-      top: 10%;
-      transform: translateX(-50%);
-      background: #fff8dc;
-      border: 3px solid #b8860b;
-      border-radius: 20px;
-      padding: 1.5em 2em;
-      z-index: 1000;
-      max-width: 90vw;
+      position: static;
+      background: #fff;
+      color: #222;
+      border: 3px solid #005fa3;
+      border-radius: 0.5em;
+      padding: 1em;
+      margin-top: 1.5em;
+      font-size: 1.1em;
+      font-weight: bold;
+      box-shadow: 0 8px 32px #005fa366;
+      z-index: 10;
+      max-width: 95vw;
+      word-break: break-word;
+    }
+    #popup .close-btn {
+      float: right;
       font-size: 1.2em;
       font-weight: bold;
-      color: #3b2e16;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-    }
-    .popup .close-btn {
-      display: block;
-      margin: 1em auto 0 auto;
-      background: #b8860b;
+      background: #005fa3;
       color: #fff;
       border: none;
-      border-radius: 10px;
-      font-size: 1em;
-      font-weight: bold;
-      padding: 0.5em 1.5em;
+      border-radius: 0.25em;
+      padding: 0.25em 0.7em;
       cursor: pointer;
+      margin-left: 1em;
+      margin-bottom: 0.5em;
     }
     @media (max-width: 600px) {
       body {
-        font-size: 1.2em;
-        padding: 0.5em;
+        font-size: 1.3em;
+        padding: 0.3em;
       }
-      .popup {
+      #popup {
         font-size: 1em;
-        padding: 1em;
+        padding: 0.7em;
       }
     }
   </style>
 </head>
 <body>
-  <div class="text" id="main-text">
-    <span class="word" data-word="Once">Once</span> <span class="word" data-word="upon">upon</span> <span class="word" data-word="a">a</span> <span class="word" data-word="time">time</span> <span class="word" data-word="there">there</span> <span class="word" data-word="were">were</span> <span class="word" data-word="four">four</span> <span class="word" data-word="little">little</span> <span class="word" data-word="Rabbits">Rabbits</span>, <span class="word" data-word="and">and</span> <span class="word" data-word="their">their</span> <span class="word" data-word="names">names</span> <span class="word" data-word="were-Flopsy">were-Flopsy</span>, <span class="word" data-word="Mopsy">Mopsy</span>, <span class="word" data-word="Cotton-tail">Cotton-tail</span>, <span class="word" data-word="and2">and</span> <span class="word" data-word="Peter">Peter</span>.<br>
-    <span class="word" data-word="They">They</span> <span class="word" data-word="lived">lived</span> <span class="word" data-word="with">with</span> <span class="word" data-word="their2">their</span> <span class="word" data-word="Mother">Mother</span> <span class="word" data-word="in">in</span> <span class="word" data-word="a2">a</span> <span class="word" data-word="sand-bank">sand-bank</span>, <span class="word" data-word="underneath">underneath</span> <span class="word" data-word="the">the</span> <span class="word" data-word="root">root</span> <span class="word" data-word="of">of</span> <span class="word" data-word="a3">a</span> <span class="word" data-word="very">very</span> <span class="word" data-word="big">big</span> <span class="word" data-word="fir-tree">fir-tree</span>.<br>
-    <span class="word" data-word="'Now,">‘Now,</span> <span class="word" data-word="my">my</span> <span class="word" data-word="dears,'">dears,’</span> <span class="word" data-word="said">said</span> <span class="word" data-word="old">old</span> <span class="word" data-word="Mrs.">Mrs.</span> <span class="word" data-word="Rabbit">Rabbit</span> <span class="word" data-word="one">one</span> <span class="word" data-word="morning">morning</span>, <span class="word" data-word="'you">'you</span> <span class="word" data-word="may">may</span> <span class="word" data-word="go">go</span> <span class="word" data-word="into">into</span> <span class="word" data-word="the2">the</span> <span class="word" data-word="fields">fields</span> <span class="word" data-word="or">or</span> <span class="word" data-word="down">down</span> <span class="word" data-word="the3">the</span> <span class="word" data-word="lane">lane</span>, <span class="word" data-word="but">but</span> <span class="word" data-word="don't">don't</span> <span class="word" data-word="go2">go</span> <span class="word" data-word="into2">into</span> <span class="word" data-word="Mr.">Mr.</span> <span class="word" data-word="McGregor's">McGregor’s</span> <span class="word" data-word="garden">garden</span>: <span class="word" data-word="your">your</span> <span class="word" data-word="father">father</span> <span class="word" data-word="had">had</span> <span class="word" data-word="an">an</span> <span class="word" data-word="accident">accident</span> <span class="word" data-word="there2">there</span>; <span class="word" data-word="he">he</span> <span class="word" data-word="was">was</span> <span class="word" data-word="put">put</span> <span class="word" data-word="in2">in</span> <span class="word" data-word="a4">a</span> <span class="word" data-word="pie">pie</span> <span class="word" data-word="by">by</span> <span class="word" data-word="Mrs.2">Mrs.</span> <span class="word" data-word="McGregor">McGregor</span>.
+  <div id="text">
+    <span class="clickable" data-word="Once">Once</span>
+    <span class="clickable" data-word="upon">upon</span>
+    <span class="clickable" data-word="a">a</span>
+    <span class="clickable" data-word="time">time</span>
+    <span class="clickable" data-word="there">there</span>
+    <span class="clickable" data-word="were">were</span>
+    <span class="clickable" data-word="four">four</span>
+    <span class="clickable" data-word="little">little</span>
+    <span class="clickable" data-word="Rabbits">Rabbits</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="and">and</span>
+    <span class="clickable" data-word="their">their</span>
+    <span class="clickable" data-word="names">names</span>
+    <span class="clickable" data-word="were">were</span><span class="clickable" data-word="-">-</span>
+    <span class="clickable" data-word="Flopsy">Flopsy</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="Mopsy">Mopsy</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="Cotton-tail">Cotton-tail</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="and">and</span>
+    <span class="clickable" data-word="Peter">Peter</span><span class="clickable" data-word=".">.</span>
+    <br><br>
+    <span class="clickable" data-word="They">They</span>
+    <span class="clickable" data-word="lived">lived</span>
+    <span class="clickable" data-word="with">with</span>
+    <span class="clickable" data-word="their">their</span>
+    <span class="clickable" data-word="Mother">Mother</span>
+    <span class="clickable" data-word="in">in</span>
+    <span class="clickable" data-word="a">a</span>
+    <span class="clickable" data-word="sand-bank">sand-bank</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="underneath">underneath</span>
+    <span class="clickable" data-word="the">the</span>
+    <span class="clickable" data-word="root">root</span>
+    <span class="clickable" data-word="of">of</span>
+    <span class="clickable" data-word="a">a</span>
+    <span class="clickable" data-word="very">very</span>
+    <span class="clickable" data-word="big">big</span>
+    <span class="clickable" data-word="fir-tree">fir-tree</span><span class="clickable" data-word=".">.</span>
+    <br><br>
+    <span class="clickable" data-word="'">‘</span>
+    <span class="clickable" data-word="Now">Now</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="my">my</span>
+    <span class="clickable" data-word="dears">dears</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="'">'</span>
+    <span class="clickable" data-word="said">said</span>
+    <span class="clickable" data-word="old">old</span>
+    <span class="clickable" data-word="Mrs.">Mrs.</span>
+    <span class="clickable" data-word="Rabbit">Rabbit</span>
+    <span class="clickable" data-word="one">one</span>
+    <span class="clickable" data-word="morning">morning</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="'">‘</span>
+    <span class="clickable" data-word="you">you</span>
+    <span class="clickable" data-word="may">may</span>
+    <span class="clickable" data-word="go">go</span>
+    <span class="clickable" data-word="into">into</span>
+    <span class="clickable" data-word="the">the</span>
+    <span class="clickable" data-word="fields">fields</span>
+    <span class="clickable" data-word="or">or</span>
+    <span class="clickable" data-word="down">down</span>
+    <span class="clickable" data-word="the">the</span>
+    <span class="clickable" data-word="lane">lane</span><span class="clickable" data-word=",">,</span>
+    <span class="clickable" data-word="but">but</span>
+    <span class="clickable" data-word="don't">don't</span>
+    <span class="clickable" data-word="go">go</span>
+    <span class="clickable" data-word="into">into</span>
+    <span class="clickable" data-word="Mr.">Mr.</span>
+    <span class="clickable" data-word="McGregor's">McGregor's</span>
+    <span class="clickable" data-word="garden">garden</span><span class="clickable" data-word=":">:</span>
+    <span class="clickable" data-word="your">your</span>
+    <span class="clickable" data-word="father">father</span>
+    <span class="clickable" data-word="had">had</span>
+    <span class="clickable" data-word="an">an</span>
+    <span class="clickable" data-word="accident">accident</span>
+    <span class="clickable" data-word="there">there</span><span class="clickable" data-word=";">;</span>
+    <span class="clickable" data-word="he">he</span>
+    <span class="clickable" data-word="was">was</span>
+    <span class="clickable" data-word="put">put</span>
+    <span class="clickable" data-word="in">in</span>
+    <span class="clickable" data-word="a">a</span>
+    <span class="clickable" data-word="pie">pie</span>
+    <span class="clickable" data-word="by">by</span>
+    <span class="clickable" data-word="Mrs.">Mrs.</span>
+    <span class="clickable" data-word="McGregor">McGregor</span><span class="clickable" data-word="'">'</span>
+    <span class="clickable" data-word=".">.</span>
   </div>
-
-  <div class="popup" id="popup"></div>
-
+  <div id="popup">
+    <button class="close-btn" onclick="closePopup()">Close</button>
+    <div id="popup-content"></div>
+  </div>
   <script>
+    // Definitions and examples for each word, idiom, contraction, and punctuation
     const definitions = {
       "Once": {
         def: "At one time in the past.",
         ex: [
           "Once I saw a big dog.",
-          "Once, we went to the park.",
-          "Once, I lost my hat.",
-          "Once, it rained all day.",
-          "Once, I ate a whole apple.",
-          "Once, I met a new friend."
+          "She went there once.",
+          "I ate cake once.",
+          "He was happy once.",
+          "We played there once.",
+          "Once, it rained a lot."
         ]
       },
       "upon": {
-        def: "On; used in stories to start a tale.",
+        def: "On; used in stories to mean 'on' or 'at'.",
         ex: [
-          "The cat sat upon the mat.",
-          "He put the book upon the table.",
-          "The bird landed upon the branch.",
-          "She placed her hand upon my shoulder.",
-          "A hat sat upon his head.",
-          "Once upon a time, there was a bear."
+          "He sat upon the chair.",
+          "The cat jumped upon the bed.",
+          "We walked upon the sand.",
+          "She put the cup upon the table.",
+          "A hat was upon his head.",
+          "The sun shone upon us."
         ]
       },
       "a": {
-        def: "One; used before a noun.",
+        def: "One; any single thing.",
         ex: [
           "I have a ball.",
-          "She saw a dog.",
+          "She saw a bird.",
           "He ate a cookie.",
-          "We found a shell.",
-          "There is a tree.",
-          "I want a toy."
+          "We found a frog.",
+          "There is a cat.",
+          "Give me a pen."
         ]
       },
       "time": {
-        def: "When something happens or how long it takes.",
+        def: "When something happens.",
         ex: [
           "What time is it?",
           "It is time to eat.",
-          "I had a good time.",
           "Bed time is soon.",
+          "I had a good time.",
           "Time goes fast.",
-          "We played for a long time."
+          "We play at lunch time."
         ]
       },
       "there": {
         def: "In that place.",
         ex: [
-          "The ball is over there.",
-          "She went there yesterday.",
-          "Is your book there?",
-          "There is my friend.",
-          "We will go there soon.",
-          "Look over there!"
+          "The ball is there.",
+          "She is over there.",
+          "Look there!",
+          "I will go there.",
+          "Sit there, please.",
+          "My shoes are there."
         ]
       },
       "were": {
-        def: "Past of 'are'; shows something happened before.",
+        def: "Past of 'are'; used for more than one.",
         ex: [
-          "We were at school.",
           "They were happy.",
-          "You were late.",
-          "The dogs were barking.",
-          "We were playing.",
-          "The books were on the table."
+          "We were late.",
+          "You were funny.",
+          "The dogs were loud.",
+          "The books were old.",
+          "The kids were tired."
         ]
       },
       "four": {
-        def: "The number after three.",
+        def: "The number 4.",
         ex: [
-          "I have four apples.",
+          "I have four cats.",
+          "She has four apples.",
           "There are four chairs.",
-          "Four kids are playing.",
-          "She has four dolls.",
-          "Four birds are singing.",
-          "He saw four cars."
+          "Four kids played.",
+          "I see four birds.",
+          "He ate four cookies."
         ]
       },
       "little": {
         def: "Small in size.",
         ex: [
           "The puppy is little.",
-          "I have a little cat.",
-          "The little bird can sing.",
-          "She wore a little hat.",
-          "He has little hands.",
-          "Look at the little fish."
+          "I have a little car.",
+          "She has a little doll.",
+          "The box is little.",
+          "He found a little frog.",
+          "The little cat ran."
         ]
       },
       "Rabbits": {
-        def: "Small animals with long ears and soft fur.",
+        def: "Small animals with long ears.",
         ex: [
-          "Rabbits like to hop.",
+          "Rabbits hop fast.",
           "I saw two rabbits.",
           "Rabbits eat carrots.",
           "The rabbits are soft.",
-          "Rabbits have long ears.",
-          "We found rabbits in the garden."
+          "Rabbits live in holes.",
+          "She likes rabbits."
+        ]
+      },
+      ",": {
+        def: "A mark to show a pause in a sentence.",
+        ex: [
+          "I like apples, oranges, and grapes.",
+          "She ran, but stopped.",
+          "Wait, please.",
+          "Yes, I will go.",
+          "No, thank you.",
+          "Come here, Sam."
         ]
       },
       "and": {
-        def: "Used to join words or groups of words.",
+        def: "Connects words or groups.",
         ex: [
-          "I like apples and oranges.",
-          "She ran and jumped.",
-          "Tom and Sue are friends.",
-          "We played and laughed.",
-          "He ate and drank.",
-          "It is red and blue."
+          "I have a cat and a dog.",
+          "She likes milk and juice.",
+          "We ran and played.",
+          "He is big and strong.",
+          "Mom and Dad are home.",
+          "Jump and clap."
         ]
       },
       "their": {
-        def: "Belonging to them.",
+        def: "Belongs to them.",
         ex: [
-          "Their house is big.",
-          "I saw their dog.",
+          "Their house is blue.",
+          "I like their dog.",
           "Their toys are new.",
-          "Their shoes are red.",
+          "The kids lost their hats.",
           "Their mom is nice.",
-          "Their car is blue."
+          "Their car is red."
         ]
       },
       "names": {
-        def: "What someone or something is called.",
+        def: "What people or things are called.",
         ex: [
-          "What are your names?",
-          "My friends have funny names.",
-          "The cats have names.",
-          "Can you write your names?",
-          "She said our names.",
-          "We heard our names called."
+          "My friends have names.",
+          "What are their names?",
+          "I wrote my name.",
+          "She said her name.",
+          "Names can be long.",
+          "He forgot the names."
         ]
       },
-      "were-Flopsy": {
-        def: "Means 'were' and the name 'Flopsy' together. Flopsy is one of the rabbits.",
+      "-": {
+        def: "A long dash; shows a break or pause.",
         ex: [
-          "Their names were-Flopsy, Mopsy, and Peter.",
-          "Flopsy is a rabbit's name.",
+          "He ran-then stopped.",
+          "I want-no, I need-ice cream.",
+          "She smiled-happy at last.",
+          "Wait-listen!",
+          "The dog-brown and big-barked.",
+          "We saw-just for a second-a fox."
+        ]
+      },
+      "Flopsy": {
+        def: "A name for one of the rabbits.",
+        ex: [
+          "Flopsy is a bunny.",
           "Flopsy likes to hop.",
-          "Flopsy lives with her family.",
-          "Flopsy has soft fur.",
-          "Flopsy is a little rabbit."
+          "I saw Flopsy run.",
+          "Flopsy is soft.",
+          "Flopsy eats grass.",
+          "Flopsy has big ears."
         ]
       },
       "Mopsy": {
-        def: "Mopsy is the name of one of the rabbits.",
+        def: "A name for one of the rabbits.",
         ex: [
-          "Mopsy is a little rabbit.",
+          "Mopsy is a bunny.",
           "Mopsy likes to play.",
-          "Mopsy is Flopsy's sister.",
-          "Mopsy lives in a sand-bank.",
-          "Mopsy has soft fur.",
-          "Mopsy is a funny name."
+          "I saw Mopsy jump.",
+          "Mopsy is cute.",
+          "Mopsy eats carrots.",
+          "Mopsy has a tail."
         ]
       },
       "Cotton-tail": {
-        def: "Cotton-tail is the name of one of the rabbits.",
+        def: "A name for one of the rabbits.",
         ex: [
-          "Cotton-tail is a little rabbit.",
-          "Cotton-tail has a fluffy tail.",
-          "Cotton-tail likes to hop.",
-          "Cotton-tail lives with her family.",
-          "Cotton-tail is Flopsy's sister.",
-          "Cotton-tail is a cute name."
-        ]
-      },
-      "and2": {
-        def: "Used to join words or groups of words.",
-        ex: [
-          "I like apples and oranges.",
-          "She ran and jumped.",
-          "Tom and Sue are friends.",
-          "We played and laughed.",
-          "He ate and drank.",
-          "It is red and blue."
+          "Cotton-tail is a bunny.",
+          "Cotton-tail has a white tail.",
+          "I saw Cotton-tail hide.",
+          "Cotton-tail is small.",
+          "Cotton-tail eats leaves.",
+          "Cotton-tail likes to run."
         ]
       },
       "Peter": {
-        def: "Peter is the name of one of the rabbits.",
+        def: "A name for one of the rabbits.",
         ex: [
-          "Peter is a little rabbit.",
-          "Peter has a blue coat.",
-          "Peter likes to explore.",
-          "Peter is Flopsy's brother.",
-          "Peter lives with his family.",
-          "Peter is a brave rabbit."
+          "Peter is a bunny.",
+          "Peter likes to eat.",
+          "I saw Peter jump.",
+          "Peter is fast.",
+          "Peter wears a coat.",
+          "Peter is brave."
+        ]
+      },
+      ".": {
+        def: "A mark to show the end of a sentence.",
+        ex: [
+          "I like cats.",
+          "She ran home.",
+          "We ate lunch.",
+          "He is tall.",
+          "It is sunny.",
+          "The dog barked."
         ]
       },
       "They": {
-        def: "More than one person or animal.",
+        def: "More than one person or thing.",
         ex: [
-          "They are running.",
-          "They like ice cream.",
+          "They are happy.",
+          "They ran fast.",
+          "They have toys.",
+          "They like cake.",
           "They went home.",
-          "They have a dog.",
-          "They can sing.",
-          "They are happy."
+          "They saw a dog."
         ]
       },
       "lived": {
         def: "Had a home in a place.",
         ex: [
-          "We lived in a big house.",
-          "She lived near the park.",
-          "They lived by the sea.",
-          "He lived with his mom.",
-          "The cat lived in the barn.",
-          "We lived on a farm."
+          "We lived in a house.",
+          "He lived on a farm.",
+          "She lived with her mom.",
+          "They lived in a city.",
+          "The cat lived here.",
+          "I lived there once."
         ]
       },
       "with": {
-        def: "Together; not alone.",
+        def: "Together; having.",
         ex: [
           "I live with my mom.",
-          "She plays with her dog.",
-          "He eats with us.",
-          "We walk with our friends.",
-          "They play with toys.",
-          "I read with my dad."
-        ]
-      },
-      "their2": {
-        def: "Belonging to them.",
-        ex: [
-          "Their house is big.",
-          "I saw their dog.",
-          "Their toys are new.",
-          "Their shoes are red.",
-          "Their mom is nice.",
-          "Their car is blue."
+          "She played with me.",
+          "We went with Dad.",
+          "He ate with us.",
+          "The dog sleeps with the cat.",
+          "I drew with a pen."
         ]
       },
       "Mother": {
-        def: "A mom; a female parent.",
+        def: "A mom; a parent.",
         ex: [
           "My mother is kind.",
-          "Her mother makes lunch.",
-          "The mother hugs her child.",
-          "Mother tells a story.",
-          "Mother helps me.",
-          "Mother loves her kids."
+          "She called her mother.",
+          "Mother made lunch.",
+          "We hugged our mother.",
+          "Mother reads to me.",
+          "I love my mother."
         ]
       },
       "in": {
         def: "Inside something.",
         ex: [
           "The cat is in the box.",
-          "I am in my room.",
-          "The ball is in the bag.",
-          "She is in the car.",
-          "We are in the house.",
-          "The dog is in the yard."
-        ]
-      },
-      "a2": {
-        def: "One; used before a noun.",
-        ex: [
-          "I have a ball.",
-          "She saw a dog.",
-          "He ate a cookie.",
-          "We found a shell.",
-          "There is a tree.",
-          "I want a toy."
+          "I am in the car.",
+          "She is in the house.",
+          "We are in school.",
+          "Put it in the bag.",
+          "He is in the yard."
         ]
       },
       "sand-bank": {
-        def: "A hill or wall made of sand.",
+        def: "A hill or pile of sand.",
         ex: [
-          "The rabbit lives in a sand-bank.",
           "We played on the sand-bank.",
-          "The sand-bank is soft.",
+          "The rabbit hid in the sand-bank.",
+          "Sand-banks are soft.",
           "A sand-bank is near the river.",
-          "The sand-bank is high.",
-          "Rabbits dig in the sand-bank."
+          "I saw a sand-bank at the beach.",
+          "The fox ran over the sand-bank."
         ]
       },
       "underneath": {
-        def: "Below or under something.",
+        def: "Below; under.",
         ex: [
-          "The cat is underneath the table.",
-          "The toy is underneath the bed.",
-          "She hid underneath the blanket.",
+          "The ball is underneath the bed.",
+          "The cat hid underneath the table.",
+          "We sat underneath the tree.",
           "The dog is underneath the chair.",
-          "The ball rolled underneath the couch.",
-          "We sat underneath the tree."
+          "Look underneath the box.",
+          "He found it underneath his hat."
         ]
       },
       "the": {
-        def: "A word used before a noun to show it is special.",
+        def: "Shows a certain thing.",
         ex: [
-          "The dog is brown.",
-          "The sun is bright.",
-          "The car is fast.",
-          "The book is new.",
-          "The apple is red.",
-          "The house is big."
+          "The dog ran.",
+          "I see the sun.",
+          "She likes the book.",
+          "The cat is here.",
+          "We ate the cake.",
+          "He found the ball."
         ]
       },
       "root": {
-        def: "The part of a plant that grows in the ground.",
+        def: "The part of a plant under the ground.",
         ex: [
-          "The tree has a big root.",
-          "Carrots grow as a root.",
-          "The root holds the plant.",
-          "The root is under the soil.",
-          "We saw the root of the flower.",
-          "The root is strong."
+          "The tree has a root.",
+          "Carrots grow from a root.",
+          "The root is strong.",
+          "Pull the root up.",
+          "Roots are in the dirt.",
+          "The plant needs its root."
         ]
       },
       "of": {
-        def: "Belonging to or part of something.",
+        def: "Shows what something belongs to.",
         ex: [
-          "The leg of the table is strong.",
-          "The color of the sky is blue.",
-          "The top of the box is open.",
-          "The sound of the bell is loud.",
-          "The tail of the cat is long.",
-          "The smell of the flower is sweet."
-        ]
-      },
-      "a3": {
-        def: "One; used before a noun.",
-        ex: [
-          "I have a ball.",
-          "She saw a dog.",
-          "He ate a cookie.",
-          "We found a shell.",
-          "There is a tree.",
-          "I want a toy."
+          "The color of the sky.",
+          "A glass of milk.",
+          "The sound of the bell.",
+          "The name of the dog.",
+          "A piece of cake.",
+          "The end of the story."
         ]
       },
       "very": {
-        def: "A lot; more than usual.",
+        def: "A lot; really.",
         ex: [
+          "It is very hot.",
+          "She is very happy.",
           "The dog is very big.",
-          "I am very happy.",
-          "She is very nice.",
+          "I am very tired.",
           "He runs very fast.",
-          "The soup is very hot.",
-          "The room is very cold."
+          "The cake is very good."
         ]
       },
       "big": {
         def: "Large in size.",
         ex: [
-          "The house is big.",
-          "I saw a big dog.",
-          "The ball is big.",
-          "She has a big smile.",
-          "The tree is big.",
-          "He has big shoes."
+          "The dog is big.",
+          "I have a big ball.",
+          "The box is big.",
+          "She saw a big tree.",
+          "He ate a big apple.",
+          "The room is big."
         ]
       },
       "fir-tree": {
-        def: "A kind of tree with needles, not leaves.",
+        def: "A kind of tree with needles.",
         ex: [
           "The fir-tree is tall.",
-          "Birds sit in the fir-tree.",
-          "The fir-tree is green.",
+          "Birds live in the fir-tree.",
           "We saw a fir-tree in the park.",
-          "Fir-trees grow in the forest.",
-          "A fir-tree has cones."
+          "Fir-trees stay green.",
+          "The fir-tree has cones.",
+          "A fir-tree grows in the woods."
         ]
       },
-      "'Now,": {
-        def: "Shows someone is about to speak; 'Now' means at this moment.",
+      "‘": {
+        def: "Shows when someone is talking.",
         ex: [
-          "'Now, let's begin.'",
-          "'Now, you can play.'",
-          "'Now, come here.'",
-          "'Now, it is time to eat.'",
-          "'Now, listen to me.'",
-          "'Now, let's go.'"
+          "He said, ‘Hello.’",
+          "‘Stop!’ she yelled.",
+          "‘Come here,’ Mom said.",
+          "‘I am happy,’ he said.",
+          "‘Yes,’ said Dad.",
+          "‘No,’ she said."
+        ]
+      },
+      "Now": {
+        def: "At this moment.",
+        ex: [
+          "Now it is time to eat.",
+          "I am ready now.",
+          "We can go now.",
+          "She is here now.",
+          "Do it now.",
+          "Now, let's play."
         ]
       },
       "my": {
-        def: "Belonging to me.",
+        def: "Belongs to me.",
         ex: [
-          "This is my toy.",
-          "My cat is soft.",
+          "My dog is brown.",
+          "This is my hat.",
           "My mom is nice.",
-          "My shoes are blue.",
-          "My dog can run.",
-          "My house is big."
+          "I like my toy.",
+          "My cat is soft.",
+          "My book is new."
         ]
       },
-      "dears,'": {
-        def: "A kind way to call someone you care about.",
+      "dears": {
+        def: "A loving way to talk to someone you care about.",
         ex: [
-          "'Good night, dears.'",
-          "'Come here, dears.'",
-          "'Eat your food, dears.'",
-          "'Let's go, dears.'",
-          "'Be safe, dears.'",
-          "'I love you, dears.'"
+          "Goodnight, dears.",
+          "Come here, dears.",
+          "My dears, be safe.",
+          "Eat well, dears.",
+          "Hello, dears.",
+          "Thank you, dears."
+        ]
+      },
+      "'": {
+        def: "Shows when someone is talking or for short words.",
+        ex: [
+          "He said, 'Hi.'",
+          "'Stop!' she said.",
+          "'Go!' yelled Dad.",
+          "It's cold today.",
+          "Don't run.",
+          "I'm happy."
         ]
       },
       "said": {
-        def: "Spoke or told.",
+        def: "Told with words.",
         ex: [
-          "He said hello.",
-          "She said yes.",
-          "Dad said no.",
-          "They said thank you.",
-          "I said goodbye.",
-          "Mom said come here."
+          "She said hello.",
+          "He said yes.",
+          "Mom said no.",
+          "Dad said wait.",
+          "They said goodbye.",
+          "I said thanks."
         ]
       },
       "old": {
-        def: "Having lived for many years.",
+        def: "Not young.",
         ex: [
-          "The old man is kind.",
-          "This is an old book.",
-          "The dog is old.",
-          "My shoes are old.",
-          "That tree is old.",
-          "My grandma is old."
+          "My dog is old.",
+          "She has an old book.",
+          "The house is old.",
+          "He is old now.",
+          "The car is old.",
+          "Old trees are big."
         ]
       },
       "Mrs.": {
         def: "A title for a married woman.",
         ex: [
           "Mrs. Smith is my teacher.",
-          "We saw Mrs. Brown.",
-          "Mrs. Lee is kind.",
-          "Mrs. Jones bakes cookies.",
+          "We saw Mrs. Lee.",
+          "Mrs. Brown is nice.",
+          "Mrs. Green bakes pies.",
           "Mrs. White has a cat.",
-          "Mrs. Green is nice."
+          "Mrs. Black is here."
         ]
       },
       "Rabbit": {
-        def: "A small animal with long ears and soft fur.",
+        def: "A small animal with long ears.",
         ex: [
-          "The rabbit hops fast.",
+          "The rabbit hops.",
           "I saw a rabbit.",
           "The rabbit eats grass.",
-          "A rabbit has big ears.",
-          "We have a pet rabbit.",
-          "The rabbit is white."
+          "A rabbit is soft.",
+          "Rabbits like carrots.",
+          "The rabbit ran fast."
         ]
       },
       "one": {
-        def: "The number after zero.",
+        def: "The number 1.",
         ex: [
-          "I have one apple.",
-          "She has one cat.",
-          "One dog is barking.",
-          "He ate one cookie.",
-          "There is one chair.",
-          "One boy is running."
+          "I have one dog.",
+          "She ate one apple.",
+          "He found one rock.",
+          "One cat slept.",
+          "Give me one pen.",
+          "There is one tree."
         ]
       },
       "morning": {
         def: "The early part of the day.",
         ex: [
-          "I eat breakfast in the morning.",
+          "Good morning!",
+          "I eat in the morning.",
           "The sun comes up in the morning.",
-          "We go to school in the morning.",
-          "Birds sing in the morning.",
-          "It is bright in the morning.",
-          "We play outside in the morning."
+          "We play in the morning.",
+          "She runs every morning.",
+          "Morning is bright."
         ]
       },
-      "'you": {
-        def: "The person or people being talked to.",
+      "you": {
+        def: "The person being talked to.",
         ex: [
-          "'You can go now.'",
-          "'You are my friend.'",
-          "'You did a good job.'",
-          "'You can play.'",
-          "'You are nice.'",
-          "'You can have a cookie.'"
+          "You are nice.",
+          "I see you.",
+          "You can play.",
+          "Are you ready?",
+          "You have a hat.",
+          "Thank you."
         ]
       },
       "may": {
         def: "Can; allowed to.",
         ex: [
-          "You may go outside.",
-          "May I have a snack?",
+          "You may go.",
+          "May I help?",
           "You may play now.",
-          "May I help you?",
+          "May I have some?",
           "You may sit here.",
-          "May I see that?"
+          "May we come in?"
         ]
       },
       "go": {
         def: "To move from one place to another.",
         ex: [
           "I go to school.",
-          "Let's go home.",
-          "He will go outside.",
-          "We go to the park.",
-          "She can go now.",
-          "Go to bed."
+          "She will go home.",
+          "We go outside.",
+          "Go to bed.",
+          "He goes fast.",
+          "Let's go!"
         ]
       },
       "into": {
-        def: "To the inside of something.",
+        def: "To the inside of.",
         ex: [
-          "She went into the house.",
-          "Put your shoes into the box.",
-          "The cat ran into the room.",
+          "Go into the house.",
+          "She ran into the room.",
           "He jumped into the pool.",
-          "We walked into the store.",
-          "The dog went into the yard."
-        ]
-      },
-      "the2": {
-        def: "A word used before a noun to show it is special.",
-        ex: [
-          "The dog is brown.",
-          "The sun is bright.",
-          "The car is fast.",
-          "The book is new.",
-          "The apple is red.",
-          "The house is big."
+          "Put it into the box.",
+          "Look into the bag.",
+          "Walk into the store."
         ]
       },
       "fields": {
-        def: "Big open areas of grass or crops.",
+        def: "Open land with grass or crops.",
         ex: [
           "The cows are in the fields.",
           "We ran in the fields.",
           "The fields are green.",
-          "Flowers grow in the fields.",
-          "The fields are wide.",
-          "Birds fly over the fields."
+          "I saw flowers in the fields.",
+          "Fields are big.",
+          "We played in the fields."
         ]
       },
       "or": {
-        def: "Shows a choice between things.",
+        def: "Shows a choice.",
         ex: [
+          "Red or blue?",
           "Do you want cake or pie?",
-          "Is it red or blue?",
-          "You can sit or stand.",
-          "Will you run or walk?",
+          "Go left or right.",
+          "Sit or stand.",
           "Is it hot or cold?",
-          "Do you like cats or dogs?"
+          "Big or small?"
         ]
       },
       "down": {
-        def: "From high to low; along.",
+        def: "To a lower place.",
         ex: [
-          "He ran down the hill.",
+          "Go down the stairs.",
+          "Sit down.",
           "The ball rolled down.",
-          "She walked down the street.",
-          "The sun goes down at night.",
-          "We went down the stairs.",
-          "Birds fly down."
-        ]
-      },
-      "the3": {
-        def: "A word used before a noun to show it is special.",
-        ex: [
-          "The dog is brown.",
-          "The sun is bright.",
-          "The car is fast.",
-          "The book is new.",
-          "The apple is red.",
-          "The house is big."
+          "He fell down.",
+          "Look down.",
+          "We walked down the hill."
         ]
       },
       "lane": {
         def: "A small road or path.",
         ex: [
-          "We walked down the lane.",
-          "The lane is narrow.",
-          "There are trees by the lane.",
-          "The lane goes to the farm.",
+          "Walk down the lane.",
           "The lane is quiet.",
-          "Bikes ride in the lane."
+          "We live on a lane.",
+          "The lane is short.",
+          "There is a tree by the lane.",
+          "A cat ran across the lane."
         ]
       },
       "but": {
-        def: "Shows something different or not the same.",
+        def: "Shows a difference or exception.",
         ex: [
-          "I like cats but not dogs.",
-          "She is small but strong.",
-          "He ran but fell.",
-          "We played but got tired.",
-          "It is sunny but cold.",
-          "I want to go but can't."
+          "I like cake, but not pie.",
+          "She ran, but stopped.",
+          "He is small but strong.",
+          "We played, but got tired.",
+          "It is cold but sunny.",
+          "I want to go, but I can't."
         ]
       },
       "don't": {
-        def: "Do not; tells someone not to do something.",
+        def: "Do not.",
         ex: [
-          "Don't run in the hall.",
+          "Don't run.",
           "Don't touch that.",
           "Don't be late.",
           "Don't yell.",
-          "Don't forget your bag.",
-          "Don't go outside."
-        ]
-      },
-      "go2": {
-        def: "To move from one place to another.",
-        ex: [
-          "I go to school.",
-          "Let's go home.",
-          "He will go outside.",
-          "We go to the park.",
-          "She can go now.",
-          "Go to bed."
-        ]
-      },
-      "into2": {
-        def: "To the inside of something.",
-        ex: [
-          "She went into the house.",
-          "Put your shoes into the box.",
-          "The cat ran into the room.",
-          "He jumped into the pool.",
-          "We walked into the store.",
-          "The dog went into the yard."
+          "Don't forget.",
+          "Don't go there."
         ]
       },
       "Mr.": {
         def: "A title for a man.",
         ex: [
           "Mr. Brown is my teacher.",
-          "I saw Mr. Lee.",
-          "Mr. Smith is nice.",
-          "Mr. Jones has a dog.",
-          "Mr. White is tall.",
-          "Mr. Green is funny."
+          "We saw Mr. Lee.",
+          "Mr. Smith is tall.",
+          "Mr. Green has a dog.",
+          "Mr. White is nice.",
+          "Mr. Black is here."
         ]
       },
       "McGregor's": {
         def: "Belonging to Mr. McGregor.",
         ex: [
           "That is McGregor's house.",
-          "McGregor's garden is big.",
-          "I saw McGregor's hat.",
-          "McGregor's dog is loud.",
-          "McGregor's car is blue.",
-          "We went to McGregor's farm."
+          "We saw McGregor's garden.",
+          "McGregor's hat is big.",
+          "McGregor's dog is brown.",
+          "I like McGregor's pie.",
+          "McGregor's gate is open."
         ]
       },
       "garden": {
@@ -721,212 +770,223 @@
         ex: [
           "We have a garden.",
           "The garden has flowers.",
-          "I play in the garden.",
-          "The garden is green.",
-          "There are rabbits in the garden.",
-          "The garden is pretty."
+          "She works in the garden.",
+          "The garden is pretty.",
+          "I see a rabbit in the garden.",
+          "The garden is green."
+        ]
+      },
+      ":": {
+        def: "A mark to show what comes next.",
+        ex: [
+          "He said: 'Hello.'",
+          "Here is the list: milk, eggs, bread.",
+          "Look: a bird!",
+          "She asked: 'Why?'",
+          "Do this: jump.",
+          "I want: cake."
         ]
       },
       "your": {
-        def: "Belonging to you.",
+        def: "Belongs to you.",
         ex: [
-          "Is this your toy?",
-          "Your dog is cute.",
-          "Your room is clean.",
+          "Your hat is blue.",
+          "I like your dog.",
           "Your mom is nice.",
-          "Your shoes are blue.",
-          "Your book is on the table."
+          "Your book is here.",
+          "Where is your toy?",
+          "Your cat is soft."
         ]
       },
       "father": {
-        def: "A dad; a male parent.",
+        def: "A dad; a parent.",
         ex: [
           "My father is tall.",
-          "Her father drives a car.",
-          "Father helps me.",
-          "Father reads to me.",
-          "Father is funny.",
-          "Father loves his kids."
+          "Her father is kind.",
+          "Father made lunch.",
+          "We saw our father.",
+          "Father reads to us.",
+          "I love my father."
         ]
       },
       "had": {
         def: "Owned or got.",
         ex: [
-          "I had a cookie.",
-          "She had a dog.",
-          "We had fun.",
-          "He had a toy.",
+          "I had a toy.",
+          "She had a cat.",
+          "He had fun.",
+          "We had lunch.",
           "They had a party.",
-          "I had a nap."
+          "You had a hat."
         ]
       },
       "an": {
-        def: "One; used before a word that starts with a vowel sound.",
+        def: "One; used before a vowel sound.",
         ex: [
-          "I saw an apple.",
-          "She has an egg.",
-          "He ate an orange.",
+          "I saw an owl.",
+          "She ate an apple.",
+          "He has an egg.",
           "We found an ant.",
-          "An owl is in the tree.",
-          "I want an ice cream."
+          "Give me an orange.",
+          "An idea came to me."
         ]
       },
       "accident": {
         def: "Something bad that happens by mistake.",
         ex: [
-          "He had an accident on his bike.",
-          "The glass broke by accident.",
+          "He had an accident.",
+          "The car had an accident.",
           "She fell by accident.",
           "It was just an accident.",
-          "The dog made an accident.",
-          "I spilled my milk by accident."
+          "I broke it by accident.",
+          "No one likes an accident."
         ]
       },
-      "there2": {
+      "there": {
         def: "In that place.",
         ex: [
-          "The ball is over there.",
-          "She went there yesterday.",
-          "Is your book there?",
-          "There is my friend.",
-          "We will go there soon.",
-          "Look over there!"
+          "The ball is there.",
+          "She is over there.",
+          "Look there!",
+          "I will go there.",
+          "Sit there, please.",
+          "My shoes are there."
+        ]
+      },
+      ";": {
+        def: "A mark that joins two sentences.",
+        ex: [
+          "I like dogs; they are fun.",
+          "She ran; he walked.",
+          "It is hot; let's swim.",
+          "We played; then we ate.",
+          "He is tall; she is short.",
+          "I am happy; you are too."
         ]
       },
       "he": {
-        def: "A boy or a man.",
+        def: "A boy or man.",
         ex: [
           "He is my friend.",
-          "He likes to run.",
+          "He ran fast.",
+          "He likes cake.",
           "He has a dog.",
-          "He is tall.",
-          "He can jump.",
+          "He went home.",
           "He is happy."
         ]
       },
       "was": {
-        def: "Past of 'is'; shows something happened before.",
+        def: "Past of 'is'; used for one.",
         ex: [
-          "He was at school.",
-          "It was sunny.",
+          "He was late.",
           "She was happy.",
-          "The dog was barking.",
-          "I was late.",
-          "The book was new."
+          "It was fun.",
+          "The dog was big.",
+          "I was there.",
+          "It was cold."
         ]
       },
       "put": {
-        def: "To place something somewhere.",
+        def: "To place something.",
         ex: [
-          "Put your shoes on.",
-          "She put the book away.",
-          "He put the toy in the box.",
-          "Put your hat on.",
+          "Put it here.",
+          "She put on her hat.",
+          "He put the book down.",
+          "Put your shoes away.",
           "I put my bag down.",
-          "We put the ball in the net."
+          "Put the ball in the box."
         ]
       },
-      "in2": {
+      "in": {
         def: "Inside something.",
         ex: [
           "The cat is in the box.",
-          "I am in my room.",
-          "The ball is in the bag.",
-          "She is in the car.",
-          "We are in the house.",
-          "The dog is in the yard."
-        ]
-      },
-      "a4": {
-        def: "One; used before a noun.",
-        ex: [
-          "I have a ball.",
-          "She saw a dog.",
-          "He ate a cookie.",
-          "We found a shell.",
-          "There is a tree.",
-          "I want a toy."
+          "I am in the car.",
+          "She is in the house.",
+          "We are in school.",
+          "Put it in the bag.",
+          "He is in the yard."
         ]
       },
       "pie": {
-        def: "A food made with crust and filling.",
+        def: "A baked food with a crust and filling.",
         ex: [
-          "I ate apple pie.",
-          "She baked a pie.",
+          "I like apple pie.",
+          "She made a pie.",
           "The pie is sweet.",
-          "We shared a pie.",
-          "He likes cherry pie.",
-          "The pie is warm."
+          "We ate pie for lunch.",
+          "He baked a pie.",
+          "The pie smells good."
         ]
       },
       "by": {
-        def: "Done by someone; near.",
+        def: "Shows who did something.",
         ex: [
-          "The book was written by her.",
-          "The cake was made by mom.",
-          "He sat by me.",
-          "We walked by the river.",
-          "She stood by the door.",
-          "The cat is by the window."
-        ]
-      },
-      "Mrs.2": {
-        def: "A title for a married woman.",
-        ex: [
-          "Mrs. Smith is my teacher.",
-          "We saw Mrs. Brown.",
-          "Mrs. Lee is kind.",
-          "Mrs. Jones bakes cookies.",
-          "Mrs. White has a cat.",
-          "Mrs. Green is nice."
+          "The book is by Sam.",
+          "The cake was made by Mom.",
+          "The picture is by me.",
+          "The song is by her.",
+          "The house was built by Dad.",
+          "The story is by you."
         ]
       },
       "McGregor": {
-        def: "The last name of Mr. and Mrs. McGregor.",
+        def: "A name for a person.",
         ex: [
           "Mr. McGregor has a garden.",
-          "Mrs. McGregor made a pie.",
-          "McGregor lives in a house.",
-          "I saw McGregor at the store.",
-          "McGregor has a big hat.",
-          "McGregor is a farmer."
+          "McGregor chased the rabbit.",
+          "We saw McGregor's house.",
+          "McGregor is tall.",
+          "McGregor bakes pies.",
+          "McGregor is in the story."
         ]
       }
     };
 
-    function showPopup(wordKey) {
-      const popup = document.getElementById('popup');
-      const data = definitions[wordKey];
-      if (!data) return;
-      let html = `<div><strong>${wordKey.replace(/[\d']+/g, '').replace(/-/g, ' ')}</strong></div>`;
-      html += `<div style="margin-top:0.5em;"><span style="color:#b8860b;">Meaning:</span> ${data.def}</div>`;
-      html += `<div style="margin-top:0.7em;"><span style="color:#b8860b;">Examples:</span><ul style="margin:0.5em 0 0 1em;padding:0;">`;
-      data.ex.forEach(ex => {
-        html += `<li style="font-weight:normal;margin-bottom:0.3em;">${ex}</li>`;
+    // Add punctuation and contraction definitions if missing
+    const punctuations = [",", ".", ":", ";", "-", "'", "‘"];
+    const contractions = ["don't"];
+    const names = ["Flopsy", "Mopsy", "Cotton-tail", "Peter", "Mrs.", "Mr.", "McGregor's", "Rabbit", "Mother", "McGregor"];
+
+    // Click event handler
+    document.querySelectorAll('.clickable').forEach(span => {
+      span.addEventListener('click', function(e) {
+        const word = this.getAttribute('data-word');
+        showPopup(word, this);
       });
-      html += `</ul></div>`;
-      html += `<button class="close-btn" onclick="closePopup()">Close</button>`;
-      popup.innerHTML = html;
-      popup.style.display = 'block';
+    });
+
+    function showPopup(word, elem) {
+      const popup = document.getElementById('popup');
+      const content = document.getElementById('popup-content');
+      let info = definitions[word];
+      if (!info) {
+        // Fallback for any missing word
+        info = {
+          def: "No definition found.",
+          ex: [
+            "This is an example.",
+            "Another example here.",
+            "Use the word in a sentence.",
+            "Try to learn this word.",
+            "Ask someone what it means.",
+            "Look for this word in a book."
+          ]
+        };
+      }
+      let html = `<b>Meaning:</b> ${info.def}<br><br><b>Examples:</b><ul>`;
+      for (let ex of info.ex) {
+        html += `<li>${ex}</li>`;
+      }
+      html += "</ul>";
+      content.innerHTML = html;
+      popup.style.display = "block";
+      window.scrollTo({top: 0, behavior: "smooth"});
     }
 
     function closePopup() {
-      document.getElementById('popup').style.display = 'none';
+      document.getElementById('popup').style.display = "none";
     }
-
-    document.querySelectorAll('.word').forEach(span => {
-      span.addEventListener('click', function(e) {
-        showPopup(this.getAttribute('data-word'));
-      });
-    });
-
-    // Close popup if user taps outside it
-    window.addEventListener('click', function(e) {
-      const popup = document.getElementById('popup');
-      if (popup.style.display === 'block' && !popup.contains(e.target) && !e.target.classList.contains('word')) {
-        closePopup();
-      }
-    });
   </script>
 </body>
 </html>
