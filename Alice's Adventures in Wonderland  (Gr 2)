@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Alice's Adventures in Wonderland</title>
+  <style>
+    body {
+      font-size: 3em;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      padding: 1em;
+      max-width: 900px;
+      margin: auto;
+    }
+    .underline {
+      text-decoration: underline;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .underline:hover {
+      background: #ffe4b5;
+    }
+    .popup {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 2.2em;
+      background: #f9f9f9;
+      border: 2px solid #aaa;
+      border-radius: 0.5em;
+      padding: 0.6em 1em;
+      z-index: 10;
+      font-size: 0.45em;
+      font-weight: normal;
+      color: #222;
+      width: 90vw;
+      max-width: 600px;
+      box-shadow: 0 0 14px #bbb;
+    }
+    .close-btn {
+      background: #ff6666;
+      color: #fff;
+      border: none;
+      border-radius: 0.3em;
+      font-size: 1.2em;
+      font-weight: bold;
+      float: right;
+      margin-left: 1em;
+      cursor: pointer;
+      padding: 0.1em 0.5em;
+    }
+    .popup ul {
+      margin-top: 0.5em;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+    }
+    .popup li {
+      margin-bottom: 0.2em;
+    }
+    .text-container {
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container">
+    <span class="underline" data-word="Alice">Alice</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="very">very</span> <span class="underline" data-word="tired">tired</span> <span class="underline" data-word="from">from</span> <span class="underline" data-word="sitting">sitting</span> <span class="underline" data-word="next">next</span> <span class="underline" data-word="to">to</span> <span class="underline" data-word="her">her</span> <span class="underline" data-word="sister">sister</span> <span class="underline" data-word="on">on</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="bank">bank</span>. <span class="underline" data-word="She">She</span> <span class="underline" data-word="had">had</span> <span class="underline" data-word="nothing">nothing</span> <span class="underline" data-word="to">to</span> <span class="underline" data-word="do">do</span>. <span class="underline" data-word="She">She</span> <span class="underline" data-word="looked">looked</span> <span class="underline" data-word="at">at</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="book">book</span> <span class="underline" data-word="her">her</span> <span class="underline" data-word="sister">sister</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="reading">reading</span>, <span class="underline" data-word="but">but</span> <span class="underline" data-word="it">it</span> <span class="underline" data-word="had">had</span> <span class="underline" data-word="no">no</span> <span class="underline" data-word="pictures">pictures</span> <span class="underline" data-word="in">in</span> <span class="underline" data-word="it">it</span>. <span class="underline" data-word="Alice">Alice</span> <span class="underline" data-word="thought">thought</span> <span class="underline" data-word="what">what</span> <span class="underline" data-word="is">is</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="use">use</span> <span class="underline" data-word="of">of</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="book">book</span> <span class="underline" data-word="without">without</span> <span class="underline" data-word="pictures">pictures</span>. <span class="underline" data-word="It">It</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="hot">hot</span> <span class="underline" data-word="day">day</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="Alice">Alice</span> <span class="underline" data-word="felt">felt</span> <span class="underline" data-word="very">very</span> <span class="underline" data-word="sleepy">sleepy</span>. <span class="underline" data-word="She">She</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="thinking">thinking</span> <span class="underline" data-word="about">about</span> <span class="underline" data-word="making">making</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="chain">chain</span> <span class="underline" data-word="of">of</span> <span class="underline" data-word="daisies">daisies</span> <span class="underline" data-word="when">when</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="white">white</span> <span class="underline" data-word="rabbit">rabbit</span> <span class="underline" data-word="ran">ran</span> <span class="underline" data-word="past">past</span> <span class="underline" data-word="her">her</span>. <span class="underline" data-word="The">The</span> <span class="underline" data-word="rabbit">rabbit</span> <span class="underline" data-word="took">took</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="watch">watch</span> <span class="underline" data-word="out">out</span> <span class="underline" data-word="of">of</span> <span class="underline" data-word="his">his</span> <span class="underline" data-word="pocket">pocket</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="said">said</span> <span class="underline" data-word="he">he</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="late">late</span>. <span class="underline" data-word="Alice">Alice</span> <span class="underline" data-word="had">had</span> <span class="underline" data-word="never">never</span> <span class="underline" data-word="seen">seen</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="rabbit">rabbit</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="pocket">pocket</span> <span class="underline" data-word="watch">watch</span> <span class="underline" data-word="before">before</span>. <span class="underline" data-word="She">She</span> <span class="underline" data-word="jumped">jumped</span> <span class="underline" data-word="up">up</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="ran">ran</span> <span class="underline" data-word="after">after</span> <span class="underline" data-word="him">him</span> <span class="underline" data-word="across">across</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="field">field</span>.
+  </div>
+  
+  <!-- Popups -->
+  <div id="popup-container"></div>
+  
+  <script>
+    // Definitions and examples for each word/idiom/contraction
+    const wordData = {
+      "Alice": {
+        def: "A girl who is the main person in the story.",
+        ex: [
+          "Alice likes to read.",
+          "Alice wears a blue dress.",
+          "Alice saw a rabbit.",
+          "Alice is kind to her friends.",
+          "Alice went on an adventure.",
+          "Alice has a big smile."
+        ]
+      },
+      "was": {
+        def: "Shows something happened before now.",
+        ex: [
+          "He was happy.",
+          "She was at school.",
+          "It was cold outside.",
+          "The dog was barking.",
+          "The book was open.",
+          "The sun was bright."
+        ]
+      },
+      "very": {
+        def: "A lot or much.",
+        ex: [
+          "I am very happy.",
+          "This is very big.",
+          "She is very nice.",
+          "The cake is very sweet.",
+          "The dog is very small.",
+          "He is very tall."
+        ]
+      },
+      "tired": {
+        def: "Feeling like you need to rest or sleep.",
+        ex: [
+          "I am tired after running.",
+          "She was tired last night.",
+          "The baby is tired.",
+          "He felt tired in the morning.",
+          "The dog looks tired.",
+          "We are tired after playing."
+        ]
+      },
+      "from": {
+        def: "Shows where something starts or comes.",
+        ex: [
+          "I got a gift from Mom.",
+          "He ran from the house.",
+          "She is from my school.",
+          "The letter is from Dad.",
+          "We came from the park.",
+          "The sound comes from the bell."
+        ]
+      },
+      "sitting": {
+        def: "To rest with your bottom on something.",
+        ex: [
+          "I am sitting on a chair.",
+          "The cat is sitting on the mat.",
+          "She is sitting by the window.",
+          "We are sitting in class.",
+          "He is sitting next to me.",
+          "The bird is sitting in the tree."
+        ]
+      },
+      "next": {
+        def: "Beside or close to.",
+        ex: [
+          "I sit next to my friend.",
+          "The dog is next to the cat.",
+          "She stands next to her mom.",
+          "The book is next to the lamp.",
+          "He is next in line.",
+          "The ball is next to the box."
+        ]
+      },
+      "to": {
+        def: "Shows direction or place.",
+        ex: [
+          "I go to school.",
+          "She walks to the park.",
+          "Give it to me.",
+          "He runs to the door.",
+          "We went to the store.",
+          "They came to the party."
+        ]
+      },
+      "her": {
+        def: "Belongs to a girl or woman.",
+        ex: [
+          "This is her hat.",
+          "Her dog is brown.",
+          "I like her dress.",
+          "Her name is Sue.",
+          "She lost her book.",
+          "Her bike is new."
+        ]
+      },
+      "sister": {
+        def: "A girl who has the same parents as you.",
+        ex: [
+          "My sister is older.",
+          "She has a little sister.",
+          "His sister likes to draw.",
+          "The sisters play together.",
+          "Her sister is funny.",
+          "I help my sister."
+        ]
+      },
+      "on": {
+        def: "Touching or above something.",
+        ex: [
+          "The book is on the table.",
+          "Sit on the chair.",
+          "The cat is on the bed.",
+          "He put his hat on.",
+          "The ball is on the grass.",
+          "She sits on the bench."
+        ]
+      },
+      "the": {
+        def: "Used to talk about one thing or group.",
+        ex: [
+          "The dog is barking.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is red.",
+          "The book is open.",
+          "He closed the door."
+        ]
+      },
+      "bank": {
+        def: "The land next to a river or lake.",
+        ex: [
+          "We sat on the bank of the river.",
+          "The frog jumped from the bank.",
+          "She walked along the bank.",
+          "The bank was grassy.",
+          "He found a rock on the bank.",
+          "The bank was soft and wet."
+        ]
+      },
+      "She": {
+        def: "A word for a girl or woman.",
+        ex: [
+          "She is my friend.",
+          "She likes apples.",
+          "She went home.",
+          "She is happy.",
+          "She can run fast.",
+          "She has a cat."
+        ]
+      },
+      "had": {
+        def: "Owned or did before now.",
+        ex: [
+          "I had a toy.",
+          "She had a snack.",
+          "He had a nap.",
+          "They had fun.",
+          "We had a dog.",
+          "You had a book."
+        ]
+      },
+      "nothing": {
+        def: "Not anything; zero things.",
+        ex: [
+          "There is nothing in the box.",
+          "She saw nothing.",
+          "He ate nothing.",
+          "I have nothing to do.",
+          "Nothing is here.",
+          "They found nothing."
+        ]
+      },
+      "do": {
+        def: "To act or make something happen.",
+        ex: [
+          "I do my homework.",
+          "She will do her chores.",
+          "He can do it.",
+          "Do you want to play?",
+          "We do our best.",
+          "They do the dishes."
+        ]
+      },
+      "looked": {
+        def: "Used your eyes to see.",
+        ex: [
+          "She looked at the sky.",
+          "He looked for his shoes.",
+          "I looked in the box.",
+          "They looked at the dog.",
+          "We looked at the map.",
+          "He looked happy."
+        ]
+      },
+      "at": {
+        def: "Shows where you look or point.",
+        ex: [
+          "Look at the bird.",
+          "She is at school.",
+          "He sits at the table.",
+          "We are at home.",
+          "The dog is at the door.",
+          "I am at the park."
+        ]
+      },
+      "book": {
+        def: "Pages with words or pictures to read.",
+        ex: [
+          "I read a book.",
+          "She has a new book.",
+          "The book is blue.",
+          "He likes his book.",
+          "We share a book.",
+          "The book is on the table."
+        ]
+      },
+      "reading": {
+        def: "Looking at words and understanding them.",
+        ex: [
+          "I am reading a story.",
+          "She is reading a book.",
+          "He likes reading.",
+          "We are reading together.",
+          "Reading is fun.",
+          "They are reading in class."
+        ]
+      },
+      "but": {
+        def: "Shows something different or not the same.",
+        ex: [
+          "I want to play, but it is raining.",
+          "She is small but strong.",
+          "He is tired but happy.",
+          "They ran but fell.",
+          "I called but no one came.",
+          "It is cold but sunny."
+        ]
+      },
+      "it": {
+        def: "A word for a thing or animal.",
+        ex: [
+          "It is soft.",
+          "I see it.",
+          "It runs fast.",
+          "It is blue.",
+          "It can jump.",
+          "It looks nice."
+        ]
+      },
+      "no": {
+        def: "Not any or not true.",
+        ex: [
+          "There is no milk.",
+          "No one is here.",
+          "I have no toys.",
+          "No, thank you.",
+          "No dogs allowed.",
+          "No, I can't."
+        ]
+      },
+      "pictures": {
+        def: "Drawings or photos you can see.",
+        ex: [
+          "I like pictures in books.",
+          "She drew pictures.",
+          "The wall has pictures.",
+          "He looks at pictures.",
+          "We made pictures.",
+          "There are two pictures."
+        ]
+      },
+      "in": {
+        def: "Inside something.",
+        ex: [
+          "The ball is in the box.",
+          "She is in the car.",
+          "He is in the room.",
+          "We are in school.",
+          "It is in my bag.",
+          "The cat is in the house."
+        ]
+      },
+      "thought": {
+        def: "Used your mind to think.",
+        ex: [
+          "I thought about cake.",
+          "She thought of a game.",
+          "He thought it was funny.",
+          "They thought it was late.",
+          "We thought of a plan.",
+          "She thought of her friend."
+        ]
+      },
+      "what": {
+        def: "Asks about something.",
+        ex: [
+          "What is your name?",
+          "What do you want?",
+          "What is that?",
+          "What did you see?",
+          "What time is it?",
+          "What is in the box?"
+        ]
+      },
+      "is": {
+        def: "Shows something exists or happens.",
+        ex: [
+          "She is happy.",
+          "It is blue.",
+          "He is tall.",
+          "This is my dog.",
+          "The book is open.",
+          "He is here."
+        ]
+      },
+      "use": {
+        def: "Why something is helpful or needed.",
+        ex: [
+          "What is the use of this?",
+          "I use a pencil to write.",
+          "She uses a spoon.",
+          "The use of a chair is to sit.",
+          "He has no use for it.",
+          "We use soap to wash."
+        ]
+      },
+      "of": {
+        def: "Shows what something is part of.",
+        ex: [
+          "A cup of milk.",
+          "The color of the sky.",
+          "A piece of cake.",
+          "The sound of music.",
+          "A bag of toys.",
+          "The name of the dog."
+        ]
+      },
+      "a": {
+        def: "One thing.",
+        ex: [
+          "I have a cat.",
+          "She saw a dog.",
+          "He has a ball.",
+          "Give me a book.",
+          "It is a car.",
+          "We want a snack."
+        ]
+      },
+      "without": {
+        def: "Not having something.",
+        ex: [
+          "I went without my hat.",
+          "She ate without a fork.",
+          "He left without a word.",
+          "They played without music.",
+          "We walked without shoes.",
+          "The box is without a lid."
+        ]
+      },
+      "It": {
+        def: "A word for a thing or animal.",
+        ex: [
+          "It is raining.",
+          "It is soft.",
+          "It runs fast.",
+          "It is blue.",
+          "It can jump.",
+          "It looks nice."
+        ]
+      },
+      "hot": {
+        def: "Having a high temperature.",
+        ex: [
+          "The soup is hot.",
+          "It is hot outside.",
+          "The sun is hot.",
+          "My tea is hot.",
+          "The sand is hot.",
+          "The stove is hot."
+        ]
+      },
+      "day": {
+        def: "The time when the sun is up.",
+        ex: [
+          "Today is a sunny day.",
+          "I play in the day.",
+          "She works in the day.",
+          "The day is long.",
+          "It is a happy day.",
+          "We went out in the day."
+        ]
+      },
+      "and": {
+        def: "Joins two things or ideas.",
+        ex: [
+          "I have a cat and a dog.",
+          "She likes apples and bananas.",
+          "He ran and jumped.",
+          "We sing and dance.",
+          "It is red and blue.",
+          "You and I are friends."
+        ]
+      },
+      "felt": {
+        def: "Had a feeling.",
+        ex: [
+          "I felt happy.",
+          "She felt cold.",
+          "He felt sad.",
+          "They felt tired.",
+          "We felt scared.",
+          "The dog felt hungry."
+        ]
+      },
+      "sleepy": {
+        def: "Wanting to sleep.",
+        ex: [
+          "I am sleepy at night.",
+          "She is sleepy in the car.",
+          "He feels sleepy.",
+          "The baby is sleepy.",
+          "We are sleepy after lunch.",
+          "The cat looks sleepy."
+        ]
+      },
+      "thinking": {
+        def: "Using your mind to have ideas.",
+        ex: [
+          "I am thinking about lunch.",
+          "She is thinking of a story.",
+          "He is thinking hard.",
+          "They are thinking together.",
+          "We are thinking of a plan.",
+          "The boy is thinking."
+        ]
+      },
+      "about": {
+        def: "Shows what something is for or connected to.",
+        ex: [
+          "I am talking about my dog.",
+          "She is thinking about cake.",
+          "He cares about his friend.",
+          "We read about animals.",
+          "It is about fun.",
+          "They learn about plants."
+        ]
+      },
+      "making": {
+        def: "To create or put together.",
+        ex: [
+          "I am making a cake.",
+          "She is making a card.",
+          "He is making a mess.",
+          "They are making noise.",
+          "We are making a plan.",
+          "She is making a picture."
+        ]
+      },
+      "chain": {
+        def: "A line of things joined together.",
+        ex: [
+          "I made a chain of paper.",
+          "She wore a chain.",
+          "He made a flower chain.",
+          "The chain is long.",
+          "We built a chain with blocks.",
+          "The dog has a chain."
+        ]
+      },
+      "daisies": {
+        def: "Small white flowers with yellow centers.",
+        ex: [
+          "I picked some daisies.",
+          "She likes daisies.",
+          "The field has daisies.",
+          "He gave her daisies.",
+          "We saw daisies in the grass.",
+          "Daisies are pretty flowers."
+        ]
+      },
+      "when": {
+        def: "Shows the time something happens.",
+        ex: [
+          "Call me when you get home.",
+          "I eat when I am hungry.",
+          "She smiles when happy.",
+          "He runs when it rains.",
+          "We play when it is sunny.",
+          "They laugh when they win."
+        ]
+      },
+      "white": {
+        def: "The color of snow or milk.",
+        ex: [
+          "The cat is white.",
+          "She wore a white dress.",
+          "The paper is white.",
+          "He has white shoes.",
+          "The clouds are white.",
+          "The flower is white."
+        ]
+      },
+      "rabbit": {
+        def: "A small animal with long ears.",
+        ex: [
+          "The rabbit hops fast.",
+          "She has a pet rabbit.",
+          "Rabbits eat carrots.",
+          "The rabbit is white.",
+          "He saw a rabbit in the yard.",
+          "The rabbit has soft fur."
+        ]
+      },
+      "ran": {
+        def: "Moved fast on feet.",
+        ex: [
+          "I ran to the door.",
+          "She ran in the race.",
+          "He ran home.",
+          "They ran together.",
+          "We ran outside.",
+          "The dog ran away."
+        ]
+      },
+      "past": {
+        def: "Going by something.",
+        ex: [
+          "The car drove past.",
+          "She walked past the house.",
+          "He ran past me.",
+          "They went past the store.",
+          "The dog ran past the tree.",
+          "I looked past the window."
+        ]
+      },
+      "The": {
+        def: "Used to talk about one thing or group.",
+        ex: [
+          "The dog is barking.",
+          "The sun is bright.",
+          "The book is blue.",
+          "The car is fast.",
+          "The sky is clear.",
+          "The bird is singing."
+        ]
+      },
+      "took": {
+        def: "Picked up or got.",
+        ex: [
+          "He took a cookie.",
+          "She took my hand.",
+          "I took a picture.",
+          "They took the ball.",
+          "We took a walk.",
+          "The dog took the toy."
+        ]
+      },
+      "watch": {
+        def: "A small clock you wear or carry.",
+        ex: [
+          "I have a watch.",
+          "She wears a watch.",
+          "His watch is blue.",
+          "The watch tells time.",
+          "He looked at his watch.",
+          "The watch is on the table."
+        ]
+      },
+      "out": {
+        def: "To the outside or away from inside.",
+        ex: [
+          "Go out to play.",
+          "She went out the door.",
+          "He looked out the window.",
+          "The cat ran out.",
+          "We went out for lunch.",
+          "Take the trash out."
+        ]
+      },
+      "his": {
+        def: "Belongs to a boy or man.",
+        ex: [
+          "This is his hat.",
+          "His dog is big.",
+          "I like his bike.",
+          "His name is Tom.",
+          "He lost his book.",
+          "His shoes are new."
+        ]
+      },
+      "pocket": {
+        def: "A small bag in clothes to hold things.",
+        ex: [
+          "I put keys in my pocket.",
+          "She has a pocket in her dress.",
+          "His pocket is full.",
+          "The watch is in his pocket.",
+          "He found a coin in his pocket.",
+          "The pocket is small."
+        ]
+      },
+      "said": {
+        def: "Told with words.",
+        ex: [
+          "She said hello.",
+          "He said yes.",
+          "I said thank you.",
+          "They said goodbye.",
+          "We said sorry.",
+          "The teacher said sit down."
+        ]
+      },
+      "he": {
+        def: "A word for a boy or man.",
+        ex: [
+          "He is my brother.",
+          "He likes to run.",
+          "He is tall.",
+          "He has a dog.",
+          "He went home.",
+          "He is happy."
+        ]
+      },
+      "late": {
+        def: "After the right time.",
+        ex: [
+          "I am late for school.",
+          "She is late to class.",
+          "He came late.",
+          "The bus is late.",
+          "They are late for dinner.",
+          "It is too late."
+        ]
+      },
+      "never": {
+        def: "Not ever.",
+        ex: [
+          "I never saw a lion.",
+          "She never eats fish.",
+          "He never runs fast.",
+          "They never come late.",
+          "We never skip school.",
+          "The dog never barks."
+        ]
+      },
+      "seen": {
+        def: "Looked at before.",
+        ex: [
+          "I have seen that movie.",
+          "She has seen a rabbit.",
+          "He has seen the book.",
+          "They have seen the dog.",
+          "We have seen the sun.",
+          "You have seen my hat."
+        ]
+      },
+      "with": {
+        def: "Together or having.",
+        ex: [
+          "I play with my friend.",
+          "She came with her mom.",
+          "He eats with a spoon.",
+          "They walk with the dog.",
+          "We sing with music.",
+          "The box with toys is heavy."
+        ]
+      },
+      "before": {
+        def: "At a time earlier than now.",
+        ex: [
+          "I have been here before.",
+          "She saw it before.",
+          "He ate lunch before.",
+          "We met before.",
+          "They played before.",
+          "The bell rang before class."
+        ]
+      },
+      "jumped": {
+        def: "Pushed up off the ground.",
+        ex: [
+          "I jumped over the log.",
+          "She jumped high.",
+          "He jumped in the pool.",
+          "The cat jumped down.",
+          "They jumped together.",
+          "The frog jumped away."
+        ]
+      },
+      "up": {
+        def: "To a higher place.",
+        ex: [
+          "Look up at the sky.",
+          "She stood up.",
+          "He climbed up the hill.",
+          "The ball went up.",
+          "We woke up early.",
+          "The dog jumped up."
+        ]
+      },
+      "after": {
+        def: "Later than or behind.",
+        ex: [
+          "I eat after school.",
+          "She runs after the dog.",
+          "He came after me.",
+          "We play after lunch.",
+          "They go home after class.",
+          "The sun sets after day."
+        ]
+      },
+      "him": {
+        def: "A word for a boy or man.",
+        ex: [
+          "I see him.",
+          "She likes him.",
+          "He helps him.",
+          "They called him.",
+          "We know him.",
+          "Give it to him."
+        ]
+      },
+      "across": {
+        def: "From one side to the other.",
+        ex: [
+          "I ran across the field.",
+          "She walked across the street.",
+          "He looked across the room.",
+          "They swam across the pool.",
+          "We went across the bridge.",
+          "The dog ran across the yard."
+        ]
+      },
+      "field": {
+        def: "An open area of grass or land.",
+        ex: [
+          "We played in the field.",
+          "The field is green.",
+          "She ran in the field.",
+          "He saw cows in the field.",
+          "The field is big.",
+          "Flowers grow in the field."
+        ]
+      }
+    };
+
+    function createPopup(word, x, y, parent) {
+      // Remove any existing popups
+      const container = document.getElementById('popup-container');
+      container.innerHTML = '';
+      const data = wordData[word];
+      if (!data) return;
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      popup.style.display = 'block';
+
+      // Positioning
+      const rect = parent.getBoundingClientRect();
+      popup.style.left = (window.scrollX + rect.left) + 'px';
+      popup.style.top = (window.scrollY + rect.bottom + 10) + 'px';
+
+      // Build popup content
+      popup.innerHTML = `
+        <button class="close-btn" onclick="document.getElementById('popup-container').innerHTML=''">×</button>
+        <strong>${word}</strong><br>
+        <div style="margin-top:0.3em;"><b>Meaning:</b> ${data.def}</div>
+        <div style="margin-top:0.3em;"><b>Examples:</b>
+          <ul>
+            <li>${data.ex[0]}</li>
+            <li>${data.ex[1]}</li>
+            <li>${data.ex[2]}</li>
+            <li>${data.ex[3]}</li>
+            <li>${data.ex[4]}</li>
+            <li>${data.ex[5]}</li>
+          </ul>
+        </div>
+      `;
+      container.appendChild(popup);
+      // Scroll into view if needed
+      setTimeout(() => {
+        popup.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }, 100);
+    }
+
+    document.querySelectorAll('.underline').forEach(span => {
+      span.addEventListener('click', function(e) {
+        const word = this.getAttribute('data-word');
+        createPopup(word, e.clientX, e.clientY, this);
+      });
+    });
+
+    // Close popup on click outside
+    document.addEventListener('click', function(e) {
+      const container = document.getElementById('popup-container');
+      if (!e.target.classList.contains('underline') && !container.contains(e.target)) {
+        container.innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>
