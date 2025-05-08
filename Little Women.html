@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Little Women</title>
+  <style>
+    body {
+      background: #f9f9f9;
+      font-family: Arial, sans-serif;
+      color: #222;
+      padding: 2vw;
+    }
+    .text-container {
+      font-size: 3em;
+      font-weight: bold;
+      line-height: 1.4;
+      margin-bottom: 2em;
+      max-width: 900px;
+    }
+    .word {
+      text-decoration: underline;
+      cursor: pointer;
+      position: relative;
+      padding: 0 0.1em;
+      transition: background 0.2s;
+    }
+    .word:hover {
+      background: #e0f7fa;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 15%;
+      transform: translate(-50%, 0);
+      background: #fff;
+      border: 3px solid #4caf50;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      z-index: 1000;
+      padding: 2em 2em 1.5em 2em;
+      max-width: 90vw;
+      font-size: 1.5em;
+      font-weight: normal;
+    }
+    .popup .close-btn {
+      display: block;
+      margin: 0 auto 1em auto;
+      padding: 0.2em 1.2em;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #fff;
+      background: #4caf50;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .popup .word-title {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #388e3c;
+      margin-bottom: 0.5em;
+      text-align: center;
+    }
+    .popup .definition {
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    .popup .examples {
+      margin-top: 0.5em;
+    }
+    .popup .examples li {
+      margin-bottom: 0.3em;
+    }
+    @media (max-width: 600px) {
+      .text-container { font-size: 2em; }
+      .popup { font-size: 1.1em; padding: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container" id="main-text">
+    <span class="word" data-word="The">The</span>
+    <span class="word" data-word="March">March</span>
+    <span class="word" data-word="family">family</span>
+    <span class="word" data-word="was">was</span>
+    <span class="word" data-word="very">very</span>
+    <span class="word" data-word="poor">poor</span>,
+    <span class="word" data-word="but">but</span>
+    <span class="word" data-word="they">they</span>
+    <span class="word" data-word="were">were</span>
+    <span class="word" data-word="happy">happy</span>.
+    <span class="word" data-word="There">There</span>
+    <span class="word" data-word="were_2">were</span>
+    <span class="word" data-word="four">four</span>
+    <span class="word" data-word="sisters">sisters</span>
+    <span class="word" data-word="named">named</span>
+    <span class="word" data-word="Meg">Meg</span>,
+    <span class="word" data-word="Jo">Jo</span>,
+    <span class="word" data-word="Beth">Beth</span>,
+    <span class="word" data-word="and">and</span>
+    <span class="word" data-word="Amy">Amy</span>.
+    <span class="word" data-word="Their">Their</span>
+    <span class="word" data-word="father">father</span>
+    <span class="word" data-word="was_2">was</span>
+    <span class="word" data-word="away">away</span>
+    <span class="word" data-word="at">at</span>
+    <span class="word" data-word="war">war</span>,
+    <span class="word" data-word="and_2">and</span>
+    <span class="word" data-word="their_2">their</span>
+    <span class="word" data-word="mother">mother</span>
+    <span class="word" data-word="worked">worked</span>
+    <span class="word" data-word="hard">hard</span>
+    <span class="word" data-word="to">to</span>
+    <span class="word" data-word="take">take</span>
+    <span class="word" data-word="care">care</span>
+    <span class="word" data-word="of">of</span>
+    <span class="word" data-word="them">them</span>.
+    <span class="word" data-word="It">It</span>
+    <span class="word" data-word="was_3">was</span>
+    <span class="word" data-word="almost">almost</span>
+    <span class="word" data-word="Christmas">Christmas</span>,
+    <span class="word" data-word="and_3">and</span>
+    <span class="word" data-word="the_2">the</span>
+    <span class="word" data-word="girls">girls</span>
+    <span class="word" data-word="were_3">were</span>
+    <span class="word" data-word="sad">sad</span>
+    <span class="word" data-word="because">because</span>
+    <span class="word" data-word="there">there</span>
+    <span class="word" data-word="would">would</span>
+    <span class="word" data-word="be">be</span>
+    <span class="word" data-word="no">no</span>
+    <span class="word" data-word="presents">presents</span>
+    <span class="word" data-word="this">this</span>
+    <span class="word" data-word="year">year</span>.
+    <span class="word" data-word="They">They</span>
+    <span class="word" data-word="decided">decided</span>
+    <span class="word" data-word="to_2">to</span>
+    <span class="word" data-word="use">use</span>
+    <span class="word" data-word="their_3">their</span>
+    <span class="word" data-word="own">own</span>
+    <span class="word" data-word="money">money</span>
+    <span class="word" data-word="to_3">to</span>
+    <span class="word" data-word="buy">buy</span>
+    <span class="word" data-word="gifts">gifts</span>
+    <span class="word" data-word="for">for</span>
+    <span class="word" data-word="their_4">their</span>
+    <span class="word" data-word="mother_2">mother</span>
+    <span class="word" data-word="instead">instead</span>
+    <span class="word" data-word="of_2">of</span>
+    <span class="word" data-word="things">things</span>
+    <span class="word" data-word="for_2">for</span>
+    <span class="word" data-word="themselves">themselves</span>.
+    <span class="word" data-word="On">On</span>
+    <span class="word" data-word="Christmas_2">Christmas</span>
+    <span class="word" data-word="morning">morning</span>,
+    <span class="word" data-word="they_2">they</span>
+    <span class="word" data-word="woke">woke</span>
+    <span class="word" data-word="up">up</span>
+    <span class="word" data-word="to_4">to</span>
+    <span class="word" data-word="find">find</span>
+    <span class="word" data-word="little">little</span>
+    <span class="word" data-word="books">books</span>
+    <span class="word" data-word="under">under</span>
+    <span class="word" data-word="their_5">their</span>
+    <span class="word" data-word="pillows">pillows</span>.
+    <span class="word" data-word="Their_2">Their</span>
+    <span class="word" data-word="mother_3">mother</span>
+    <span class="word" data-word="had">had</span>
+    <span class="word" data-word="managed">managed</span>
+    <span class="word" data-word="to_5">to</span>
+    <span class="word" data-word="get">get</span>
+    <span class="word" data-word="them_2">them</span>
+    <span class="word" data-word="each">each</span>
+    <span class="word" data-word="a">a</span>
+    <span class="word" data-word="gift">gift</span>
+    <span class="word" data-word="after">after</span>
+    <span class="word" data-word="all">all</span>.
+    <span class="word" data-word="Later">Later</span>
+    <span class="word" data-word="that">that</span>
+    <span class="word" data-word="day">day</span>,
+    <span class="word" data-word="they_3">they</span>
+    <span class="word" data-word="shared">shared</span>
+    <span class="word" data-word="their_6">their</span>
+    <span class="word" data-word="breakfast">breakfast</span>
+    <span class="word" data-word="with">with</span>
+    <span class="word" data-word="a_2">a</span>
+    <span class="word" data-word="poor_2">poor</span>
+    <span class="word" data-word="family_2">family</span>
+    <span class="word" data-word="who">who</span>
+    <span class="word" data-word="had">had</span>
+    <span class="word" data-word="nothing">nothing</span>
+    <span class="word" data-word="to_6">to</span>
+    <span class="word" data-word="eat">eat</span>.
+    <span class="word" data-word="The_2">The</span>
+    <span class="word" data-word="girls_2">girls</span>
+    <span class="word" data-word="learned">learned</span>
+    <span class="word" data-word="that_2">that</span>
+    <span class="word" data-word="giving">giving</span>
+    <span class="word" data-word="to_7">to</span>
+    <span class="word" data-word="others">others</span>
+    <span class="word" data-word="can">can</span>
+    <span class="word" data-word="bring">bring</span>
+    <span class="word" data-word="more">more</span>
+    <span class="word" data-word="joy">joy</span>
+    <span class="word" data-word="than">than</span>
+    <span class="word" data-word="getting">getting</span>
+    <span class="word" data-word="presents_2">presents</span>.
+  </div>
+  <div class="popup" id="popup">
+    <button class="close-btn" onclick="hidePopup()">Close</button>
+    <div class="word-title" id="popup-word"></div>
+    <div class="definition" id="popup-def"></div>
+    <div class="examples">
+      <ul id="popup-examples"></ul>
+    </div>
+  </div>
+  <script>
+    const wordData = {
+      "The": {
+        definition: "Used to talk about a thing we know about.",
+        examples: [
+          "The dog is brown.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is fast.",
+          "The house is big.",
+          "The key is lost."
+        ]
+      },
+      "March": {
+        definition: "The last name of the family in the story.",
+        examples: [
+          "The March family is kind.",
+          "Meg March is the oldest.",
+          "Jo March likes to write.",
+          "Beth March plays the piano.",
+          "Amy March likes to draw.",
+          "March is their last name."
+        ]
+      },
+      "family": {
+        definition: "A group of people who are related.",
+        examples: [
+          "My family is big.",
+          "We eat with our family.",
+          "She loves her family.",
+          "The family went to the park.",
+          "His family is nice.",
+          "The March family is happy."
+        ]
+      },
+      "was": {
+        definition: "Shows something happened before now.",
+        examples: [
+          "She was happy.",
+          "The cat was small.",
+          "It was raining.",
+          "He was here.",
+          "The door was open.",
+          "I was tired."
+        ]
+      },
+      "very": {
+        definition: "Means a lot or much.",
+        examples: [
+          "She is very happy.",
+          "The dog is very big.",
+          "I am very tired.",
+          "It is very cold.",
+          "He is very fast.",
+          "The room is very dark."
+        ]
+      },
+      "poor": {
+        definition: "Not having much money.",
+        examples: [
+          "The family is poor.",
+          "They are poor but happy.",
+          "He is a poor man.",
+          "We were poor last year.",
+          "She helps poor people.",
+          "The poor family had no food."
+        ]
+      },
+      "but": {
+        definition: "Shows something different or not the same.",
+        examples: [
+          "I like cats but not dogs.",
+          "She is small but strong.",
+          "He ran but fell.",
+          "It is cold but sunny.",
+          "We want to go but can't.",
+          "They are poor but happy."
+        ]
+      },
+      "they": {
+        definition: "A word for more than one person or thing.",
+        examples: [
+          "They are friends.",
+          "They play outside.",
+          "They have a dog.",
+          "They went home.",
+          "They are sisters.",
+          "They are happy."
+        ]
+      },
+      "were": {
+        definition: "Shows something happened before now, for more than one thing.",
+        examples: [
+          "They were happy.",
+          "The books were lost.",
+          "We were there.",
+          "The doors were open.",
+          "The rooms were big.",
+          "Most were locked."
+        ]
+      },
+      "happy": {
+        definition: "Feeling good and smiling.",
+        examples: [
+          "She is happy.",
+          "He feels happy.",
+          "The dog is happy.",
+          "They are happy together.",
+          "I am happy today.",
+          "The family is happy."
+        ]
+      },
+      "There": {
+        definition: "Shows something exists or is present.",
+        examples: [
+          "There is a cat.",
+          "There are five apples.",
+          "There was a party.",
+          "There is no food.",
+          "There were four girls.",
+          "There is a house."
+        ]
+      },
+      "were_2": {
+        definition: "Shows something happened before now, for more than one thing.",
+        examples: [
+          "They were happy.",
+          "The books were lost.",
+          "We were there.",
+          "The doors were open.",
+          "The rooms were big.",
+          "Most were locked."
+        ]
+      },
+      "four": {
+        definition: "The number 4.",
+        examples: [
+          "I have four books.",
+          "There are four chairs.",
+          "Four kids are here.",
+          "She has four cats.",
+          "Four sisters live here.",
+          "We saw four birds."
+        ]
+      },
+      "sisters": {
+        definition: "Girls who have the same parents.",
+        examples: [
+          "I have two sisters.",
+          "The sisters play together.",
+          "She loves her sisters.",
+          "The four sisters are close.",
+          "Sisters help each other.",
+          "They are sisters."
+        ]
+      },
+      "named": {
+        definition: "Having a certain name.",
+        examples: [
+          "The dog is named Max.",
+          "She is named Amy.",
+          "The book is named 'Little Women'.",
+          "My friend is named Sam.",
+          "There are girls named Meg and Jo.",
+          "He is named Tom."
+        ]
+      },
+      "Meg": {
+        definition: "The oldest sister in the March family.",
+        examples: [
+          "Meg is kind and caring.",
+          "Meg helps her mother.",
+          "Meg is the oldest sister.",
+          "Meg likes to cook.",
+          "Meg is smart.",
+          "Meg is a good sister."
+        ]
+      },
+      "Jo": {
+        definition: "The second oldest sister in the March family.",
+        examples: [
+          "Jo likes to write stories.",
+          "Jo is brave.",
+          "Jo is the second oldest.",
+          "Jo has short hair.",
+          "Jo helps her sisters.",
+          "Jo is a good friend."
+        ]
+      },
+      "Beth": {
+        definition: "The third sister in the March family.",
+        examples: [
+          "Beth is very sweet.",
+          "Beth plays the piano.",
+          "Beth is shy.",
+          "Beth loves her family.",
+          "Beth is kind to others.",
+          "Beth is a good sister."
+        ]
+      },
+      "and": {
+        definition: "Connects two things together.",
+        examples: [
+          "I have a cat and a dog.",
+          "She likes apples and oranges.",
+          "We play and laugh.",
+          "He runs and jumps.",
+          "It is hot and sunny.",
+          "You and I are friends."
+        ]
+      },
+      "Amy": {
+        definition: "The youngest sister in the March family.",
+        examples: [
+          "Amy likes to draw.",
+          "Amy is the youngest.",
+          "Amy is funny.",
+          "Amy loves her sisters.",
+          "Amy is smart.",
+          "Amy is a good sister."
+        ]
+      },
+      "Their": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "father": {
+        definition: "A man who has children.",
+        examples: [
+          "My father is kind.",
+          "Her father works hard.",
+          "Their father is away.",
+          "Father reads to us.",
+          "He is a good father.",
+          "Father helps me."
+        ]
+      },
+      "was_2": {
+        definition: "Shows something happened before now.",
+        examples: [
+          "She was happy.",
+          "The cat was small.",
+          "It was raining.",
+          "He was here.",
+          "The door was open.",
+          "I was tired."
+        ]
+      },
+      "away": {
+        definition: "Not here, in another place.",
+        examples: [
+          "She is away at school.",
+          "The dog ran away.",
+          "Father is away at work.",
+          "He went away.",
+          "The toy is put away.",
+          "They are away from home."
+        ]
+      },
+      "at": {
+        definition: "Shows where something happens.",
+        examples: [
+          "She is at home.",
+          "He is at school.",
+          "We eat at the table.",
+          "I look at the sky.",
+          "They are at the park.",
+          "Father is at war."
+        ]
+      },
+      "war": {
+        definition: "A big fight between groups or countries.",
+        examples: [
+          "The men went to war.",
+          "War is very hard.",
+          "Father is at war.",
+          "The country was at war.",
+          "War makes people sad.",
+          "They hope the war ends soon."
+        ]
+      },
+      "and_2": {
+        definition: "Connects two things together.",
+        examples: [
+          "I have a cat and a dog.",
+          "She likes apples and oranges.",
+          "We play and laugh.",
+          "He runs and jumps.",
+          "It is hot and sunny.",
+          "You and I are friends."
+        ]
+      },
+      "their_2": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "mother": {
+        definition: "A woman who has children.",
+        examples: [
+          "My mother is nice.",
+          "Her mother helps her.",
+          "Their mother works hard.",
+          "Mother cooks dinner.",
+          "She loves her mother.",
+          "Mother reads to us."
+        ]
+      },
+      "worked": {
+        definition: "Did a job.",
+        examples: [
+          "She worked at the store.",
+          "Mother worked hard.",
+          "He worked all day.",
+          "They worked together.",
+          "I worked on my homework.",
+          "We worked in the garden."
+        ]
+      },
+      "hard": {
+        definition: "With a lot of effort.",
+        examples: [
+          "She works hard.",
+          "He studies hard.",
+          "Mother worked hard.",
+          "They play hard.",
+          "I try hard.",
+          "He runs hard."
+        ]
+      },
+      "to": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "take": {
+        definition: "To get or use something.",
+        examples: [
+          "Take the book.",
+          "She will take a nap.",
+          "He can take a turn.",
+          "Take your time.",
+          "They take the bus.",
+          "Mother will take care of us."
+        ]
+      },
+      "care": {
+        definition: "To help and look after someone.",
+        examples: [
+          "I care for my dog.",
+          "Mother takes care of us.",
+          "He cares about his friend.",
+          "She cares for her baby.",
+          "They care for the garden.",
+          "We care for each other."
+        ]
+      },
+      "of": {
+        definition: "Shows what something is about or belongs to.",
+        examples: [
+          "A cup of milk.",
+          "A box of toys.",
+          "A group of kids.",
+          "A bag of apples.",
+          "A lot of fun.",
+          "Take care of the dog."
+        ]
+      },
+      "them": {
+        definition: "A word for more than one person or thing.",
+        examples: [
+          "I see them.",
+          "Give it to them.",
+          "They are with them.",
+          "Help them.",
+          "Tell them to come.",
+          "Mother takes care of them."
+        ]
+      },
+      "It": {
+        definition: "A word for a thing or animal.",
+        examples: [
+          "It is cold.",
+          "I see it.",
+          "It is raining.",
+          "It is my toy.",
+          "It is big.",
+          "It is a key."
+        ]
+      },
+      "was_3": {
+        definition: "Shows something happened before now.",
+        examples: [
+          "She was happy.",
+          "The cat was small.",
+          "It was raining.",
+          "He was here.",
+          "The door was open.",
+          "I was tired."
+        ]
+      },
+      "almost": {
+        definition: "Very close to, but not quite.",
+        examples: [
+          "It is almost time.",
+          "She is almost done.",
+          "He is almost here.",
+          "The cup is almost full.",
+          "It is almost Christmas.",
+          "We are almost ready."
+        ]
+      },
+      "Christmas": {
+        definition: "A holiday in December when people give gifts.",
+        examples: [
+          "Christmas is in December.",
+          "We get gifts at Christmas.",
+          "The tree is for Christmas.",
+          "I love Christmas.",
+          "We sing at Christmas.",
+          "It is almost Christmas."
+        ]
+      },
+      "and_3": {
+        definition: "Connects two things together.",
+        examples: [
+          "I have a cat and a dog.",
+          "She likes apples and oranges.",
+          "We play and laugh.",
+          "He runs and jumps.",
+          "It is hot and sunny.",
+          "You and I are friends."
+        ]
+      },
+      "the_2": {
+        definition: "Used to talk about a thing we know about.",
+        examples: [
+          "The dog is brown.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is fast.",
+          "The house is big.",
+          "The key is lost."
+        ]
+      },
+      "girls": {
+        definition: "Young female children.",
+        examples: [
+          "The girls are playing.",
+          "Three girls are here.",
+          "Girls like to sing.",
+          "The girls are sisters.",
+          "The girls share toys.",
+          "The girls are happy."
+        ]
+      },
+      "were_3": {
+        definition: "Shows something happened before now, for more than one thing.",
+        examples: [
+          "They were happy.",
+          "The books were lost.",
+          "We were there.",
+          "The doors were open.",
+          "The rooms were big.",
+          "Most were locked."
+        ]
+      },
+      "sad": {
+        definition: "Feeling unhappy.",
+        examples: [
+          "She is sad.",
+          "The boy looks sad.",
+          "Rainy days make me sad.",
+          "He felt sad when he lost his toy.",
+          "The story is sad.",
+          "I am sad today."
+        ]
+      },
+      "because": {
+        definition: "Shows the reason for something.",
+        examples: [
+          "I am happy because I won.",
+          "She is sad because it rained.",
+          "He left because he was tired.",
+          "We stayed inside because it was cold.",
+          "They cried because of the movie.",
+          "She smiled because of the gift."
+        ]
+      },
+      "there": {
+        definition: "Shows something exists or is present.",
+        examples: [
+          "There is a cat.",
+          "There are five apples.",
+          "There was a party.",
+          "There is no food.",
+          "There were four girls.",
+          "There is a house."
+        ]
+      },
+      "would": {
+        definition: "Shows what someone wanted or planned.",
+        examples: [
+          "I would like a cookie.",
+          "She would help you.",
+          "He would go if he could.",
+          "They would play outside.",
+          "We would sing a song.",
+          "There would be no presents."
+        ]
+      },
+      "be": {
+        definition: "To exist or happen.",
+        examples: [
+          "I want to be happy.",
+          "She will be here.",
+          "He can be funny.",
+          "It will be sunny.",
+          "They will be late.",
+          "Be kind to others."
+        ]
+      },
+      "no": {
+        definition: "Not any.",
+        examples: [
+          "I have no toys.",
+          "There is no food.",
+          "She has no friends.",
+          "No one is here.",
+          "No dogs allowed.",
+          "He has no money."
+        ]
+      },
+      "presents": {
+        definition: "Gifts given to someone.",
+        examples: [
+          "I got presents for my birthday.",
+          "She gave me two presents.",
+          "We open presents at Christmas.",
+          "The box has presents inside.",
+          "They wrapped the presents.",
+          "There were no presents."
+        ]
+      },
+      "this": {
+        definition: "Shows something close or happening now.",
+        examples: [
+          "This is my book.",
+          "I like this toy.",
+          "This is fun.",
+          "This dog is brown.",
+          "This is my friend.",
+          "This year is special."
+        ]
+      },
+      "year": {
+        definition: "A time of twelve months.",
+        examples: [
+          "I am six years old.",
+          "She waited for two years.",
+          "He lived there for years.",
+          "The house is many years old.",
+          "Ten years passed.",
+          "This year is fun."
+        ]
+      },
+      "They": {
+        definition: "A word for more than one person or thing.",
+        examples: [
+          "They are friends.",
+          "They play outside.",
+          "They have a dog.",
+          "They went home.",
+          "They are sisters.",
+          "They are happy."
+        ]
+      },
+      "decided": {
+        definition: "Made a choice.",
+        examples: [
+          "She decided to go.",
+          "They decided to help.",
+          "He decided to run.",
+          "We decided to play.",
+          "I decided to read.",
+          "The girls decided to give gifts."
+        ]
+      },
+      "to_2": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "use": {
+        definition: "To do something with something.",
+        examples: [
+          "I use a pencil.",
+          "She uses her phone.",
+          "We use water to drink.",
+          "He uses a key.",
+          "They use their money.",
+          "Use your hands."
+        ]
+      },
+      "their_3": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "own": {
+        definition: "Belonging to them, not someone else.",
+        examples: [
+          "I have my own room.",
+          "She has her own book.",
+          "They use their own money.",
+          "He has his own toy.",
+          "We made our own lunch.",
+          "This is my own idea."
+        ]
+      },
+      "money": {
+        definition: "What people use to buy things.",
+        examples: [
+          "I have some money.",
+          "She saved her money.",
+          "He uses money to buy food.",
+          "They need money.",
+          "Money is in my pocket.",
+          "We use money at the store."
+        ]
+      },
+      "to_3": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "buy": {
+        definition: "To get something by paying money.",
+        examples: [
+          "I buy a toy.",
+          "She will buy a book.",
+          "They buy food.",
+          "He buys a gift.",
+          "We buy milk.",
+          "They buy gifts for mother."
+        ]
+      },
+      "gifts": {
+        definition: "Things you give to someone to be nice.",
+        examples: [
+          "She got gifts for her birthday.",
+          "We give gifts at Christmas.",
+          "He gave me two gifts.",
+          "They opened their gifts.",
+          "I wrapped the gifts.",
+          "The girls gave gifts to mother."
+        ]
+      },
+      "for": {
+        definition: "Shows the reason or who gets something.",
+        examples: [
+          "This is for you.",
+          "I waited for an hour.",
+          "She made a cake for me.",
+          "We play for fun.",
+          "He left for school.",
+          "The gifts are for mother."
+        ]
+      },
+      "their_4": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "mother_2": {
+        definition: "A woman who has children.",
+        examples: [
+          "My mother is nice.",
+          "Her mother helps her.",
+          "Their mother works hard.",
+          "Mother cooks dinner.",
+          "She loves her mother.",
+          "Mother reads to us."
+        ]
+      },
+      "instead": {
+        definition: "In place of something else.",
+        examples: [
+          "I want milk instead of juice.",
+          "She stayed home instead of going out.",
+          "They played inside instead.",
+          "He took the bus instead of walking.",
+          "We ate fruit instead of candy.",
+          "They gave gifts instead of getting them."
+        ]
+      },
+      "of_2": {
+        definition: "Shows what something is about or belongs to.",
+        examples: [
+          "A cup of milk.",
+          "A box of toys.",
+          "A group of kids.",
+          "A bag of apples.",
+          "A lot of fun.",
+          "Instead of things for themselves."
+        ]
+      },
+      "things": {
+        definition: "Objects or items.",
+        examples: [
+          "I have many things.",
+          "She lost her things.",
+          "He found his things.",
+          "We packed our things.",
+          "Things are on the table.",
+          "They gave up things for mother."
+        ]
+      },
+      "for_2": {
+        definition: "Shows the reason or who gets something.",
+        examples: [
+          "This is for you.",
+          "I waited for an hour.",
+          "She made a cake for me.",
+          "We play for fun.",
+          "He left for school.",
+          "The gifts are for mother."
+        ]
+      },
+      "themselves": {
+        definition: "Refers to the same people already talked about.",
+        examples: [
+          "They did it themselves.",
+          "The girls helped themselves.",
+          "They made food for themselves.",
+          "The sisters bought gifts for themselves.",
+          "They played by themselves.",
+          "The girls thought of others, not themselves."
+        ]
+      },
+      "On": {
+        definition: "Shows the day or time something happens.",
+        examples: [
+          "On Monday, we play.",
+          "She sings on Sunday.",
+          "On Christmas, we get gifts.",
+          "On my birthday, I eat cake.",
+          "On the table is a book.",
+          "On Christmas morning, they woke up."
+        ]
+      },
+      "Christmas_2": {
+        definition: "A holiday in December when people give gifts.",
+        examples: [
+          "Christmas is in December.",
+          "We get gifts at Christmas.",
+          "The tree is for Christmas.",
+          "I love Christmas.",
+          "We sing at Christmas.",
+          "It is almost Christmas."
+        ]
+      },
+      "morning": {
+        definition: "The first part of the day.",
+        examples: [
+          "I wake up in the morning.",
+          "Morning is bright.",
+          "We eat breakfast in the morning.",
+          "She runs every morning.",
+          "Morning comes after night.",
+          "On Christmas morning, they woke up."
+        ]
+      },
+      "they_2": {
+        definition: "A word for more than one person or thing.",
+        examples: [
+          "They are friends.",
+          "They play outside.",
+          "They have a dog.",
+          "They went home.",
+          "They are sisters.",
+          "They are happy."
+        ]
+      },
+      "woke": {
+        definition: "Opened eyes after sleeping.",
+        examples: [
+          "I woke up early.",
+          "She woke when the sun rose.",
+          "He woke to a noise.",
+          "They woke on Christmas.",
+          "The baby woke up.",
+          "We woke in the morning."
+        ]
+      },
+      "up": {
+        definition: "Shows something is higher or awake.",
+        examples: [
+          "Stand up.",
+          "Wake up.",
+          "Pick up the toy.",
+          "Look up at the sky.",
+          "He got up from bed.",
+          "They woke up."
+        ]
+      },
+      "to_4": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "find": {
+        definition: "To see or get something you were looking for.",
+        examples: [
+          "I find my shoes.",
+          "She finds her book.",
+          "He finds a toy.",
+          "They find a dog.",
+          "We find the answer.",
+          "They find gifts."
+        ]
+      },
+      "little": {
+        definition: "Small in size.",
+        examples: [
+          "The cat is little.",
+          "She has a little dog.",
+          "He gave me a little gift.",
+          "The little girl smiled.",
+          "We saw a little bird.",
+          "There were little books."
+        ]
+      },
+      "books": {
+        definition: "Things you read with pages.",
+        examples: [
+          "I read books.",
+          "She has many books.",
+          "Books are on the shelf.",
+          "He likes books.",
+          "Books can be fun.",
+          "They got little books."
+        ]
+      },
+      "under": {
+        definition: "Below or beneath something.",
+        examples: [
+          "The cat is under the table.",
+          "Look under the bed.",
+          "The toy is under the chair.",
+          "She hid under the blanket.",
+          "The book is under the desk.",
+          "Books were under their pillows."
+        ]
+      },
+      "their_5": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "pillows": {
+        definition: "Soft things you put your head on in bed.",
+        examples: [
+          "I sleep on pillows.",
+          "She has two pillows.",
+          "The pillows are soft.",
+          "He put the pillow on the bed.",
+          "Pillows are on the couch.",
+          "Books were under their pillows."
+        ]
+      },
+      "Their_2": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "mother_3": {
+        definition: "A woman who has children.",
+        examples: [
+          "My mother is nice.",
+          "Her mother helps her.",
+          "Their mother works hard.",
+          "Mother cooks dinner.",
+          "She loves her mother.",
+          "Mother reads to us."
+        ]
+      },
+      "had": {
+        definition: "Shows someone owned or did something before now.",
+        examples: [
+          "She had a dog.",
+          "I had lunch.",
+          "He had a toy.",
+          "They had fun.",
+          "We had a party.",
+          "Mary had no friends."
+        ]
+      },
+      "managed": {
+        definition: "Was able to do something hard.",
+        examples: [
+          "She managed to finish her work.",
+          "He managed to lift the box.",
+          "They managed to get home.",
+          "I managed to win the game.",
+          "Mother managed to get gifts.",
+          "We managed to help."
+        ]
+      },
+      "to_5": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "get": {
+        definition: "To take or receive something.",
+        examples: [
+          "I get a gift.",
+          "She gets a book.",
+          "They get food.",
+          "He gets help.",
+          "We get up early.",
+          "Mother gets a present."
+        ]
+      },
+      "them_2": {
+        definition: "A word for more than one person or thing.",
+        examples: [
+          "I see them.",
+          "Give it to them.",
+          "They are with them.",
+          "Help them.",
+          "Tell them to come.",
+          "Mother takes care of them."
+        ]
+      },
+      "each": {
+        definition: "Every one in a group.",
+        examples: [
+          "Each child got a toy.",
+          "We each have a book.",
+          "She gave each friend a gift.",
+          "Each dog is brown.",
+          "Each girl smiled.",
+          "Each got a present."
+        ]
+      },
+      "a": {
+        definition: "Used before naming one thing.",
+        examples: [
+          "I have a dog.",
+          "She found a book.",
+          "He saw a bird.",
+          "It is a ball.",
+          "We need a key.",
+          "There is a house."
+        ]
+      },
+      "gift": {
+        definition: "Something you give to someone to be nice.",
+        examples: [
+          "I got a gift.",
+          "She gave me a gift.",
+          "He wrapped the gift.",
+          "They opened their gift.",
+          "We made a gift.",
+          "Mother gave a gift."
+        ]
+      },
+      "after": {
+        definition: "Later than something else.",
+        examples: [
+          "We eat after school.",
+          "She runs after breakfast.",
+          "He comes after me.",
+          "After the movie, we go home.",
+          "After dinner, we play.",
+          "After all, they got gifts."
+        ]
+      },
+      "all": {
+        definition: "Every one or everything.",
+        examples: [
+          "All the kids are here.",
+          "She ate all the cake.",
+          "He read all the books.",
+          "We saw all the dogs.",
+          "They finished all the work.",
+          "After all, they got gifts."
+        ]
+      },
+      "Later": {
+        definition: "At a time after now.",
+        examples: [
+          "We will eat later.",
+          "She will come later.",
+          "Later, we can play.",
+          "He called later.",
+          "Later that day, it rained.",
+          "Later, they shared breakfast."
+        ]
+      },
+      "that": {
+        definition: "Shows which thing you mean.",
+        examples: [
+          "That is my dog.",
+          "I like that book.",
+          "She saw that bird.",
+          "That house is big.",
+          "He wants that toy.",
+          "That garden is pretty."
+        ]
+      },
+      "day": {
+        definition: "A time from morning to night.",
+        examples: [
+          "Today is a sunny day.",
+          "She plays every day.",
+          "I saw him that day.",
+          "The day is long.",
+          "We had a fun day.",
+          "It rained all day."
+        ]
+      },
+      "they_3": {
+        definition: "A word for more than one person or thing.",
+        examples: [
+          "They are friends.",
+          "They play outside.",
+          "They have a dog.",
+          "They went home.",
+          "They are sisters.",
+          "They are happy."
+        ]
+      },
+      "shared": {
+        definition: "Gave part of something to others.",
+        examples: [
+          "She shared her toy.",
+          "They shared food.",
+          "He shared his book.",
+          "We shared our lunch.",
+          "The girls shared breakfast.",
+          "They shared with a poor family."
+        ]
+      },
+      "their_6": {
+        definition: "Belonging to them.",
+        examples: [
+          "Their house is big.",
+          "Their dog is brown.",
+          "Their mother is nice.",
+          "Their books are new.",
+          "Their family is happy.",
+          "Their father is away."
+        ]
+      },
+      "breakfast": {
+        definition: "The first meal in the morning.",
+        examples: [
+          "I eat breakfast.",
+          "She made breakfast.",
+          "We have eggs for breakfast.",
+          "He likes breakfast food.",
+          "Breakfast is in the morning.",
+          "They shared breakfast."
+        ]
+      },
+      "with": {
+        definition: "Together in the same place.",
+        examples: [
+          "I live with my mom.",
+          "She plays with her dog.",
+          "He eats with us.",
+          "They walk with friends.",
+          "Sit with me.",
+          "Mary lives with her uncle."
+        ]
+      },
+      "a_2": {
+        definition: "Used before naming one thing.",
+        examples: [
+          "I have a dog.",
+          "She found a book.",
+          "He saw a bird.",
+          "It is a ball.",
+          "We need a key.",
+          "There is a house."
+        ]
+      },
+      "poor_2": {
+        definition: "Not having much money.",
+        examples: [
+          "The family is poor.",
+          "They are poor but happy.",
+          "He is a poor man.",
+          "We were poor last year.",
+          "She helps poor people.",
+          "The poor family had no food."
+        ]
+      },
+      "family_2": {
+        definition: "A group of people who are related.",
+        examples: [
+          "My family is big.",
+          "We eat with our family.",
+          "She loves her family.",
+          "The family went to the park.",
+          "His family is nice.",
+          "The March family is happy."
+        ]
+      },
+      "who": {
+        definition: "Talking about a person.",
+        examples: [
+          "The girl who runs fast.",
+          "He is the boy who won.",
+          "She is the one who helps.",
+          "The family who lives here.",
+          "The man who sings.",
+          "The girl who is kind."
+        ]
+      },
+      "had": {
+        definition: "Shows someone owned or did something before now.",
+        examples: [
+          "She had a dog.",
+          "I had lunch.",
+          "He had a toy.",
+          "They had fun.",
+          "We had a party.",
+          "Mary had no friends."
+        ]
+      },
+      "nothing": {
+        definition: "Not anything.",
+        examples: [
+          "There is nothing here.",
+          "She has nothing to do.",
+          "I want nothing.",
+          "Nothing is wrong.",
+          "He found nothing.",
+          "Mary had nothing to play with."
+        ]
+      },
+      "to_6": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "eat": {
+        definition: "To put food in your mouth and chew.",
+        examples: [
+          "I eat apples.",
+          "She likes to eat.",
+          "He will eat lunch.",
+          "We eat breakfast.",
+          "They eat together.",
+          "The family eats food."
+        ]
+      },
+      "The_2": {
+        definition: "Used to talk about a thing we know about.",
+        examples: [
+          "The dog is brown.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is fast.",
+          "The house is big.",
+          "The key is lost."
+        ]
+      },
+      "girls_2": {
+        definition: "Young female children.",
+        examples: [
+          "The girls are playing.",
+          "Three girls are here.",
+          "Girls like to sing.",
+          "The girls are sisters.",
+          "The girls share toys.",
+          "The girls are happy."
+        ]
+      },
+      "learned": {
+        definition: "Found out something new.",
+        examples: [
+          "I learned to read.",
+          "She learned to swim.",
+          "They learned a lesson.",
+          "He learned to tie his shoes.",
+          "We learned about animals.",
+          "The girls learned to share."
+        ]
+      },
+      "that_2": {
+        definition: "Shows which thing you mean.",
+        examples: [
+          "That is my dog.",
+          "I like that book.",
+          "She saw that bird.",
+          "That house is big.",
+          "He wants that toy.",
+          "That garden is pretty."
+        ]
+      },
+      "giving": {
+        definition: "Letting someone have something from you.",
+        examples: [
+          "She is giving a gift.",
+          "He is giving food.",
+          "They are giving help.",
+          "I am giving my toy.",
+          "Giving is kind.",
+          "The girls are giving to others."
+        ]
+      },
+      "to_7": {
+        definition: "Shows what must happen or where something goes.",
+        examples: [
+          "I have to go.",
+          "She wants to play.",
+          "Give it to me.",
+          "He went to school.",
+          "They need to eat.",
+          "We walk to the park."
+        ]
+      },
+      "others": {
+        definition: "People who are not you.",
+        examples: [
+          "Help others.",
+          "Be kind to others.",
+          "She gave food to others.",
+          "Others are waiting.",
+          "He talks to others.",
+          "The girls gave to others."
+        ]
+      },
+      "can": {
+        definition: "Able to do something.",
+        examples: [
+          "I can run fast.",
+          "She can read.",
+          "He can jump.",
+          "We can sing.",
+          "They can help.",
+          "You can do it."
+        ]
+      },
+      "bring": {
+        definition: "To take something to a place.",
+        examples: [
+          "Bring me the book.",
+          "She brings lunch.",
+          "He will bring his toy.",
+          "They bring gifts.",
+          "We bring food.",
+          "Giving can bring joy."
+        ]
+      },
+      "more": {
+        definition: "A bigger amount.",
+        examples: [
+          "I want more food.",
+          "She has more toys.",
+          "He needs more time.",
+          "We have more friends.",
+          "They want more fun.",
+          "Giving brings more joy."
+        ]
+      },
+      "joy": {
+        definition: "A very happy feeling.",
+        examples: [
+          "I feel joy when I play.",
+          "She brings joy to others.",
+          "He smiles with joy.",
+          "We share joy.",
+          "Joy is a good feeling.",
+          "Giving brings joy."
+        ]
+      },
+      "than": {
+        definition: "Used to compare two things.",
+        examples: [
+          "I am taller than you.",
+          "She is faster than me.",
+          "He has more toys than I do.",
+          "This is better than that.",
+          "Giving is better than getting.",
+          "More joy than getting presents."
+        ]
+      },
+      "getting": {
+        definition: "Taking or receiving something.",
+        examples: [
+          "I like getting gifts.",
+          "She is getting a book.",
+          "He is getting food.",
+          "They are getting ready.",
+          "Getting is fun.",
+          "Getting presents is nice."
+        ]
+      },
+      "presents_2": {
+        definition: "Gifts given to someone.",
+        examples: [
+          "I got presents for my birthday.",
+          "She gave me two presents.",
+          "We open presents at Christmas.",
+          "The box has presents inside.",
+          "They wrapped the presents.",
+          "There were no presents."
+        ]
+      }
+    };
+
+    function hidePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    document.querySelectorAll('.word').forEach(function(elem){
+      elem.addEventListener('click', function(e){
+        const wordKey = elem.getAttribute('data-word');
+        let data = wordData[wordKey];
+        if(!data && wordKey.match(/(.+)_\d+$/)) {
+          data = wordData[wordKey.replace(/_\d+$/, '')];
+        }
+        if(data) {
+          document.getElementById('popup-word').textContent = elem.textContent;
+          document.getElementById('popup-def').textContent = data.definition;
+          let exList = document.getElementById('popup-examples');
+          exList.innerHTML = '';
+          data.examples.forEach(function(ex){
+            let li = document.createElement('li');
+            li.textContent = ex;
+            exList.appendChild(li);
+          });
+          document.getElementById('popup').style.display = 'block';
+        }
+      });
+    });
+
+    window.onclick = function(event) {
+      let popup = document.getElementById('popup');
+      if (popup.style.display === 'block' && !popup.contains(event.target) && !event.target.classList.contains('word')) {
+        hidePopup();
+      }
+    }
+  </script>
+</body>
+</html>
