@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Wonderful Wizard of Oz</title>
+  <style>
+    body {
+      font-size: 3em;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      padding: 1em;
+      max-width: 900px;
+      margin: auto;
+    }
+    .underline {
+      text-decoration: underline;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .underline:hover {
+      background: #ffe4b5;
+    }
+    .popup {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 2.2em;
+      background: #f9f9f9;
+      border: 2px solid #aaa;
+      border-radius: 0.5em;
+      padding: 0.6em 1em;
+      z-index: 10;
+      font-size: 0.45em;
+      font-weight: normal;
+      color: #222;
+      width: 90vw;
+      max-width: 600px;
+      box-shadow: 0 0 14px #bbb;
+    }
+    .close-btn {
+      background: #ff6666;
+      color: #fff;
+      border: none;
+      border-radius: 0.3em;
+      font-size: 1.2em;
+      font-weight: bold;
+      float: right;
+      margin-left: 1em;
+      cursor: pointer;
+      padding: 0.1em 0.5em;
+    }
+    .popup ul {
+      margin-top: 0.5em;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+    }
+    .popup li {
+      margin-bottom: 0.2em;
+    }
+    .text-container {
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container" id="main-text">
+    <span class="underline" data-word="Dorothy">Dorothy</span> <span class="underline" data-word="lived">lived</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="Uncle">Uncle</span> <span class="underline" data-word="Henry">Henry</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="Aunt">Aunt</span> <span class="underline" data-word="Em">Em</span> <span class="underline" data-word="in">in</span> <span class="underline" data-word="Kansas">Kansas</span>. <span class="underline" data-word="Their">Their</span> <span class="underline" data-word="house">house</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="small">small</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="only">only</span> <span class="underline" data-word="one">one</span> <span class="underline" data-word="room">room</span>. <span class="underline" data-word="The">The</span> <span class="underline" data-word="sun">sun</span> <span class="underline" data-word="had">had</span> <span class="underline" data-word="baked">baked</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="earth">earth</span> <span class="underline" data-word="into">into</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="gray">gray</span> <span class="underline" data-word="mass">mass</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="little">little</span> <span class="underline" data-word="cracks">cracks</span>. <span class="underline" data-word="There">There</span> <span class="underline" data-word="were">were</span> <span class="underline" data-word="no">no</span> <span class="underline" data-word="trees">trees</span>, <span class="underline" data-word="no">no</span> <span class="underline" data-word="gardens">gardens</span>, <span class="underline" data-word="just">just</span> <span class="underline" data-word="gray">gray</span> <span class="underline" data-word="everywhere">everywhere</span>. <span class="underline" data-word="Uncle">Uncle</span> <span class="underline" data-word="Henry">Henry</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="Aunt">Aunt</span> <span class="underline" data-word="Em">Em</span> <span class="underline" data-word="never">never</span> <span class="underline" data-word="smiled">smiled</span>. <span class="underline" data-word="Dorothy">Dorothy</span> <span class="underline" data-word="had">had</span> <span class="underline" data-word="her">her</span> <span class="underline" data-word="little">little</span> <span class="underline" data-word="dog">dog</span> <span class="underline" data-word="Toto">Toto</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="she">she</span> <span class="underline" data-word="played">played</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="him">him</span> <span class="underline" data-word="all">all</span> <span class="underline" data-word="day">day</span>. <span class="underline" data-word="Toto">Toto</span> <span class="underline" data-word="had">had</span> <span class="underline" data-word="long">long</span> <span class="underline" data-word="silky">silky</span> <span class="underline" data-word="hair">hair</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="small">small</span> <span class="underline" data-word="black">black</span> <span class="underline" data-word="eyes">eyes</span>. <span class="underline" data-word="He">He</span> <span class="underline" data-word="made">made</span> <span class="underline" data-word="Dorothy">Dorothy</span> <span class="underline" data-word="laugh">laugh</span>, <span class="underline" data-word="and">and</span> <span class="underline" data-word="she">she</span> <span class="underline" data-word="made">made</span> <span class="underline" data-word="him">him</span> <span class="underline" data-word="laugh">laugh</span> <span class="underline" data-word="too">too</span>. <span class="underline" data-word="One">One</span> <span class="underline" data-word="day">day</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="big">big</span> <span class="underline" data-word="storm">storm</span> <span class="underline" data-word="came">came</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="loud">loud</span> <span class="underline" data-word="howl">howl</span>. <span class="underline" data-word="The">The</span> <span class="underline" data-word="wind">wind</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="so">so</span> <span class="underline" data-word="strong">strong</span> <span class="underline" data-word="that">that</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="house">house</span> <span class="underline" data-word="started">started</span> <span class="underline" data-word="to">to</span> <span class="underline" data-word="shake">shake</span>. <span class="underline" data-word="Dorothy">Dorothy</span> <span class="underline" data-word="sat">sat</span> <span class="underline" data-word="on">on</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="floor">floor</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="held">held</span> <span class="underline" data-word="Toto">Toto</span> <span class="underline" data-word="close">close</span>.
+  </div>
+  <div id="popup-container"></div>
+  <script>
+    const wordData = {
+      "Dorothy": {
+        def: "A girl who is the main person in the story.",
+        ex: [
+          "Dorothy lives in Kansas.",
+          "Dorothy has a dog named Toto.",
+          "Dorothy is kind.",
+          "Dorothy likes to play.",
+          "Dorothy is brave.",
+          "Dorothy has brown hair."
+        ]
+      },
+      "lived": {
+        def: "Stayed in a place for a long time.",
+        ex: [
+          "I lived in a big house.",
+          "She lived with her mom.",
+          "They lived on a farm.",
+          "We lived in the city.",
+          "He lived by the sea.",
+          "The cat lived in the barn."
+        ]
+      },
+      "with": {
+        def: "Together or next to someone or something.",
+        ex: [
+          "I play with my friend.",
+          "She eats with her family.",
+          "He sits with his dog.",
+          "We walk with our teacher.",
+          "They sing with the class.",
+          "The boy reads with his dad."
+        ]
+      },
+      "Uncle": {
+        def: "The brother of your mom or dad.",
+        ex: [
+          "My uncle is funny.",
+          "I visit my uncle.",
+          "My uncle has a big car.",
+          "She hugs her uncle.",
+          "Uncle Joe likes cake.",
+          "Uncle Bob tells stories."
+        ]
+      },
+      "Henry": {
+        def: "A man's name.",
+        ex: [
+          "Henry is my uncle.",
+          "Henry likes to fish.",
+          "Henry has a red hat.",
+          "Henry is tall.",
+          "Henry helps me.",
+          "Henry is nice."
+        ]
+      },
+      "and": {
+        def: "Used to join words or groups.",
+        ex: [
+          "I have a cat and a dog.",
+          "She likes apples and oranges.",
+          "He runs and jumps.",
+          "We sing and dance.",
+          "You and I are friends.",
+          "Mom and Dad are home."
+        ]
+      },
+      "Aunt": {
+        def: "The sister of your mom or dad.",
+        ex: [
+          "My aunt bakes cookies.",
+          "I love my aunt.",
+          "Aunt Sue is kind.",
+          "She visits her aunt.",
+          "Aunt May has a garden.",
+          "Aunt Kim tells jokes."
+        ]
+      },
+      "Em": {
+        def: "A woman's name.",
+        ex: [
+          "Em is my aunt.",
+          "Em likes to read.",
+          "Em has a blue dress.",
+          "Em makes soup.",
+          "Em is smart.",
+          "Em is friendly."
+        ]
+      },
+      "in": {
+        def: "Inside a place.",
+        ex: [
+          "The cat is in the box.",
+          "We are in the car.",
+          "She is in the house.",
+          "The dog is in the yard.",
+          "He is in the room.",
+          "I am in school."
+        ]
+      },
+      "Kansas": {
+        def: "A state in the middle of the United States.",
+        ex: [
+          "Dorothy lives in Kansas.",
+          "Kansas has big fields.",
+          "It is windy in Kansas.",
+          "Kansas is far away.",
+          "People live in Kansas.",
+          "Kansas has farms."
+        ]
+      },
+      "Their": {
+        def: "Belongs to them.",
+        ex: [
+          "Their house is small.",
+          "Their dog is brown.",
+          "Their car is blue.",
+          "Their mom is nice.",
+          "Their toys are new.",
+          "Their hats are red."
+        ]
+      },
+      "house": {
+        def: "A place where people live.",
+        ex: [
+          "My house is big.",
+          "We clean the house.",
+          "She draws a house.",
+          "The house is blue.",
+          "He runs to the house.",
+          "Our house has a yard."
+        ]
+      },
+      "was": {
+        def: "Shows something happened before now.",
+        ex: [
+          "He was happy.",
+          "She was at school.",
+          "It was cold outside.",
+          "The dog was barking.",
+          "The book was open.",
+          "The sun was bright."
+        ]
+      },
+      "small": {
+        def: "Not big.",
+        ex: [
+          "The cat is small.",
+          "I have a small toy.",
+          "She lives in a small house.",
+          "The box is small.",
+          "He has small hands.",
+          "The dog is small."
+        ]
+      },
+      "only": {
+        def: "Just one or not more.",
+        ex: [
+          "I have only one apple.",
+          "She has only a cat.",
+          "There is only one chair.",
+          "He wants only water.",
+          "We saw only two birds.",
+          "They have only one car."
+        ]
+      },
+      "one": {
+        def: "The number after zero.",
+        ex: [
+          "I have one book.",
+          "She has one dog.",
+          "There is one apple.",
+          "He saw one bird.",
+          "We have one car.",
+          "One boy is here."
+        ]
+      },
+      "room": {
+        def: "A space in a house or building.",
+        ex: [
+          "My room is blue.",
+          "She plays in her room.",
+          "We clean the room.",
+          "The room is big.",
+          "He sleeps in his room.",
+          "There is a bed in the room."
+        ]
+      },
+      "The": {
+        def: "Used to talk about one thing or group.",
+        ex: [
+          "The dog is barking.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is red.",
+          "The book is open.",
+          "He closed the door."
+        ]
+      },
+      "sun": {
+        def: "The bright light in the sky in the day.",
+        ex: [
+          "The sun is hot.",
+          "The sun shines.",
+          "We play in the sun.",
+          "The sun is yellow.",
+          "The sun comes up.",
+          "The sun goes down."
+        ]
+      },
+      "had": {
+        def: "Owned or did before now.",
+        ex: [
+          "I had a toy.",
+          "She had a snack.",
+          "He had a nap.",
+          "They had fun.",
+          "We had a dog.",
+          "You had a book."
+        ]
+      },
+      "baked": {
+        def: "Made hot and dry by the sun.",
+        ex: [
+          "The sun baked the ground.",
+          "Mom baked a cake.",
+          "The bread is baked.",
+          "The sand is baked by the sun.",
+          "The cookies are baked.",
+          "The earth was baked dry."
+        ]
+      },
+      "the": {
+        def: "Used to talk about one thing or group.",
+        ex: [
+          "The dog is barking.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is red.",
+          "The book is open.",
+          "He closed the door."
+        ]
+      },
+      "earth": {
+        def: "The ground or dirt we walk on.",
+        ex: [
+          "The earth is brown.",
+          "Plants grow in the earth.",
+          "The earth is hard.",
+          "I dig in the earth.",
+          "The earth is dry.",
+          "The earth has grass."
+        ]
+      },
+      "into": {
+        def: "To go inside or become something.",
+        ex: [
+          "She went into the house.",
+          "Pour water into the cup.",
+          "He put toys into the box.",
+          "The snow turned into water.",
+          "The frog jumped into the pond.",
+          "We went into the car."
+        ]
+      },
+      "a": {
+        def: "One of something.",
+        ex: [
+          "I have a dog.",
+          "She has a cat.",
+          "He sees a bird.",
+          "We want a snack.",
+          "They found a toy.",
+          "A boy is here."
+        ]
+      },
+      "gray": {
+        def: "A color that is between black and white.",
+        ex: [
+          "The sky is gray.",
+          "The cat is gray.",
+          "She wore a gray dress.",
+          "The dog has gray fur.",
+          "The wall is gray.",
+          "The rock is gray."
+        ]
+      },
+      "mass": {
+        def: "A large amount of something.",
+        ex: [
+          "There is a mass of dirt.",
+          "The snow was a mass on the ground.",
+          "He saw a mass of people.",
+          "A mass of clouds filled the sky.",
+          "The cake was a mass of dough.",
+          "She found a mass of leaves."
+        ]
+      },
+      "little": {
+        def: "Small in size.",
+        ex: [
+          "The puppy is little.",
+          "I have a little car.",
+          "She has a little hat.",
+          "He found a little bug.",
+          "The house is little.",
+          "The bird is little."
+        ]
+      },
+      "cracks": {
+        def: "Small lines or breaks in something.",
+        ex: [
+          "There are cracks in the wall.",
+          "The ground has cracks.",
+          "I see cracks in the ice.",
+          "The plate has cracks.",
+          "The road has cracks.",
+          "The egg has cracks."
+        ]
+      },
+      "There": {
+        def: "Shows something is in a place.",
+        ex: [
+          "There is a cat.",
+          "There are toys.",
+          "There is food.",
+          "There are kids.",
+          "There is a dog.",
+          "There are books."
+        ]
+      },
+      "were": {
+        def: "Shows something happened before now for more than one.",
+        ex: [
+          "There were dogs in the yard.",
+          "We were happy.",
+          "They were at school.",
+          "The books were on the table.",
+          "The kids were playing.",
+          "The lights were on."
+        ]
+      },
+      "no": {
+        def: "Not any or not true.",
+        ex: [
+          "There is no milk.",
+          "No one is here.",
+          "I have no toys.",
+          "No, thank you.",
+          "No dogs allowed.",
+          "No, I can't."
+        ]
+      },
+      "trees": {
+        def: "Tall plants with leaves and branches.",
+        ex: [
+          "The trees are green.",
+          "Birds live in trees.",
+          "She climbed the trees.",
+          "There are many trees.",
+          "The trees are tall.",
+          "We sit under the trees."
+        ]
+      },
+      "gardens": {
+        def: "Places where plants and flowers grow.",
+        ex: [
+          "We have two gardens.",
+          "She waters the gardens.",
+          "The gardens are pretty.",
+          "He works in the gardens.",
+          "The gardens have flowers.",
+          "Gardens are full of plants."
+        ]
+      },
+      "just": {
+        def: "Only or nothing more.",
+        ex: [
+          "I want just one.",
+          "She is just a kid.",
+          "He ate just an apple.",
+          "We have just a minute.",
+          "It is just a game.",
+          "Just sit here."
+        ]
+      },
+      "everywhere": {
+        def: "In all places.",
+        ex: [
+          "There is sand everywhere.",
+          "She looked everywhere.",
+          "Toys are everywhere.",
+          "Water was everywhere.",
+          "We see flowers everywhere.",
+          "Dirt is everywhere."
+        ]
+      },
+      "never": {
+        def: "Not at any time.",
+        ex: [
+          "I never eat fish.",
+          "She never runs.",
+          "He never smiles.",
+          "They never play here.",
+          "We never go there.",
+          "The dog never barks."
+        ]
+      },
+      "smiled": {
+        def: "Showed a happy face.",
+        ex: [
+          "She smiled at me.",
+          "He smiled when he won.",
+          "The baby smiled.",
+          "They smiled at the dog.",
+          "I smiled at my friend.",
+          "Mom smiled at us."
+        ]
+      },
+      "her": {
+        def: "Belongs to a girl or woman.",
+        ex: [
+          "This is her hat.",
+          "Her dog is brown.",
+          "I like her dress.",
+          "Her name is Sue.",
+          "She lost her book.",
+          "Her bike is new."
+        ]
+      },
+      "dog": {
+        def: "An animal that barks and has four legs.",
+        ex: [
+          "The dog is brown.",
+          "I have a dog.",
+          "She walks her dog.",
+          "The dog is small.",
+          "He feeds the dog.",
+          "The dog runs fast."
+        ]
+      },
+      "Toto": {
+        def: "Dorothy's little dog.",
+        ex: [
+          "Toto is Dorothy's pet.",
+          "Toto is a small dog.",
+          "Toto has black eyes.",
+          "Toto runs fast.",
+          "Toto likes to play.",
+          "Toto makes Dorothy laugh."
+        ]
+      },
+      "she": {
+        def: "A word for a girl or woman.",
+        ex: [
+          "She is my friend.",
+          "She likes apples.",
+          "She went home.",
+          "She is happy.",
+          "She can run fast.",
+          "She has a cat."
+        ]
+      },
+      "played": {
+        def: "Had fun or did something for fun.",
+        ex: [
+          "We played outside.",
+          "She played with her dog.",
+          "He played a game.",
+          "They played in the yard.",
+          "I played with my friend.",
+          "The kids played tag."
+        ]
+      },
+      "him": {
+        def: "A word for a boy or man.",
+        ex: [
+          "I see him.",
+          "Give it to him.",
+          "She called him.",
+          "He likes him.",
+          "We help him.",
+          "They found him."
+        ]
+      },
+      "all": {
+        def: "Every one or the whole group.",
+        ex: [
+          "All the kids are here.",
+          "I ate all the cake.",
+          "She saw all the dogs.",
+          "We finished all the work.",
+          "All the lights are on.",
+          "He took all the toys."
+        ]
+      },
+      "day": {
+        def: "The time when the sun is up.",
+        ex: [
+          "It is a sunny day.",
+          "We play all day.",
+          "She works in the day.",
+          "The day is long.",
+          "He sleeps in the day.",
+          "I read in the day."
+        ]
+      },
+      "long": {
+        def: "Not short; has much length.",
+        ex: [
+          "The rope is long.",
+          "She has long hair.",
+          "The road is long.",
+          "He ran a long way.",
+          "The story is long.",
+          "The line is long."
+        ]
+      },
+      "silky": {
+        def: "Very soft and smooth.",
+        ex: [
+          "The cat's fur is silky.",
+          "She has silky hair.",
+          "The scarf is silky.",
+          "The dress feels silky.",
+          "The dog has silky ears.",
+          "The pillow is silky."
+        ]
+      },
+      "hair": {
+        def: "The stuff that grows on your head or on animals.",
+        ex: [
+          "She has brown hair.",
+          "The dog has soft hair.",
+          "He cut his hair.",
+          "Her hair is long.",
+          "The cat's hair is white.",
+          "I brush my hair."
+        ]
+      },
+      "black": {
+        def: "The darkest color.",
+        ex: [
+          "The cat is black.",
+          "He wears black shoes.",
+          "The sky is black at night.",
+          "Her hair is black.",
+          "The dog has black spots.",
+          "The car is black."
+        ]
+      },
+      "eyes": {
+        def: "The parts of your face you see with.",
+        ex: [
+          "She has blue eyes.",
+          "The dog has big eyes.",
+          "He closed his eyes.",
+          "Her eyes are brown.",
+          "I can see with my eyes.",
+          "The cat's eyes are green."
+        ]
+      },
+      "He": {
+        def: "A word for a boy or man.",
+        ex: [
+          "He is my friend.",
+          "He likes to run.",
+          "He has a dog.",
+          "He is tall.",
+          "He can jump.",
+          "He is happy."
+        ]
+      },
+      "made": {
+        def: "Caused something to happen.",
+        ex: [
+          "She made a cake.",
+          "He made me laugh.",
+          "We made a mess.",
+          "They made a card.",
+          "I made a drawing.",
+          "Mom made dinner."
+        ]
+      },
+      "laugh": {
+        def: "To make a happy sound when something is funny.",
+        ex: [
+          "The joke made me laugh.",
+          "She likes to laugh.",
+          "He made us laugh.",
+          "We laugh together.",
+          "The baby can laugh.",
+          "They laugh at funny things."
+        ]
+      },
+      "too": {
+        def: "Also or as well.",
+        ex: [
+          "I want to play too.",
+          "She likes cake too.",
+          "He is coming too.",
+          "We can go too.",
+          "The dog is here too.",
+          "They want some too."
+        ]
+      },
+      "One": {
+        def: "The number after zero.",
+        ex: [
+          "One dog ran fast.",
+          "One apple is red.",
+          "One boy is tall.",
+          "One girl is happy.",
+          "One car is blue.",
+          "One bird is singing."
+        ]
+      },
+      "big": {
+        def: "Large in size.",
+        ex: [
+          "The dog is big.",
+          "She has a big house.",
+          "He found a big rock.",
+          "The tree is big.",
+          "The box is big.",
+          "The cake is big."
+        ]
+      },
+      "storm": {
+        def: "A time with strong wind, rain, or snow.",
+        ex: [
+          "The storm is loud.",
+          "We stay inside during a storm.",
+          "The storm has rain.",
+          "The wind blows in a storm.",
+          "The storm is scary.",
+          "The storm is coming."
+        ]
+      },
+      "came": {
+        def: "Moved closer or arrived.",
+        ex: [
+          "She came home.",
+          "He came to play.",
+          "The dog came to me.",
+          "They came to the party.",
+          "We came early.",
+          "The rain came fast."
+        ]
+      },
+      "loud": {
+        def: "Making a lot of noise.",
+        ex: [
+          "The music is loud.",
+          "He talks loud.",
+          "The storm is loud.",
+          "The dog barks loud.",
+          "The bell is loud.",
+          "The car is loud."
+        ]
+      },
+      "howl": {
+        def: "A long, loud sound like wind or a dog.",
+        ex: [
+          "The wind made a howl.",
+          "The dog gave a howl.",
+          "I heard a howl at night.",
+          "The wolf makes a howl.",
+          "The storm had a howl.",
+          "The howl was scary."
+        ]
+      },
+      "wind": {
+        def: "Air that moves.",
+        ex: [
+          "The wind is strong.",
+          "The wind blows the trees.",
+          "I feel the wind.",
+          "The wind is cold.",
+          "The wind moves the leaves.",
+          "The wind is loud."
+        ]
+      },
+      "so": {
+        def: "Very or for this reason.",
+        ex: [
+          "I am so happy.",
+          "The cake is so good.",
+          "He was so tired.",
+          "She is so kind.",
+          "It is so big.",
+          "We are so ready."
+        ]
+      },
+      "strong": {
+        def: "Having a lot of power.",
+        ex: [
+          "He is strong.",
+          "The wind is strong.",
+          "She is strong.",
+          "The box is strong.",
+          "The tree is strong.",
+          "The dog is strong."
+        ]
+      },
+      "that": {
+        def: "Shows which one or what happened.",
+        ex: [
+          "I like the book that is blue.",
+          "She saw the dog that ran.",
+          "He ate the cake that Mom made.",
+          "The car that is red is fast.",
+          "The boy that is tall can jump.",
+          "The cat that is small is cute."
+        ]
+      },
+      "started": {
+        def: "Began to happen.",
+        ex: [
+          "The game started.",
+          "She started to run.",
+          "He started to laugh.",
+          "The rain started.",
+          "We started to eat.",
+          "They started to sing."
+        ]
+      },
+      "to": {
+        def: "Shows direction or place.",
+        ex: [
+          "I go to school.",
+          "She walks to the park.",
+          "Give it to me.",
+          "He runs to the door.",
+          "We went to the store.",
+          "They came to the party."
+        ]
+      },
+      "shake": {
+        def: "To move back and forth quickly.",
+        ex: [
+          "The house will shake.",
+          "She likes to shake her toy.",
+          "The dog will shake off water.",
+          "He will shake his head.",
+          "The car will shake on the road.",
+          "The tree will shake in the wind."
+        ]
+      },
+      "sat": {
+        def: "Rested with your bottom on something.",
+        ex: [
+          "I sat on the chair.",
+          "She sat by the window.",
+          "He sat on the floor.",
+          "We sat in the car.",
+          "They sat on the bench.",
+          "The cat sat on the mat."
+        ]
+      },
+      "on": {
+        def: "Touching or above something.",
+        ex: [
+          "The book is on the table.",
+          "Sit on the chair.",
+          "The cat is on the bed.",
+          "He put his hat on.",
+          "The ball is on the grass.",
+          "She sits on the bench."
+        ]
+      },
+      "floor": {
+        def: "The flat part you walk on in a room.",
+        ex: [
+          "The floor is clean.",
+          "I sit on the floor.",
+          "She dropped her toy on the floor.",
+          "The floor is cold.",
+          "He plays on the floor.",
+          "We sweep the floor."
+        ]
+      },
+      "held": {
+        def: "Kept something in your hands or arms.",
+        ex: [
+          "She held the baby.",
+          "He held my hand.",
+          "I held my toy.",
+          "They held the ball.",
+          "We held the box.",
+          "Mom held the cat."
+        ]
+      },
+      "close": {
+        def: "Near or next to.",
+        ex: [
+          "Sit close to me.",
+          "She is close to her friend.",
+          "The dog is close to the cat.",
+          "He stands close by.",
+          "We are close together.",
+          "The car is close to the house."
+        ]
+      }
+    };
+
+    // Helper to escape HTML
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, function(m) {
+        return ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        })[m];
+      });
+    }
+
+    document.querySelectorAll('.underline').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        // Remove any open popups
+        document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+        // Remove existing popups
+        document.getElementById('popup-container').innerHTML = '';
+        const word = el.getAttribute('data-word');
+        const data = wordData[word];
+        if (!data) return;
+        // Find position
+        const rect = el.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        // Build popup
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        popup.style.top = (rect.bottom + scrollTop + 10) + 'px';
+        popup.style.left = (rect.left + scrollLeft) + 'px';
+        popup.innerHTML = `<button class="close-btn" onclick="this.parentNode.style.display='none'">×</button>
+          <strong>${escapeHTML(word)}</strong><br>
+          <div>${escapeHTML(data.def)}</div>
+          <ul>${data.ex.map(s => `<li>${escapeHTML(s)}</li>`).join('')}</ul>`;
+        document.getElementById('popup-container').appendChild(popup);
+        popup.style.display = 'block';
+      });
+    });
+
+    // Hide popup on click outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('underline') && !e.target.classList.contains('close-btn')) {
+        document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      }
+    });
+  </script>
+</body>
+</html>
