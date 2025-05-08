@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Adventures of Pinocchio</title>
+  <style>
+    body {
+      font-size: 3em;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      padding: 1em;
+      max-width: 900px;
+      margin: auto;
+    }
+    .underline {
+      text-decoration: underline;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .underline:hover {
+      background: #ffe4b5;
+    }
+    .popup {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 2.2em;
+      background: #f9f9f9;
+      border: 2px solid #aaa;
+      border-radius: 0.5em;
+      padding: 0.6em 1em;
+      z-index: 10;
+      font-size: 0.45em;
+      font-weight: normal;
+      color: #222;
+      width: 90vw;
+      max-width: 600px;
+      box-shadow: 0 0 14px #bbb;
+    }
+    .close-btn {
+      background: #ff6666;
+      color: #fff;
+      border: none;
+      border-radius: 0.3em;
+      font-size: 1.2em;
+      font-weight: bold;
+      float: right;
+      margin-left: 1em;
+      cursor: pointer;
+      padding: 0.1em 0.5em;
+    }
+    .popup ul {
+      margin-top: 0.5em;
+      margin-bottom: 0;
+      padding-left: 1.2em;
+    }
+    .popup li {
+      margin-bottom: 0.2em;
+    }
+    .text-container {
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="text-container" id="main-text">
+    <span class="underline" data-word="Geppetto">Geppetto</span> <span class="underline" data-word="carefully">carefully</span> <span class="underline" data-word="carved">carved</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="wooden">wooden</span> <span class="underline" data-word="puppet">puppet</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="his">his</span> <span class="underline" data-word="sharp">sharp</span> <span class="underline" data-word="tools">tools</span> <span class="underline" data-word="inside">inside</span> <span class="underline" data-word="his">his</span> <span class="underline" data-word="small">small</span> <span class="underline" data-word="workshop">workshop</span>. <span class="underline" data-word="The">The</span> <span class="underline" data-word="old">old</span> <span class="underline" data-word="carpenter">carpenter</span> <span class="underline" data-word="worked">worked</span> <span class="underline" data-word="for">for</span> <span class="underline" data-word="many">many</span> <span class="underline" data-word="hours">hours</span> <span class="underline" data-word="on">on</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="puppet's">puppet's</span> <span class="underline" data-word="face">face</span>, <span class="underline" data-word="giving">giving</span> <span class="underline" data-word="him">him</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="pair">pair</span> <span class="underline" data-word="of">of</span> <span class="underline" data-word="round">round</span> <span class="underline" data-word="eyes">eyes</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="a">a</span> <span class="underline" data-word="funny">funny</span> <span class="underline" data-word="nose">nose</span> <span class="underline" data-word="that">that</span> <span class="underline" data-word="grew">grew</span> <span class="underline" data-word="longer">longer</span> <span class="underline" data-word="than">than</span> <span class="underline" data-word="normal">normal</span> <span class="underline" data-word="noses">noses</span>. <span class="underline" data-word="When">When</span> <span class="underline" data-word="Geppetto">Geppetto</span> <span class="underline" data-word="finished">finished</span> <span class="underline" data-word="painting">painting</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="puppet">puppet</span>, <span class="underline" data-word="he">he</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="surprised">surprised</span> <span class="underline" data-word="to">to</span> <span class="underline" data-word="see">see</span> <span class="underline" data-word="Pinocchio">Pinocchio</span> <span class="underline" data-word="suddenly">suddenly</span> <span class="underline" data-word="kick">kick</span> <span class="underline" data-word="out">out</span> <span class="underline" data-word="at">at</span> <span class="underline" data-word="him">him</span> <span class="underline" data-word="from">from</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="table">table</span>. <span class="underline" data-word="The">The</span> <span class="underline" data-word="little">little</span> <span class="underline" data-word="wooden">wooden</span> <span class="underline" data-word="boy">boy</span> <span class="underline" data-word="jumped">jumped</span> <span class="underline" data-word="down">down</span> <span class="underline" data-word="onto">onto</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="floor">floor</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="began">began</span> <span class="underline" data-word="running">running</span> <span class="underline" data-word="around">around</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="room">room</span> <span class="underline" data-word="with">with</span> <span class="underline" data-word="great">great</span> <span class="underline" data-word="speed">speed</span>. <span class="underline" data-word="Geppetto">Geppetto</span> <span class="underline" data-word="chased">chased</span> <span class="underline" data-word="after">after</span> <span class="underline" data-word="him">him</span> <span class="underline" data-word="between">between</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="chairs">chairs</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="tables">tables</span>, <span class="underline" data-word="but">but</span> <span class="underline" data-word="Pinocchio">Pinocchio</span> <span class="underline" data-word="was">was</span> <span class="underline" data-word="too">too</span> <span class="underline" data-word="quick">quick</span> <span class="underline" data-word="for">for</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="old">old</span> <span class="underline" data-word="man">man</span>. <span class="underline" data-word="Before">Before</span> <span class="underline" data-word="anyone">anyone</span> <span class="underline" data-word="could">could</span> <span class="underline" data-word="stop">stop</span> <span class="underline" data-word="him">him</span>, <span class="underline" data-word="Pinocchio">Pinocchio</span> <span class="underline" data-word="darted">darted</span> <span class="underline" data-word="through">through</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="door">door</span> <span class="underline" data-word="and">and</span> <span class="underline" data-word="into">into</span> <span class="underline" data-word="the">the</span> <span class="underline" data-word="village">village</span> <span class="underline" data-word="street">street</span>.
+  </div>
+  <div id="popup-container"></div>
+  <script>
+    const wordData = {
+      "Geppetto": {
+        def: "An old man who makes Pinocchio.",
+        ex: [
+          "Geppetto is a carpenter.",
+          "Geppetto made a puppet.",
+          "Geppetto lives alone.",
+          "Geppetto is kind.",
+          "Geppetto loves Pinocchio.",
+          "Geppetto works in a shop."
+        ]
+      },
+      "carefully": {
+        def: "Doing something with a lot of care.",
+        ex: [
+          "She carefully held the baby.",
+          "He carefully drew a picture.",
+          "They carefully walked on ice.",
+          "I carefully opened the box.",
+          "Mom carefully cut the cake.",
+          "The boy carefully painted."
+        ]
+      },
+      "carved": {
+        def: "Cut or shaped something from wood or stone.",
+        ex: [
+          "He carved a toy from wood.",
+          "She carved her name in the tree.",
+          "Dad carved a pumpkin.",
+          "The man carved a bird.",
+          "They carved a heart.",
+          "I carved a star."
+        ]
+      },
+      "the": {
+        def: "Used to talk about one thing or group.",
+        ex: [
+          "The dog is barking.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is red.",
+          "The book is open.",
+          "He closed the door."
+        ]
+      },
+      "wooden": {
+        def: "Made from wood.",
+        ex: [
+          "The box is wooden.",
+          "He has a wooden chair.",
+          "She found a wooden toy.",
+          "The spoon is wooden.",
+          "They built a wooden house.",
+          "I have a wooden boat."
+        ]
+      },
+      "puppet": {
+        def: "A toy that looks like a person or animal and can move.",
+        ex: [
+          "The puppet danced.",
+          "She played with a puppet.",
+          "He made a puppet talk.",
+          "The puppet has strings.",
+          "I have a puppet show.",
+          "The puppet is funny."
+        ]
+      },
+      "with": {
+        def: "Together or using something.",
+        ex: [
+          "I play with my friend.",
+          "She eats with a spoon.",
+          "He draws with a pencil.",
+          "We walk with our dog.",
+          "They sing with the class.",
+          "The boy reads with his dad."
+        ]
+      },
+      "his": {
+        def: "Belongs to a boy or man.",
+        ex: [
+          "This is his hat.",
+          "His dog is brown.",
+          "I like his shirt.",
+          "His name is Tom.",
+          "He lost his book.",
+          "His bike is new."
+        ]
+      },
+      "sharp": {
+        def: "Able to cut easily.",
+        ex: [
+          "The knife is sharp.",
+          "Be careful, it is sharp.",
+          "He has a sharp pencil.",
+          "The claws are sharp.",
+          "The scissors are sharp.",
+          "The rock is sharp."
+        ]
+      },
+      "tools": {
+        def: "Things used to make or fix things.",
+        ex: [
+          "Dad has tools in the box.",
+          "She used tools to build.",
+          "The tools are heavy.",
+          "He needs tools to fix it.",
+          "I saw many tools.",
+          "The tools are on the table."
+        ]
+      },
+      "inside": {
+        def: "In a place, not outside.",
+        ex: [
+          "The cat is inside.",
+          "We play inside.",
+          "She is inside the house.",
+          "He stays inside when it rains.",
+          "The toy is inside the box.",
+          "I am inside my room."
+        ]
+      },
+      "small": {
+        def: "Not big.",
+        ex: [
+          "The cat is small.",
+          "I have a small toy.",
+          "She lives in a small house.",
+          "The box is small.",
+          "He has small hands.",
+          "The dog is small."
+        ]
+      },
+      "workshop": {
+        def: "A room where someone makes things.",
+        ex: [
+          "Dad works in his workshop.",
+          "The workshop is full of tools.",
+          "She built a toy in the workshop.",
+          "The workshop is small.",
+          "He cleaned the workshop.",
+          "I saw wood in the workshop."
+        ]
+      },
+      "The": {
+        def: "Used to talk about one thing or group.",
+        ex: [
+          "The dog is barking.",
+          "I see the sun.",
+          "She likes the cake.",
+          "The car is red.",
+          "The book is open.",
+          "He closed the door."
+        ]
+      },
+      "old": {
+        def: "Having lived for many years.",
+        ex: [
+          "My grandma is old.",
+          "This tree is old.",
+          "He has an old car.",
+          "The house is old.",
+          "She found an old coin.",
+          "The dog is old."
+        ]
+      },
+      "carpenter": {
+        def: "A person who makes things from wood.",
+        ex: [
+          "The carpenter made a table.",
+          "Dad is a carpenter.",
+          "The carpenter builds chairs.",
+          "She saw the carpenter work.",
+          "The carpenter uses tools.",
+          "I want to be a carpenter."
+        ]
+      },
+      "worked": {
+        def: "Did a job or task.",
+        ex: [
+          "He worked all day.",
+          "She worked on her homework.",
+          "They worked together.",
+          "Dad worked in the yard.",
+          "I worked on my art.",
+          "We worked at school."
+        ]
+      },
+      "for": {
+        def: "Shows who gets something or how long.",
+        ex: [
+          "This gift is for you.",
+          "He works for his dad.",
+          "She waited for an hour.",
+          "We play for fun.",
+          "They run for school.",
+          "I made lunch for Mom."
+        ]
+      },
+      "many": {
+        def: "A lot; more than one.",
+        ex: [
+          "I have many toys.",
+          "She saw many dogs.",
+          "There are many kids.",
+          "He has many books.",
+          "We ate many apples.",
+          "Many birds are singing."
+        ]
+      },
+      "hours": {
+        def: "Units of time, each is 60 minutes.",
+        ex: [
+          "I slept for eight hours.",
+          "She worked for two hours.",
+          "He played for three hours.",
+          "We waited for hours.",
+          "It takes hours to drive.",
+          "They talked for hours."
+        ]
+      },
+      "on": {
+        def: "Touching or above something.",
+        ex: [
+          "The book is on the table.",
+          "Sit on the chair.",
+          "The cat is on the bed.",
+          "He put his hat on.",
+          "The ball is on the grass.",
+          "She sits on the bench."
+        ]
+      },
+      "puppet's": {
+        def: "Belonging to the puppet.",
+        ex: [
+          "The puppet's nose is long.",
+          "I see the puppet's eyes.",
+          "The puppet's hat is red.",
+          "She painted the puppet's face.",
+          "The puppet's hands move.",
+          "The puppet's shoes are blue."
+        ]
+      },
+      "face": {
+        def: "The front part of the head with eyes, nose, and mouth.",
+        ex: [
+          "She washed her face.",
+          "He has a happy face.",
+          "The face is round.",
+          "I see a smile on his face.",
+          "The cat has a cute face.",
+          "The baby made a funny face."
+        ]
+      },
+      "giving": {
+        def: "To hand or let someone have something.",
+        ex: [
+          "She is giving me a gift.",
+          "He is giving food to the dog.",
+          "Mom is giving a hug.",
+          "They are giving out toys.",
+          "I am giving my friend a card.",
+          "Dad is giving me a ride."
+        ]
+      },
+      "him": {
+        def: "A word for a boy or man.",
+        ex: [
+          "I see him.",
+          "Give it to him.",
+          "She called him.",
+          "He likes him.",
+          "We help him.",
+          "They found him."
+        ]
+      },
+      "a": {
+        def: "One of something.",
+        ex: [
+          "I have a dog.",
+          "She has a cat.",
+          "He sees a bird.",
+          "We want a snack.",
+          "They found a toy.",
+          "A boy is here."
+        ]
+      },
+      "pair": {
+        def: "Two things that go together.",
+        ex: [
+          "I have a pair of shoes.",
+          "She has a pair of socks.",
+          "He bought a pair of pants.",
+          "The birds are a pair.",
+          "I need a pair of gloves.",
+          "We saw a pair of cats."
+        ]
+      },
+      "of": {
+        def: "Shows what something is made from or belongs to.",
+        ex: [
+          "A cup of milk.",
+          "A bag of toys.",
+          "A box of books.",
+          "A bowl of soup.",
+          "A group of kids.",
+          "A bunch of flowers."
+        ]
+      },
+      "round": {
+        def: "Shaped like a circle.",
+        ex: [
+          "The ball is round.",
+          "She drew a round face.",
+          "The table is round.",
+          "I have a round cookie.",
+          "The moon is round.",
+          "The coin is round."
+        ]
+      },
+      "eyes": {
+        def: "The parts of your face you see with.",
+        ex: [
+          "She has blue eyes.",
+          "The dog has big eyes.",
+          "He closed his eyes.",
+          "Her eyes are brown.",
+          "I can see with my eyes.",
+          "The cat's eyes are green."
+        ]
+      },
+      "and": {
+        def: "Used to join words or groups.",
+        ex: [
+          "I have a cat and a dog.",
+          "She likes apples and oranges.",
+          "He runs and jumps.",
+          "We sing and dance.",
+          "You and I are friends.",
+          "Mom and Dad are home."
+        ]
+      },
+      "funny": {
+        def: "Makes you laugh or smile.",
+        ex: [
+          "The clown is funny.",
+          "She told a funny joke.",
+          "He made a funny face.",
+          "The movie is funny.",
+          "The dog did something funny.",
+          "I like funny stories."
+        ]
+      },
+      "nose": {
+        def: "The part of your face you smell with.",
+        ex: [
+          "My nose is small.",
+          "She has a red nose.",
+          "He touched his nose.",
+          "The dog has a wet nose.",
+          "I smell with my nose.",
+          "Her nose is cute."
+        ]
+      },
+      "that": {
+        def: "Shows which one or what happened.",
+        ex: [
+          "I like the book that is blue.",
+          "She saw the dog that ran.",
+          "He ate the cake that Mom made.",
+          "The car that is red is fast.",
+          "The boy that is tall can jump.",
+          "The cat that is small is cute."
+        ]
+      },
+      "grew": {
+        def: "Got bigger or longer.",
+        ex: [
+          "The plant grew tall.",
+          "He grew fast.",
+          "The puppy grew big.",
+          "The tree grew leaves.",
+          "My hair grew long.",
+          "The flower grew in the sun."
+        ]
+      },
+      "longer": {
+        def: "More long; not as short.",
+        ex: [
+          "My hair is longer now.",
+          "The rope is longer than the stick.",
+          "He ran a longer race.",
+          "The day is longer in summer.",
+          "The pencil is longer than the pen.",
+          "This line is longer."
+        ]
+      },
+      "than": {
+        def: "Used to compare two things.",
+        ex: [
+          "He is taller than me.",
+          "This is bigger than that.",
+          "She is faster than her brother.",
+          "The box is heavier than the bag.",
+          "My dog is older than yours.",
+          "I have more than you."
+        ]
+      },
+      "normal": {
+        def: "Usual or like most others.",
+        ex: [
+          "This is a normal day.",
+          "He has normal shoes.",
+          "It is normal to eat breakfast.",
+          "The dog looks normal.",
+          "She feels normal today.",
+          "We have a normal class."
+        ]
+      },
+      "noses": {
+        def: "More than one nose.",
+        ex: [
+          "Dogs have noses.",
+          "We all have noses.",
+          "The clowns have red noses.",
+          "Elephants have big noses.",
+          "Cats have small noses.",
+          "Kids touch their noses."
+        ]
+      },
+      "When": {
+        def: "At the time that something happens.",
+        ex: [
+          "When I am happy, I smile.",
+          "She runs when it rains.",
+          "He eats when he is hungry.",
+          "When the bell rings, we go inside.",
+          "When it is dark, we sleep.",
+          "When you call, I answer."
+        ]
+      },
+      "finished": {
+        def: "Done with something.",
+        ex: [
+          "I finished my homework.",
+          "She finished her snack.",
+          "He finished the race.",
+          "They finished the game.",
+          "We finished reading.",
+          "Mom finished cooking."
+        ]
+      },
+      "painting": {
+        def: "Putting color on something.",
+        ex: [
+          "She is painting a picture.",
+          "He is painting the wall.",
+          "They are painting eggs.",
+          "I am painting my room.",
+          "Mom is painting a chair.",
+          "The artist is painting."
+        ]
+      },
+      "he": {
+        def: "A word for a boy or man.",
+        ex: [
+          "He is my friend.",
+          "He likes to run.",
+          "He has a dog.",
+          "He is tall.",
+          "He can jump.",
+          "He is happy."
+        ]
+      },
+      "was": {
+        def: "Shows something happened before now.",
+        ex: [
+          "He was happy.",
+          "She was at school.",
+          "It was cold outside.",
+          "The dog was barking.",
+          "The book was open.",
+          "The sun was bright."
+        ]
+      },
+      "surprised": {
+        def: "Feeling something you did not expect.",
+        ex: [
+          "I was surprised by the gift.",
+          "She was surprised to see me.",
+          "He was surprised by the noise.",
+          "They were surprised by the rain.",
+          "We were surprised by the party.",
+          "Mom was surprised by the cake."
+        ]
+      },
+      "to": {
+        def: "Shows direction or place.",
+        ex: [
+          "I go to school.",
+          "She walks to the park.",
+          "Give it to me.",
+          "He runs to the door.",
+          "We went to the store.",
+          "They came to the party."
+        ]
+      },
+      "see": {
+        def: "To use your eyes to look at something.",
+        ex: [
+          "I see a dog.",
+          "She can see the sun.",
+          "He wants to see the movie.",
+          "We see the stars.",
+          "They see the bird.",
+          "Do you see the cat?"
+        ]
+      },
+      "Pinocchio": {
+        def: "A wooden boy who comes to life.",
+        ex: [
+          "Pinocchio is a puppet.",
+          "Pinocchio's nose grows.",
+          "Pinocchio can run.",
+          "Geppetto made Pinocchio.",
+          "Pinocchio is funny.",
+          "Pinocchio is a wooden boy."
+        ]
+      },
+      "suddenly": {
+        def: "Very quickly and without warning.",
+        ex: [
+          "The dog suddenly barked.",
+          "She suddenly stood up.",
+          "It suddenly rained.",
+          "He suddenly laughed.",
+          "The lights suddenly went out.",
+          "The car suddenly stopped."
+        ]
+      },
+      "kick": {
+        def: "To hit with your foot.",
+        ex: [
+          "He can kick the ball.",
+          "She tried to kick the door.",
+          "The horse will kick.",
+          "I kick my shoes off.",
+          "The baby can kick.",
+          "They kick the ball in the game."
+        ]
+      },
+      "out": {
+        def: "Away from inside.",
+        ex: [
+          "Go out the door.",
+          "She looked out the window.",
+          "He ran out of the house.",
+          "I went out to play.",
+          "The dog is out.",
+          "We went out for a walk."
+        ]
+      },
+      "at": {
+        def: "Shows where you look or point.",
+        ex: [
+          "Look at the bird.",
+          "She is at school.",
+          "He sits at the table.",
+          "We are at home.",
+          "The dog is at the door.",
+          "I am at the park."
+        ]
+      },
+      "from": {
+        def: "Shows where something starts or comes.",
+        ex: [
+          "I got a gift from Mom.",
+          "He ran from the house.",
+          "She is from my school.",
+          "The letter is from Dad.",
+          "We came from the park.",
+          "The sound comes from the bell."
+        ]
+      },
+      "table": {
+        def: "A piece of furniture with a flat top and legs.",
+        ex: [
+          "We eat at the table.",
+          "The table is round.",
+          "She put her book on the table.",
+          "The table is brown.",
+          "He cleaned the table.",
+          "The cat sat on the table."
+        ]
+      },
+      "little": {
+        def: "Small in size.",
+        ex: [
+          "The puppy is little.",
+          "I have a little car.",
+          "She has a little hat.",
+          "He found a little bug.",
+          "The house is little.",
+          "The bird is little."
+        ]
+      },
+      "boy": {
+        def: "A young male child.",
+        ex: [
+          "The boy is running.",
+          "He is a nice boy.",
+          "The boy has a toy.",
+          "She talked to the boy.",
+          "The boy is happy.",
+          "I see a boy."
+        ]
+      },
+      "jumped": {
+        def: "Pushed yourself up off the ground.",
+        ex: [
+          "The frog jumped.",
+          "She jumped on the bed.",
+          "He jumped over the log.",
+          "The dog jumped high.",
+          "We jumped in the pool.",
+          "The cat jumped down."
+        ]
+      },
+      "down": {
+        def: "From a higher place to a lower place.",
+        ex: [
+          "He fell down.",
+          "She sat down.",
+          "The ball rolled down.",
+          "We walked down the hill.",
+          "The bird flew down.",
+          "The rain came down."
+        ]
+      },
+      "onto": {
+        def: "Moving to a place on top of something.",
+        ex: [
+          "The cat jumped onto the bed.",
+          "She climbed onto the chair.",
+          "He put the book onto the table.",
+          "The frog hopped onto the rock.",
+          "They got onto the bus.",
+          "I stepped onto the rug."
+        ]
+      },
+      "floor": {
+        def: "The flat part you walk on in a room.",
+        ex: [
+          "The floor is clean.",
+          "I sit on the floor.",
+          "She dropped her toy on the floor.",
+          "The floor is cold.",
+          "He plays on the floor.",
+          "We sweep the floor."
+        ]
+      },
+      "began": {
+        def: "Started to do something.",
+        ex: [
+          "He began to run.",
+          "She began to sing.",
+          "The game began.",
+          "They began to laugh.",
+          "I began to read.",
+          "The rain began to fall."
+        ]
+      },
+      "running": {
+        def: "Moving fast on your feet.",
+        ex: [
+          "He is running to school.",
+          "She likes running.",
+          "The dog is running.",
+          "I am running in the yard.",
+          "We are running together.",
+          "The kids are running fast."
+        ]
+      },
+      "around": {
+        def: "In a circle or all over.",
+        ex: [
+          "We walked around the park.",
+          "She looked around the room.",
+          "He ran around the house.",
+          "The dog ran around.",
+          "I turned around.",
+          "The kids played around the tree."
+        ]
+      },
+      "room": {
+        def: "A space in a house or building.",
+        ex: [
+          "My room is blue.",
+          "She plays in her room.",
+          "We clean the room.",
+          "The room is big.",
+          "He sleeps in his room.",
+          "There is a bed in the room."
+        ]
+      },
+      "great": {
+        def: "Very good or very big.",
+        ex: [
+          "He did a great job.",
+          "The cake tastes great.",
+          "She has great ideas.",
+          "We had a great time.",
+          "The mountain is great.",
+          "The show was great."
+        ]
+      },
+      "speed": {
+        def: "How fast something moves.",
+        ex: [
+          "The car has speed.",
+          "He runs with speed.",
+          "The dog ran at speed.",
+          "She likes speed.",
+          "The bike goes at speed.",
+          "The wind moves with speed."
+        ]
+      },
+      "chased": {
+        def: "Ran after someone or something.",
+        ex: [
+          "The dog chased the cat.",
+          "He chased his friend.",
+          "She chased the ball.",
+          "They chased the bird.",
+          "I chased my brother.",
+          "The kids chased each other."
+        ]
+      },
+      "after": {
+        def: "Following or behind.",
+        ex: [
+          "I ran after the bus.",
+          "She went after her dog.",
+          "He looked after his brother.",
+          "We came after lunch.",
+          "They played after school.",
+          "The cat went after the mouse."
+        ]
+      },
+      "between": {
+        def: "In the middle of two things.",
+        ex: [
+          "The cat is between the chairs.",
+          "She sat between her friends.",
+          "The ball is between the dogs.",
+          "He stood between the trees.",
+          "There is a road between the houses.",
+          "The book is between the boxes."
+        ]
+      },
+      "chairs": {
+        def: "Seats for one person.",
+        ex: [
+          "We have four chairs.",
+          "The chairs are blue.",
+          "She sat on the chairs.",
+          "The chairs are in the room.",
+          "He moved the chairs.",
+          "The chairs are soft."
+        ]
+      },
+      "tables": {
+        def: "More than one table.",
+        ex: [
+          "There are two tables.",
+          "The tables are round.",
+          "She cleaned the tables.",
+          "The tables are in the room.",
+          "He moved the tables.",
+          "We ate at the tables."
+        ]
+      },
+      "but": {
+        def: "Shows something different or not the same.",
+        ex: [
+          "I want to play, but it is raining.",
+          "She is small but strong.",
+          "He is tired but happy.",
+          "They ran but fell.",
+          "I called but no one came.",
+          "It is cold but sunny."
+        ]
+      },
+      "too": {
+        def: "Also or as well.",
+        ex: [
+          "I want to play too.",
+          "She likes cake too.",
+          "He is coming too.",
+          "We can go too.",
+          "The dog is here too.",
+          "They want some too."
+        ]
+      },
+      "quick": {
+        def: "Fast or speedy.",
+        ex: [
+          "The dog is quick.",
+          "She is quick at math.",
+          "He ran quick.",
+          "The cat is quick.",
+          "I am quick to help.",
+          "The car is quick."
+        ]
+      },
+      "man": {
+        def: "A grown-up boy.",
+        ex: [
+          "The man is tall.",
+          "He is a nice man.",
+          "The man has a hat.",
+          "She talked to the man.",
+          "The man is old.",
+          "I see a man."
+        ]
+      },
+      "Before": {
+        def: "Earlier than something else.",
+        ex: [
+          "Wash your hands before dinner.",
+          "I finished before you.",
+          "She left before me.",
+          "He called before lunch.",
+          "We played before school.",
+          "They ate before the movie."
+        ]
+      },
+      "anyone": {
+        def: "Any person.",
+        ex: [
+          "Anyone can play.",
+          "Did anyone see my hat?",
+          "Anyone can help.",
+          "Is anyone home?",
+          "Anyone may join.",
+          "Anyone can come."
+        ]
+      },
+      "could": {
+        def: "Was able to do something.",
+        ex: [
+          "I could run fast.",
+          "She could read.",
+          "He could sing.",
+          "We could play.",
+          "They could help.",
+          "You could see it."
+        ]
+      },
+      "stop": {
+        def: "To not let something keep going.",
+        ex: [
+          "Please stop talking.",
+          "He tried to stop the car.",
+          "She will stop running.",
+          "We stop at the light.",
+          "They stop to rest.",
+          "I stop when I am tired."
+        ]
+      },
+      "darted": {
+        def: "Moved very fast and suddenly.",
+        ex: [
+          "The mouse darted away.",
+          "She darted out the door.",
+          "He darted across the street.",
+          "The fish darted in the water.",
+          "The cat darted under the bed.",
+          "The bird darted into the sky."
+        ]
+      },
+      "through": {
+        def: "Going in one side and out the other.",
+        ex: [
+          "We walked through the door.",
+          "She ran through the park.",
+          "He looked through the window.",
+          "The ball went through the hoop.",
+          "The dog ran through the gate.",
+          "I went through the tunnel."
+        ]
+      },
+      "door": {
+        def: "A thing you open to go in or out of a room or house.",
+        ex: [
+          "Open the door.",
+          "She closed the door.",
+          "He knocked on the door.",
+          "The dog went out the door.",
+          "We painted the door.",
+          "The door is brown."
+        ]
+      },
+      "into": {
+        def: "To go inside or become something.",
+        ex: [
+          "She went into the house.",
+          "Pour water into the cup.",
+          "He put toys into the box.",
+          "The snow turned into water.",
+          "The frog jumped into the pond.",
+          "We went into the car."
+        ]
+      },
+      "village": {
+        def: "A very small town.",
+        ex: [
+          "The village is quiet.",
+          "She lives in a village.",
+          "The village has a school.",
+          "He walked to the village.",
+          "The village is far away.",
+          "We saw the village."
+        ]
+      },
+      "street": {
+        def: "A road in a town or city.",
+        ex: [
+          "The street is busy.",
+          "She lives on my street.",
+          "Cars drive on the street.",
+          "We walk down the street.",
+          "The street is long.",
+          "He crossed the street."
+        ]
+      }
+    };
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, function(m) {
+        return ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        })[m];
+      });
+    }
+
+    document.querySelectorAll('.underline').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+        document.getElementById('popup-container').innerHTML = '';
+        const word = el.getAttribute('data-word');
+        const data = wordData[word];
+        if (!data) return;
+        const rect = el.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        popup.style.top = (rect.bottom + scrollTop + 10) + 'px';
+        popup.style.left = (rect.left + scrollLeft) + 'px';
+        popup.innerHTML = `<button class="close-btn" onclick="this.parentNode.style.display='none'">×</button>
+          <strong>${escapeHTML(word)}</strong><br>
+          <div>${escapeHTML(data.def)}</div>
+          <ul>${data.ex.map(s => `<li>${escapeHTML(s)}</li>`).join('')}</ul>`;
+        document.getElementById('popup-container').appendChild(popup);
+        popup.style.display = 'block';
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('underline') && !e.target.classList.contains('close-btn')) {
+        document.querySelectorAll('.popup').forEach(p => p.style.display = 'none');
+      }
+    });
+  </script>
+</body>
+</html>
