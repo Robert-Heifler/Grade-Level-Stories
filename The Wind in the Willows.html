@@ -1,1 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Wind in the Willows Story</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 1em;
+    background: #f9f9f9;
+  }
+  #story {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1.4;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    background: white;
+    padding: 1em;
+    border-radius: 8px;
+  }
+  .word {
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+  }
+  .highlight {
+    background-color: #add8e6;
+  }
+  #popup {
+    position: absolute;
+    background: white;
+    border: 2px solid #007acc;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 100%;
+    max-width: 600px;
+    left: 0;
+    z-index: 1000;
+    display: none;
+  }
+  #popup .close-btn {
+    position: absolute;
+    top: 0.2em;
+    right: 0.5em;
+    font-weight: bold;
+    font-size: 1.5em;
+    cursor: pointer;
+    user-select: none;
+  }
+  #popup .word-title {
+    text-align: center;
+    margin-bottom: 0.3em;
+  }
+  #popup .definition {
+    font-weight: normal;
+    margin-bottom: 0.5em;
+  }
+  #popup .examples {
+    font-weight: normal;
+    font-size: 1em;
+    margin-left: 1em;
+  }
+  #popup .examples li {
+    margin-bottom: 0.3em;
+  }
+</style>
+</head>
+<body>
+<div id="story">
+  <span class="word" data-key="Mole">Mole</span>
+  <span class="word" data-key="was">was</span>
+  <span class="word" data-key="cleaning">cleaning</span>
+  <span class="word" data-key="his">his</span>
+  <span class="word" data-key="little">little</span>
+  <span class="word" data-key="home">home</span>
+  <span class="word" data-key="when">when</span>
+  <span class="word" data-key="he">he</span>
+  <span class="word" data-key="suddenly">suddenly</span>
+  <span class="word" data-key="felt">felt</span>
+  <span class="word" data-key="tired">tired</span>
+  <span class="word" data-key="of">of</span>
+  <span class="word" data-key="it">it</span>
+  <span class="word" data-key="all">all</span>.
+  <br />
+  <span class="word" data-key="He">He</span>
+  <span class="word" data-key="had">had</span>
+  <span class="word" data-key="been">been</span>
+  <span class="word" data-key="working">working</span>
+  <span class="word" data-key="hard">hard</span>
+  <span class="word" data-key="all">all</span>
+  <span class="word" data-key="morning">morning</span>
+  <span class="word" data-key="and">and</span>
+  <span class="word" data-key="now">now</span>
+  <span class="word" data-key="he">he</span>
+  <span class="word" data-key="wanted">wanted</span>
+  <span class="word" data-key="to">to</span>
+  <span class="word" data-key="see">see</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="world">world</span>
+  <span class="word" data-key="outside">outside</span>.
+  <br />
+  <span class="word" data-key="He">He</span>
+  <span class="word" data-key="put">put</span>
+  <span class="word" data-key="down">down</span>
+  <span class="word" data-key="his">his</span>
+  <span class="word" data-key="cleaning">cleaning</span>
+  <span class="word" data-key="tools">tools</span>
+  <span class="word" data-key="and">and</span>
+  <span class="word" data-key="made">made</span>
+  <span class="word" data-key="his">his</span>
+  <span class="word" data-key="way">way</span>
+  <span class="word" data-key="up">up</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="tunnel">tunnel</span>
+  <span class="word" data-key="to">to</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="outside">outside</span>.
+  <br />
+  <span class="word" data-key="The">The</span>
+  <span class="word" data-key="sunshine">sunshine</span>
+  <span class="word" data-key="was">was</span>
+  <span class="word" data-key="bright">bright</span>
+  <span class="word" data-key="and">and</span>
+  <span class="word" data-key="warm">warm</span>
+  <span class="word" data-key="on">on</span>
+  <span class="word" data-key="his">his</span>
+  <span class="word" data-key="fur">fur</span>.
+  <br />
+  <span class="word" data-key="Mole">Mole</span>
+  <span class="word" data-key="had">had</span>
+  <span class="word" data-key="never">never</span>
+  <span class="word" data-key="seen">seen</span>
+  <span class="word" data-key="so">so</span>
+  <span class="word" data-key="much">much</span>
+  <span class="word" data-key="green">green</span>
+  <span class="word" data-key="grass">grass</span>
+  <span class="word" data-key="and">and</span>
+  <span class="word" data-key="blue">blue</span>
+  <span class="word" data-key="sky">sky</span>
+  <span class="word" data-key="before">before</span>.
+  <br />
+  <span class="word" data-key="He">He</span>
+  <span class="word" data-key="walked">walked</span>
+  <span class="word" data-key="and">and</span>
+  <span class="word" data-key="walked">walked</span>
+  <span class="word" data-key="until">until</span>
+  <span class="word" data-key="he">he</span>
+  <span class="word" data-key="came">came</span>
+  <span class="word" data-key="to">to</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="river">river</span>,
+  <span class="word" data-key="something">something</span>
+  <span class="word" data-key="he">he</span>
+  <span class="word" data-key="had">had</span>
+  <span class="word" data-key="never">never</span>
+  <span class="word" data-key="seen">seen</span>
+  <span class="word" data-key="in">in</span>
+  <span class="word" data-key="his">his</span>
+  <span class="word" data-key="life">life</span>.
+  <br />
+  <span class="word" data-key="The">The</span>
+  <span class="word" data-key="water">water</span>
+  <span class="word" data-key="sparkled">sparkled</span>
+  <span class="word" data-key="in">in</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="sun">sun</span>
+  <span class="word" data-key="as">as</span>
+  <span class="word" data-key="it">it</span>
+  <span class="word" data-key="flowed">flowed</span>
+  <span class="word" data-key="past">past</span>.
+  <br />
+  <span class="word" data-key="Mole">Mole</span>
+  <span class="word" data-key="was">was</span>
+  <span class="word" data-key="so">so</span>
+  <span class="word" data-key="happy">happy</span>
+  <span class="word" data-key="that">that</span>
+  <span class="word" data-key="he">he</span>
+  <span class="word" data-key="sat">sat</span>
+  <span class="word" data-key="down">down</span>
+  <span class="word" data-key="on">on</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="bank">bank</span>
+  <span class="word" data-key="to">to</span>
+  <span class="word" data-key="watch">watch</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="water">water</span>
+  <span class="word" data-key="and">and</span>
+  <span class="word" data-key="the">the</span>
+  <span class="word" data-key="animals">animals</span>
+  <span class="word" data-key="that">that</span>
+  <span class="word" data-key="lived">lived</span>
+  <span class="word" data-key="there">there</span>.
+</div>
+
+<div id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-word" aria-describedby="popup-def">
+  <div class="close-btn" id="closeBtn" tabindex="0" aria-label="Close definition popup">×</div>
+  <div class="word-title" id="popup-word"></div>
+  <div class="definition" id="popup-def"></div>
+  <ul class="examples" id="popup-examples"></ul>
+</div>
+
+<script>
+  const definitions = {
+    "Mole": {
+      def: "A small furry animal that lives underground and likes to dig tunnels.",
+      examples: [
+        "The mole lives in a dark hole under the ground.",
+        "Moles have soft fur and small eyes.",
+        "Mole likes to dig tunnels with his paws.",
+        "The mole found a worm to eat.",
+        "Mole’s home is cozy and warm.",
+        "Mole is curious about the world above ground."
+      ]
+    },
+    "was": {
+      def: "Used to show something happened in the past.",
+      examples: [
+        "She was happy yesterday.",
+        "The sun was bright this morning.",
+        "He was tired after playing.",
+        "It was cold last night.",
+        "The dog was barking loudly.",
+        "I was at school all day."
+      ]
+    },
+    "cleaning": {
+      def: "Making something free from dirt or mess.",
+      examples: [
+        "She is cleaning her room.",
+        "They are cleaning the windows.",
+        "Mole was cleaning his home.",
+        "We clean the table before dinner.",
+        "He is cleaning his shoes.",
+        "Cleaning helps keep things neat."
+      ]
+    },
+    "his": {
+      def: "Belonging to a boy or man.",
+      examples: [
+        "This is his book.",
+        "He lost his hat.",
+        "Mole cleaned his home.",
+        "His dog is very friendly.",
+        "He took his coat.",
+        "The boy loves his bike."
+      ]
+    },
+    "little": {
+      def: "Small in size or amount.",
+      examples: [
+        "She has a little cat.",
+        "The little boy smiled.",
+        "Mole has a little home.",
+        "There is a little water in the cup.",
+        "He gave me a little gift.",
+        "The little bird sang softly."
+      ]
+    },
+    "home": {
+      def: "The place where someone lives.",
+      examples: [
+        "Mole lives in a little home.",
+        "I like my home.",
+        "We go home after school.",
+        "The house is their home.",
+        "Home is where family is.",
+        "She cleaned her home today."
+      ]
+    },
+    "when": {
+      def: "At the time that something happens.",
+      examples: [
+        "I was happy when you came.",
+        "Call me when you arrive.",
+        "Mole felt tired when he cleaned.",
+        "When is your birthday?",
+        "She smiled when she saw the dog.",
+        "We eat when the bell rings."
+      ]
+    },
+    "he": {
+      def: "Used to talk about a boy or man.",
+      examples: [
+        "He is my friend.",
+        "He likes to run.",
+        "Mole is happy because he is outside.",
+        "He reads a book.",
+        "He plays with his toys.",
+        "He is very kind."
+      ]
+    },
+    "suddenly": {
+      def: "Happening very quickly and without warning.",
+      examples: [
+        "Suddenly, it started to rain.",
+        "She suddenly ran away.",
+        "Mole suddenly felt tired.",
+        "The cat suddenly jumped.",
+        "Suddenly, the lights went out.",
+        "He suddenly laughed loudly."
+      ]
+    },
+    "felt": {
+      def: "To have a feeling or to notice something by touch.",
+      examples: [
+        "She felt happy today.",
+        "Mole felt tired after cleaning.",
+        "I felt the soft blanket.",
+        "He felt cold outside.",
+        "They felt the warm sun.",
+        "We felt the rain on our skin."
+      ]
+    },
+    "tired": {
+      def: "Feeling that you need to rest or sleep.",
+      examples: [
+        "Mole was tired after working.",
+        "I feel tired after running.",
+        "She is tired and wants to sleep.",
+        "The dog looks tired.",
+        "He was tired from school.",
+        "They felt tired after the game."
+      ]
+    },
+    "of": {
+      def: "Used to show what something belongs to or is about.",
+      examples: [
+        "The color of the sky is blue.",
+        "A cup of water.",
+        "Mole was tired of cleaning.",
+        "The door of the house is open.",
+        "A piece of cake.",
+        "The sound of birds is nice."
+      ]
+    },
+    "it": {
+      def: "Used to talk about a thing or animal already mentioned.",
+      examples: [
+        "The sun is bright. It is warm.",
+        "Mole cleaned his home. It was small.",
+        "The river is wide. It flows fast.",
+        "The dog is barking. It is loud.",
+        "The book is new. It is interesting.",
+        "The flower is red. It smells nice."
+      ]
+    },
+    "all": {
+      def: "The whole amount or everything.",
+      examples: [
+        "Mole was tired of it all.",
+        "She ate all the food.",
+        "All the birds are singing.",
+        "He read all the books.",
+        "All the children played outside.",
+        "The rain covered all the ground."
+      ]
+    },
+    "had": {
+      def: "Used to show something happened before now.",
+      examples: [
+        "He had a big lunch.",
+        "Mole had been working hard.",
+        "They had a fun day.",
+        "She had a new toy.",
+        "We had a nice time.",
+        "I had a cold last week."
+      ]
+    },
+    "been": {
+      def: "Used to show something happened before now or was true.",
+      examples: [
+        "Mole had been working all morning.",
+        "I have been to the park.",
+        "She has been happy today.",
+        "They have been friends for years.",
+        "He has been sick.",
+        "We have been busy."
+      ]
+    },
+    "working": {
+      def: "Doing a job or task.",
+      examples: [
+        "Mole was working hard.",
+        "She is working on her homework.",
+        "They are working in the garden.",
+        "He works at a store.",
+        "We are working together.",
+        "The dog is working to find the ball."
+      ]
+    },
+    "hard": {
+      def: "With a lot of effort or energy.",
+      examples: [
+        "Mole worked hard all morning.",
+        "She studies hard for tests.",
+        "They worked hard to finish.",
+        "He tries hard to help.",
+        "The rain fell hard.",
+        "We play hard at games."
+      ]
+    },
+    "morning": {
+      def: "The first part of the day before noon.",
+      examples: [
+        "Mole worked hard all morning.",
+        "We eat breakfast in the morning.",
+        "The sun rises in the morning.",
+        "She goes to school in the morning.",
+        "Birds sing in the morning.",
+        "Morning is a fresh start."
+      ]
+    },
+    "now": {
+      def: "At this time or moment.",
+      examples: [
+        "Now he wanted to see the world.",
+        "It is time to eat now.",
+        "She is happy now.",
+        "We go outside now.",
+        "He is ready now.",
+        "Now is a good time to play."
+      ]
+    },
+    "wanted": {
+      def: "To wish or hope for something.",
+      examples: [
+        "Mole wanted to see the world.",
+        "She wanted a new toy.",
+        "They wanted to go outside.",
+        "He wanted to help.",
+        "I wanted some water.",
+        "We wanted to play games."
+      ]
+    },
+    "to": {
+      def: "Used to show direction, place, or purpose.",
+      examples: [
+        "He went to the river.",
+        "Mole wanted to see the world.",
+        "She gave a gift to him.",
+        "We go to school.",
+        "They listen to music.",
+        "He talks to his friend."
+      ]
+    },
+    "see": {
+      def: "To use your eyes to look at something.",
+      examples: [
+        "Mole wanted to see the world.",
+        "I see a bird in the tree.",
+        "She sees the sun shining.",
+        "We see the river flowing.",
+        "He sees his friend at school.",
+        "They see the stars at night."
+      ]
+    },
+    "the": {
+      def: "Used before a noun to show something specific.",
+      examples: [
+        "The sun is bright.",
+        "Mole saw the river.",
+        "The animals live there.",
+        "She likes the flowers.",
+        "The sky is blue.",
+        "We play in the park."
+      ]
+    },
+    "world": {
+      def: "The earth and all the places and people on it.",
+      examples: [
+        "Mole wanted to see the world.",
+        "The world is big and beautiful.",
+        "We learn about the world in school.",
+        "Animals live all over the world.",
+        "The world has many rivers and mountains.",
+        "People from all over the world come here."
+      ]
+    },
+    "outside": {
+      def: "The area that is not inside a building or place.",
+      examples: [
+        "Mole went outside his home.",
+        "We play outside in the sun.",
+        "The flowers grow outside.",
+        "She likes to be outside.",
+        "The birds sing outside.",
+        "Outside is warm and bright."
+      ]
+    },
+    "put": {
+      def: "To move something into a place or position.",
+      examples: [
+        "He put down his tools.",
+        "She put the book on the table.",
+        "Mole put down his cleaning tools.",
+        "We put on our shoes.",
+        "They put the toys away.",
+        "He put the cup on the shelf."
+      ]
+    },
+    "down": {
+      def: "From a higher place to a lower place.",
+      examples: [
+        "He put down his tools.",
+        "The ball rolled down the hill.",
+        "She sat down on the chair.",
+        "Mole sat down on the bank.",
+        "The leaves fell down from the tree.",
+        "He looked down at the ground."
+      ]
+    },
+    "tools": {
+      def: "Things used to help do work or fix things.",
+      examples: [
+        "Mole used cleaning tools.",
+        "A hammer is a tool.",
+        "She has many tools in her box.",
+        "We use tools to build things.",
+        "The gardener has tools for planting.",
+        "He cleaned the tools after work."
+      ]
+    },
+    "made": {
+      def: "To create or do something.",
+      examples: [
+        "He made his way up the tunnel.",
+        "She made a cake.",
+        "Mole made his way outside.",
+        "They made a big sandcastle.",
+        "He made a drawing.",
+        "We made a plan."
+      ]
+    },
+    "his": {
+      def: "Belonging to a boy or man.",
+      examples: [
+        "His fur was soft.",
+        "Mole made his way up.",
+        "He took his coat.",
+        "His home is cozy.",
+        "He found his hat.",
+        "His friends are kind."
+      ]
+    },
+    "way": {
+      def: "A path or road to go somewhere.",
+      examples: [
+        "Mole made his way up the tunnel.",
+        "We found a way to the park.",
+        "The way to school is long.",
+        "She showed me the way home.",
+        "They walked the way together.",
+        "The way was clear."
+      ]
+    },
+    "up": {
+      def: "From a lower place to a higher place.",
+      examples: [
+        "Mole went up the tunnel.",
+        "The sun came up in the morning.",
+        "She climbed up the hill.",
+        "He looked up at the sky.",
+        "We went up the stairs.",
+        "The bird flew up high."
+      ]
+    },
+    "tunnel": {
+      def: "A long, narrow passage under the ground or through a hill.",
+      examples: [
+        "Mole walked up the tunnel.",
+        "The train goes through the tunnel.",
+        "They dug a tunnel in the sand.",
+        "The mole lives in a tunnel underground.",
+        "We walked through the dark tunnel.",
+        "The tunnel was cool and quiet."
+      ]
+    },
+    "sunshine": {
+      def: "The light and heat that comes from the sun.",
+      examples: [
+        "The sunshine was bright and warm.",
+        "We played in the sunshine.",
+        "Sunshine makes flowers grow.",
+        "She felt the warm sunshine on her face.",
+        "The sunshine woke me up.",
+        "Sunshine is nice on a cold day."
+      ]
+    },
+    "bright": {
+      def: "Giving a lot of light or shining strongly.",
+      examples: [
+        "The sunshine was bright.",
+        "The stars are bright at night.",
+        "She has bright eyes.",
+        "The room is bright and clean.",
+        "The bright light hurt my eyes.",
+        "He wore a bright red hat."
+      ]
+    },
+    "and": {
+      def: "Used to join words or ideas together.",
+      examples: [
+        "Mole saw green grass and blue sky.",
+        "We like apples and oranges.",
+        "She runs fast and jumps high.",
+        "The sun is warm and bright.",
+        "He plays soccer and basketball.",
+        "They sing and dance."
+      ]
+    },
+    "warm": {
+      def: "Having a comfortable or pleasant heat.",
+      examples: [
+        "The sunshine was warm on his fur.",
+        "She wore a warm coat.",
+        "The soup is warm and tasty.",
+        "We sat by the warm fire.",
+        "The warm sun made me happy.",
+        "He likes warm weather."
+      ]
+    },
+    "fur": {
+      def: "The soft hair that covers an animal’s body.",
+      examples: [
+        "Mole has black fur.",
+        "The cat’s fur is soft.",
+        "The bear’s fur is thick.",
+        "He petted the dog’s fur.",
+        "The rabbit’s fur is white.",
+        "Fur keeps animals warm."
+      ]
+    },
+    "never": {
+      def: "Not at any time; not ever.",
+      examples: [
+        "Mole had never seen a river before.",
+        "I never eat candy before dinner.",
+        "She never forgets her homework.",
+        "They never go to bed late.",
+        "He never talks in class.",
+        "We never swim in cold water."
+      ]
+    },
+    "seen": {
+      def: "To have looked at or noticed something.",
+      examples: [
+        "Mole had never seen the river.",
+        "I have seen a rainbow.",
+        "She has seen many birds.",
+        "We have seen the movie.",
+        "He has seen his friend today.",
+        "They have seen the stars."
+      ]
+    },
+    "so": {
+      def: "To a very high degree or amount.",
+      examples: [
+        "Mole was so happy.",
+        "She is so kind.",
+        "The water sparkled so bright.",
+        "He ran so fast.",
+        "They were so tired.",
+        "We had so much fun."
+      ]
+    },
+    "much": {
+      def: "A large amount or number.",
+      examples: [
+        "Mole had never seen so much green grass.",
+        "She has much homework.",
+        "There is much water in the river.",
+        "He ate so much food.",
+        "They have much fun playing.",
+        "We saw much wildlife."
+      ]
+    },
+    "green": {
+      def: "The color of grass and leaves.",
+      examples: [
+        "The grass was green.",
+        "Mole saw green grass.",
+        "She wore a green dress.",
+        "The trees are green in summer.",
+        "Green means fresh and alive.",
+        "He picked a green leaf."
+      ]
+    },
+    "grass": {
+      def: "The green plants that cover the ground outside.",
+      examples: [
+        "Mole rolled in the green grass.",
+        "The grass is soft to walk on.",
+        "We play on the grass.",
+        "The cows eat the grass.",
+        "The grass grows after rain.",
+        "She sat on the grass."
+      ]
+    },
+    "blue": {
+      def: "The color of the sky on a clear day.",
+      examples: [
+        "The sky was blue.",
+        "Mole saw a blue sky.",
+        "She wore a blue hat.",
+        "The water looked blue.",
+        "Blue is a cool color.",
+        "He likes blue cars."
+      ]
+    },
+    "sky": {
+      def: "The space above the earth where clouds and the sun are.",
+      examples: [
+        "The sky was clear and blue.",
+        "Birds fly in the sky.",
+        "The sky is full of stars at night.",
+        "Mole looked up at the sky.",
+        "The sky changes color at sunset.",
+        "Clouds float in the sky."
+      ]
+    },
+    "before": {
+      def: "Earlier than now or something else.",
+      examples: [
+        "Mole had never seen a river before.",
+        "I ate breakfast before school.",
+        "She came before me.",
+        "They played outside before dinner.",
+        "He finished his work before lunch.",
+        "We saw the movie before."
+      ]
+    },
+    "walked": {
+      def: "Moved by putting one foot in front of the other.",
+      examples: [
+        "Mole walked to the river.",
+        "She walked to school.",
+        "They walked in the park.",
+        "He walked home slowly.",
+        "We walked together.",
+        "The dog walked beside me."
+      ]
+    },
+    "until": {
+      def: "Up to the time when something happens.",
+      examples: [
+        "He walked until he came to the river.",
+        "Wait until I finish.",
+        "She stayed until sunset.",
+        "They played until dark.",
+        "He worked until noon.",
+        "We walked until we were tired."
+      ]
+    },
+    "came": {
+      def: "Moved toward a place or person.",
+      examples: [
+        "He came to the river.",
+        "She came to the party.",
+        "Mole came outside.",
+        "They came home early.",
+        "He came with his friends.",
+        "We came to see you."
+      ]
+    },
+    "river": {
+      def: "A large, flowing body of water.",
+      examples: [
+        "Mole saw the river for the first time.",
+        "The river flows to the sea.",
+        "Fish live in the river.",
+        "We sat by the river bank.",
+        "The river sparkled in the sun.",
+        "Boats sail on the river."
+      ]
+    },
+    "something": {
+      def: "A thing that is not named or known.",
+      examples: [
+        "He saw something new.",
+        "Mole found something by the river.",
+        "She wants something to eat.",
+        "There is something in the box.",
+        "They heard something outside.",
+        "I want to tell you something."
+      ]
+    },
+    "life": {
+      def: "The state of being alive or living things.",
+      examples: [
+        "Mole had never seen a river in his life.",
+        "Life is full of surprises.",
+        "Animals have a life in the forest.",
+        "She enjoys life every day.",
+        "Life is important to all creatures.",
+        "We learn about life in school."
+      ]
+    },
+    "water": {
+      def: "The clear liquid that we drink and that fills rivers and lakes.",
+      examples: [
+        "The water sparkled in the sun.",
+        "Mole sat by the water.",
+        "Fish live in the water.",
+        "We drink water every day.",
+        "The water flowed past the bank.",
+        "She splashed water on her face."
+      ]
+    },
+    "sparkled": {
+      def: "Shined brightly with small flashes of light.",
+      examples: [
+        "The water sparkled in the sun.",
+        "The stars sparkled at night.",
+        "Her eyes sparkled with joy.",
+        "The snow sparkled in the light.",
+        "The jewels sparkled in the box.",
+        "The river sparkled after the rain."
+      ]
+    },
+    "as": {
+      def: "Used to show how something happens or is like something else.",
+      examples: [
+        "The water sparkled as it flowed.",
+        "She sings as beautifully as a bird.",
+        "He runs as fast as a car.",
+        "The sun shines as bright as gold.",
+        "They laughed as happily as children.",
+        "The river moves as quietly as a cat."
+      ]
+    },
+    "it": {
+      def: "Used to talk about a thing or animal already mentioned.",
+      examples: [
+        "The water sparkled in the sun as it flowed.",
+        "It was a bright day.",
+        "It looks very pretty.",
+        "It moves fast.",
+        "It is warm outside.",
+        "It makes me happy."
+      ]
+    },
+    "flowed": {
+      def: "Moved like a stream or river of liquid.",
+      examples: [
+        "The water flowed past the bank.",
+        "The river flowed quickly.",
+        "She flowed through the dance moves.",
+        "The wind flowed through the trees.",
+        "The paint flowed down the wall.",
+        "The river flowed into the sea."
+      ]
+    },
+    "past": {
+      def: "Moving by or beyond a place.",
+      examples: [
+        "The water flowed past the bank.",
+        "We walked past the house.",
+        "She ran past the school.",
+        "The car drove past us.",
+        "He looked past the window.",
+        "The boat sailed past the island."
+      ]
+    },
+    "happy": {
+      def: "Feeling good and joyful.",
+      examples: [
+        "Mole was so happy.",
+        "She feels happy today.",
+        "They are happy to play.",
+        "He smiled because he was happy.",
+        "We are happy to see you.",
+        "The dog looks happy."
+      ]
+    },
+    "sat": {
+      def: "To rest with the body supported by the bottom on a chair or the ground.",
+      examples: [
+        "Mole sat down on the bank.",
+        "She sat on the chair.",
+        "They sat by the fire.",
+        "He sat quietly.",
+        "We sat together.",
+        "The cat sat on the mat."
+      ]
+    },
+    "down": {
+      def: "From a higher place to a lower place.",
+      examples: [
+        "Mole sat down on the bank.",
+        "The ball rolled down the hill.",
+        "She sat down on the chair.",
+        "The leaves fell down from the tree.",
+        "He looked down at the ground.",
+        "The bird flew down to the grass."
+      ]
+    },
+    "bank": {
+      def: "The land beside a river or lake.",
+      examples: [
+        "Mole sat on the bank to watch the water.",
+        "We walked along the river bank.",
+        "The flowers grow on the bank.",
+        "The boat stopped at the bank.",
+        "Fish swim near the bank.",
+        "The bank is soft with grass."
+      ]
+    },
+    "watch": {
+      def: "To look at something carefully.",
+      examples: [
+        "Mole watched the water and animals.",
+        "She watches TV after school.",
+        "They watch the birds fly.",
+        "He watches his friend play.",
+        "We watch the sunset.",
+        "The dog watches the cat."
+      ]
+    },
+    "animals": {
+      def: "Living creatures that are not people, like birds, fish, or mammals.",
+      examples: [
+        "Mole watched the animals by the river.",
+        "Dogs and cats are animals.",
+        "Birds are animals that can fly.",
+        "Fish are animals that live in water.",
+        "Animals need food and water.",
+        "The forest is full of animals."
+      ]
+    },
+    "that": {
+      def: "Used to show which one or to give more information about something.",
+      examples: [
+        "The animals that lived there were happy.",
+        "I like the book that you gave me.",
+        "She saw the dog that barked.",
+        "He found the toy that was lost.",
+        "The tree that is tall is old.",
+        "We like the games that are fun."
+      ]
+    },
+    "lived": {
+      def: "To have a home or place where one stays.",
+      examples: [
+        "The animals lived by the river.",
+        "Mole lived in a little home.",
+        "She lived in a big house.",
+        "They lived in the forest.",
+        "He lived near the school.",
+        "We lived happily together."
+      ]
+    },
+    "there": {
+      def: "In or at that place.",
+      examples: [
+        "The animals lived there by the river.",
+        "We went there yesterday.",
+        "She is standing there.",
+        "The book is over there.",
+        "He lives there with his family.",
+        "There is a tree in the park."
+      ]
+    }
+  };
+
+  const storyEl = document.getElementById('story');
+  const popup = document.getElementById('popup');
+  const popupWord = document.getElementById('popup-word');
+  const popupDef = document.getElementById('popup-def');
+  const popupExamples = document.getElementById('popup-examples');
+  const closeBtn = document.getElementById('closeBtn');
+
+  let highlightedWord = null;
+
+  function clearHighlight() {
+    if (highlightedWord) {
+      highlightedWord.classList.remove('highlight');
+      highlightedWord = null;
+    }
+  }
+
+  function closePopup() {
+    popup.style.display = 'none';
+    clearHighlight();
+  }
+
+  function showPopup(wordEl) {
+    clearHighlight();
+    highlightedWord = wordEl;
+    wordEl.classList.add('highlight');
+
+    const key = wordEl.dataset.key;
+    const data = definitions[key];
+    if (!data) return;
+
+    popupWord.textContent = key;
+    popupDef.textContent = data.def;
+    popupExamples.innerHTML = '';
+    data.examples.forEach(ex => {
+      const li = document.createElement('li');
+      li.textContent = ex;
+      popupExamples.appendChild(li);
+    });
+
+    // Position popup: top edge about 2em below the highlighted word
+    const storyRect = storyEl.getBoundingClientRect();
+    const wordRect = wordEl.getBoundingClientRect();
+
+    // Calculate vertical position relative to story container
+    const topOffset = wordRect.bottom - storyRect.top + 32; // ~2em = 32px
+
+    popup.style.top = topOffset + 'px';
+    popup.style.left = '0px';
+    popup.style.display = 'block';
+
+    // Scroll story container to ensure popup is visible on small screens
+    const popupBottom = topOffset + popup.offsetHeight;
+    if (popupBottom > storyRect.height) {
+      storyEl.scrollTop += popupBottom - storyRect.height + 10;
+    }
+  }
+
+  storyEl.addEventListener('click', (e) => {
+    if (e.target.classList.contains('word')) {
+      if (popup.style.display === 'block' && highlightedWord === e.target) {
+        closePopup();
+      } else {
+        showPopup(e.target);
+      }
+    }
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+  closeBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      closePopup();
+      e.preventDefault();
+    }
+  });
+
+  // Close popup if clicking outside the story or popup
+  document.addEventListener('click', (e) => {
+    if (!storyEl.contains(e.target) && !popup.contains(e.target)) {
+      closePopup();
+    }
+  });
+</script>
+</body>
+</html>
 
