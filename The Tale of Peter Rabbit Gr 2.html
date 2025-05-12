@@ -7,1578 +7,1474 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: #f8fcff;
+      height: 100%;
+      background: #f8fbff;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
       font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
     #story {
+      position: relative;
+      width: 100vw;
       max-width: 900px;
       margin: 0 auto;
-      padding: 1em 1em 4em 1em;
+      padding: 1.5em 1em 4em 1em;
       background: #fff;
-      min-height: 100vh;
       box-sizing: border-box;
-      position: relative;
-      overflow: auto;
+      min-height: 100vh;
+      border-radius: 0.5em;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
     }
     .story-text {
       font-size: 2.2em;
       font-weight: bold;
-      line-height: 1.3;
+      line-height: 1.35;
+      color: #222;
       width: 100%;
       letter-spacing: 0.01em;
-      color: #222;
       word-break: break-word;
+      user-select: none;
     }
-    .clickable {
+    .uword {
       text-decoration: underline;
+      text-decoration-thickness: 0.12em;
+      text-underline-offset: 0.18em;
       cursor: pointer;
-      transition: background 0.2s;
-      border-radius: 0.2em;
-      padding: 0 0.1em;
-      position: relative;
+      transition: background 0.15s;
+      border-radius: 0.18em;
+      padding: 0 0.08em;
+      margin: 0 0.02em;
+      background: transparent;
     }
-    .highlighted {
-      background: #cbeaff !important;
-      color: #113d5b !important;
+    .uword.active {
+      background: #cce7ff !important;
+      color: #0a2e52;
     }
     .popup {
       position: absolute;
-      background: #eaf6ff;
-      border: 2px solid #7ec3e8;
-      border-radius: 0.6em;
-      box-shadow: 0 0.2em 1em #b8d9f7;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 220px;
+      max-width: calc(100% - 2em);
+      width: calc(100% - 2em);
+      background: #f3faff;
+      border: 2px solid #5eb3ff;
+      border-radius: 0.5em;
+      box-shadow: 0 6px 32px rgba(0,80,180,0.11);
       z-index: 100;
-      min-width: 200px;
-      max-width: none;
       padding: 0.7em 1em 1.2em 1em;
+      box-sizing: border-box;
       font-size: 2em;
       font-weight: bold;
-      color: #1a3e5c;
-      box-sizing: border-box;
-      width: calc(100% - 2em);
-      left: 1em;
-      right: 1em;
+      color: #183b5b;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       justify-content: flex-start;
       overflow: visible;
-      min-height: 7em;
-      max-height: 80vh;
     }
     .popup .close-btn {
       position: absolute;
-      top: 0.2em;
+      top: 0.4em;
       right: 0.7em;
       font-size: 1.2em;
-      color: #1976d2;
+      font-weight: bold;
+      color: #2677c9;
       background: none;
       border: none;
-      font-weight: bold;
       cursor: pointer;
-      z-index: 1;
-      padding: 0.1em 0.3em;
-      border-radius: 0.3em;
-      transition: background 0.2s;
+      padding: 0;
+      margin: 0;
+      z-index: 10;
+      transition: color 0.13s;
     }
     .popup .close-btn:hover {
-      background: #d1e9fd;
+      color: #c00;
     }
-    .popup .popup-word {
-      font-size: 2em;
-      font-weight: bold;
+    .popup-word {
       text-align: center;
-      margin: 0.2em 0 0.4em 0;
-      width: 100%;
-      color: #0d2d4d;
+      font-size: 1.25em;
+      font-weight: bold;
+      margin: 0.22em 0 0.2em 0;
       letter-spacing: 0.01em;
+      color: #0b3f6a;
     }
-    .popup .popup-def {
-      font-size: 1em;
-      font-weight: bold;
+    .popup-sentence {
       text-align: center;
-      margin: 0.3em 0 0.7em 0;
-      width: 100%;
-      color: #1a3e5c;
-    }
-    .popup .popup-examples {
-      width: 100%;
-      margin-top: 0.3em;
-    }
-    .popup .popup-examples .example {
-      font-size: 0.95em;
+      font-size: 0.9em;
+      margin: 0.22em 0 0.2em 0;
+      color: #1b4c6a;
       font-weight: bold;
-      margin: 0.18em 0;
-      color: #2c4d6b;
-      text-align: left;
       width: 100%;
-      display: block;
     }
-    .popup .popup-def-list {
+    .popup-def {
+      text-align: center;
+      font-size: 0.93em;
+      font-weight: bold;
+      margin: 0.35em 0 0.4em 0;
+      color: #205e8b;
       width: 100%;
-      max-height: 11em;
-      overflow-y: auto;
-      margin: 0.3em 0 0.2em 0;
+    }
+    .popup-examples {
+      width: 100%;
+      margin: 0.3em 0 0 0;
       padding: 0;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 0.3em;
+      gap: 0.22em;
     }
-    .popup .popup-def-list .def-choice {
-      width: 100%;
-      background: #d7ecfa;
-      border: 2px solid #9ed3f7;
-      border-radius: 0.4em;
-      font-size: 1em;
+    .popup-example {
+      font-size: 0.8em;
       font-weight: bold;
-      color: #184c74;
-      padding: 0.3em 0.5em;
+      color: #26527c;
       text-align: center;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      line-height: 1.18;
+    }
+    .popup-def-list {
+      width: 100%;
+      max-height: 7.7em;
+      overflow-y: auto;
+      margin: 0.35em 0 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.24em;
+    }
+    .popup-def-choice {
+      background: #e7f3ff;
+      border: 2px solid #a3d6ff;
+      border-radius: 0.3em;
+      font-size: 0.88em;
+      font-weight: bold;
+      color: #1b4c6a;
       cursor: pointer;
-      margin-bottom: 0.1em;
-      transition: background 0.18s, border 0.18s;
-      box-sizing: border-box;
+      padding: 0.25em 0.1em;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      transition: background 0.12s, border 0.12s;
       outline: none;
     }
-    .popup .popup-def-list .def-choice:active,
-    .popup .popup-def-list .def-choice.selected {
-      background: #b7e2ff;
-      border-color: #2a7bbd;
-      color: #0b2e4d;
+    .popup-def-choice:active, .popup-def-choice.selected {
+      background: #b8e2ff;
+      border-color: #5eb3ff;
+      color: #0c2d4a;
     }
-    .popup .popup-def-list::-webkit-scrollbar {
-      width: 0.3em;
-      background: #eaf6ff;
+    .popup-prompt {
+      text-align: center;
+      font-size: 0.78em;
+      color: #1d4d7a;
+      margin: 0.3em 0 0.3em 0;
+      font-weight: bold;
+      width: 100%;
     }
-    .popup .popup-def-list::-webkit-scrollbar-thumb {
-      background: #b7e2ff;
-      border-radius: 0.2em;
-    }
-    @media (max-width: 700px) {
+    @media (max-width: 600px) {
       #story {
-        padding: 0.5em 0.2em 3em 0.2em;
-      }
-      .popup {
-        font-size: 1.5em;
-        min-width: 120px;
-        padding: 0.5em 0.2em 1em 0.2em;
-        border-width: 2px;
+        padding: 1em 0.2em 3em 0.2em;
       }
       .story-text {
-        font-size: 1.3em;
+        font-size: 2em;
       }
-    }
-    @media (max-width: 500px) {
       .popup {
-        font-size: 1.08em;
-        min-width: 90px;
-        padding: 0.3em 0.1em 0.8em 0.1em;
-      }
-      .story-text {
-        font-size: 1.1em;
+        font-size: 1.4em;
       }
     }
   </style>
 </head>
 <body>
-<div id="story">
-  <div class="story-text" id="story-text">
-    <span class="clickable" data-word="Peter">Peter</span> <span class="clickable" data-word="hopped">hopped</span> <span class="clickable" data-word="in">in</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="garden">garden</span>, <span class="clickable" data-word="looking">looking</span> <span class="clickable" data-word="for">for</span> <span class="clickable" data-word="something">something</span> <span class="clickable" data-word="to">to</span> <span class="clickable" data-word="eat">eat</span>. <span class="clickable" data-word="He">He</span> <span class="clickable" data-word="squeezed">squeezed</span> <span class="clickable" data-word="under">under</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="gate">gate</span>, <span class="clickable" data-word="hoping">hoping</span> <span class="clickable" data-word="to">to</span> <span class="clickable" data-word="find">find</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="snack">snack</span>. <span class="clickable" data-word="A">A</span> <span class="clickable" data-word="row">row</span> <span class="clickable" data-word="of">of</span> <span class="clickable" data-word="carrots">carrots</span> <span class="clickable" data-word="grew">grew</span> <span class="clickable" data-word="in">in</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="soft">soft</span> <span class="clickable" data-word="dirt">dirt</span>, <span class="clickable" data-word="bright">bright</span> <span class="clickable" data-word="in">in</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="morning">morning</span> <span class="clickable" data-word="sun">sun</span>. <span class="clickable" data-word="Peter">Peter</span> <span class="clickable" data-word="nibbled">nibbled</span> <span class="clickable" data-word="on">on</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="leaf">leaf</span>, <span class="clickable" data-word="feeling">feeling</span> <span class="clickable" data-word="happy">happy</span> <span class="clickable" data-word="in">in</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="cool">cool</span> <span class="clickable" data-word="shade">shade</span>. <span class="clickable" data-word="He">He</span> <span class="clickable" data-word="saw">saw</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="big">big</span> <span class="clickable" data-word="cat">cat</span> <span class="clickable" data-word="sitting">sitting</span> <span class="clickable" data-word="on">on</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="wall">wall</span>, <span class="clickable" data-word="watching">watching</span> <span class="clickable" data-word="him">him</span> <span class="clickable" data-word="from">from</span> <span class="clickable" data-word="above">above</span>. <span class="clickable" data-word="Peter">Peter</span> <span class="clickable" data-word="moved">moved</span> <span class="clickable" data-word="past">past</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="cat">cat</span>, <span class="clickable" data-word="careful">careful</span> <span class="clickable" data-word="not">not</span> <span class="clickable" data-word="to">to</span> <span class="clickable" data-word="make">make</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="sound">sound</span>. <span class="clickable" data-word="He">He</span> <span class="clickable" data-word="tiptoed">tiptoed</span> <span class="clickable" data-word="behind">behind</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="bush">bush</span>, <span class="clickable" data-word="hiding">hiding</span> <span class="clickable" data-word="from">from</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="gardener">gardener</span>. <span class="clickable" data-word="A">A</span> <span class="clickable" data-word="bird">bird</span> <span class="clickable" data-word="sang">sang</span> <span class="clickable" data-word="on">on</span> <span class="clickable" data-word="a">a</span> <span class="clickable" data-word="branch">branch</span>, <span class="clickable" data-word="filling">filling</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="air">air</span> <span class="clickable" data-word="with">with</span> <span class="clickable" data-word="sweet">sweet</span> <span class="clickable" data-word="music">music</span>. <span class="clickable" data-word="Peter">Peter</span> <span class="clickable" data-word="hurried">hurried</span> <span class="clickable" data-word="through">through</span> <span class="clickable" data-word="the">the</span> <span class="clickable" data-word="rows">rows</span>, <span class="clickable" data-word="dreaming">dreaming</span> <span class="clickable" data-word="of">of</span> <span class="clickable" data-word="home">home</span> <span class="clickable" data-word="and">and</span> <span class="clickable" data-word="safety">safety</span>.
+  <div id="story">
+    <div class="story-text" id="storyText">
+      <span class="uword" data-word="Peter">Peter</span> 
+      <span class="uword" data-word="hopped">hopped</span> 
+      <span class="uword" data-word="in" data-prep="in">in</span> 
+      the 
+      <span class="uword" data-word="garden">garden</span>, 
+      <span class="uword" data-word="looking">looking</span> 
+      <span class="uword" data-word="for">for</span> 
+      <span class="uword" data-word="something">something</span> 
+      <span class="uword" data-word="to" data-prep="to">to</span> 
+      <span class="uword" data-word="eat">eat</span>. 
+      He 
+      <span class="uword" data-word="squeezed">squeezed</span> 
+      <span class="uword" data-word="under">under</span> 
+      the 
+      <span class="uword" data-word="gate">gate</span>, 
+      <span class="uword" data-word="hoping">hoping</span> 
+      <span class="uword" data-word="to" data-prep="to">to</span> 
+      <span class="uword" data-word="find">find</span> 
+      a 
+      <span class="uword" data-word="snack">snack</span>. 
+      A 
+      <span class="uword" data-word="row">row</span> 
+      <span class="uword" data-word="of" data-prep="of">of</span> 
+      <span class="uword" data-word="carrots">carrots</span> 
+      <span class="uword" data-word="grew">grew</span> 
+      <span class="uword" data-word="in" data-prep="in">in</span> 
+      the 
+      <span class="uword" data-word="soft">soft</span> 
+      <span class="uword" data-word="dirt">dirt</span>, 
+      <span class="uword" data-word="bright">bright</span> 
+      <span class="uword" data-word="in" data-prep="in">in</span> 
+      the 
+      <span class="uword" data-word="morning">morning</span> 
+      <span class="uword" data-word="sun">sun</span>. 
+      <span class="uword" data-word="Peter">Peter</span> 
+      <span class="uword" data-word="nibbled">nibbled</span> 
+      <span class="uword" data-word="on" data-prep="on">on</span> 
+      a 
+      <span class="uword" data-word="leaf">leaf</span>, 
+      <span class="uword" data-word="feeling">feeling</span> 
+      <span class="uword" data-word="happy">happy</span> 
+      <span class="uword" data-word="in" data-prep="in">in</span> 
+      the 
+      <span class="uword" data-word="cool">cool</span> 
+      <span class="uword" data-word="shade">shade</span>. 
+      He 
+      <span class="uword" data-word="saw">saw</span> 
+      a 
+      <span class="uword" data-word="big">big</span> 
+      <span class="uword" data-word="cat">cat</span> 
+      <span class="uword" data-word="sitting">sitting</span> 
+      <span class="uword" data-word="on" data-prep="on">on</span> 
+      a 
+      <span class="uword" data-word="wall">wall</span>, 
+      <span class="uword" data-word="watching">watching</span> 
+      him 
+      <span class="uword" data-word="from">from</span> 
+      <span class="uword" data-word="above">above</span>. 
+      <span class="uword" data-word="Peter">Peter</span> 
+      <span class="uword" data-word="moved">moved</span> 
+      <span class="uword" data-word="past">past</span> 
+      the 
+      <span class="uword" data-word="cat">cat</span>, 
+      <span class="uword" data-word="careful">careful</span> 
+      <span class="uword" data-word="not">not</span> 
+      <span class="uword" data-word="to" data-prep="to">to</span> 
+      <span class="uword" data-word="make">make</span> 
+      a 
+      <span class="uword" data-word="sound">sound</span>. 
+      He 
+      <span class="uword" data-word="tiptoed">tiptoed</span> 
+      <span class="uword" data-word="behind">behind</span> 
+      a 
+      <span class="uword" data-word="bush">bush</span>, 
+      <span class="uword" data-word="hiding">hiding</span> 
+      <span class="uword" data-word="from">from</span> 
+      the 
+      <span class="uword" data-word="gardener">gardener</span>. 
+      A 
+      <span class="uword" data-word="bird">bird</span> 
+      <span class="uword" data-word="sang">sang</span> 
+      <span class="uword" data-word="on" data-prep="on">on</span> 
+      a 
+      <span class="uword" data-word="branch">branch</span>, 
+      <span class="uword" data-word="filling">filling</span> 
+      the 
+      <span class="uword" data-word="air">air</span> 
+      <span class="uword" data-word="with">with</span> 
+      <span class="uword" data-word="sweet">sweet</span> 
+      <span class="uword" data-word="music">music</span>. 
+      <span class="uword" data-word="Peter">Peter</span> 
+      <span class="uword" data-word="hurried">hurried</span> 
+      <span class="uword" data-word="through">through</span> 
+      the 
+      <span class="uword" data-word="rows">rows</span>, 
+      <span class="uword" data-word="dreaming">dreaming</span> 
+      <span class="uword" data-word="of" data-prep="of">of</span> 
+      <span class="uword" data-word="home">home</span> 
+      <span class="uword" data-word="and">and</span> 
+      <span class="uword" data-word="safety">safety</span>.
+    </div>
   </div>
-</div>
-<script>
-const jasonPrepositions = {
-  "to": {
-    "Grade 1": [
-      {
-        "definition": "the direction of",
-        "examples": [
+  <script>
+    // Jason dictionary (prepositions only, loaded from attached file)
+    const jasonPreps = {
+      "to": [
+        { def: "the direction of", examples: [
           "We go to school every day.",
           "She walks to the store.",
           "Give the toy to your friend.",
           "The dog ran to the door.",
           "He pointed to the sky.",
           "Mom drove to work."
-        ]
-      }
-    ],
-    "Grade 2": [
-      {
-        "definition": "as far",
-        "examples": [
+        ]},
+        { def: "as far", examples: [
           "Walk to the end of the street.",
           "Run to the big tree.",
           "She read to page ten.",
           "Draw a line to the corner.",
           "We played to the last minute.",
           "He jumped to the top step."
-        ]
-      },
-      {
-        "definition": "until or up to a time",
-        "examples": [
+        ]},
+        { def: "until or up to a time", examples: [
           "Wait to the bell rings.",
           "Stay here to five o'clock.",
           "She worked to lunchtime.",
           "I will sleep to morning.",
           "Read to the end of the story.",
           "We can play to dinner."
-        ]
-      }
-    ],
-    "Grade 3": [
-      {
-        "definition": "touching or leaning against something",
-        "examples": [
+        ]},
+        { def: "touching or leaning against something", examples: [
           "The bike is leaning to the wall.",
           "She pressed her ear to the door.",
           "Put your hand to your heart.",
           "He glued the paper to the board.",
           "The puppy snuggled to my leg.",
           "The sign was nailed to the tree."
-        ]
-      },
-      {
-        "definition": "for the purpose of",
-        "examples": [
+        ]},
+        { def: "for the purpose of", examples: [
           "She went to the store to buy milk.",
           "He called to ask a question.",
           "We study to learn.",
           "They ran to catch the bus.",
           "I came to help you.",
           "She smiled to show she was happy."
-        ]
-      }
-    ],
-    "Grade 4": [
-      {
-        "definition": "related to or causing something",
-        "examples": [
+        ]},
+        { def: "related to or causing something", examples: [
           "The noise led to a complaint.",
           "His hard work led to success.",
           "Rain can lead to flooding.",
           "A cold can lead to a cough.",
           "The story led to laughter.",
           "The mistake led to a new idea."
-        ]
-      }
-    ],
-    "Grade 5": [
-      {
-        "definition": "alongside or belonging with something",
-        "examples": [
+        ]},
+        { def: "alongside or belonging with something", examples: [
           "The answer is next to the question.",
           "The picture belongs to the book.",
           "The key is to the lock.",
           "The shoes are to the outfit.",
           "The lid is to the jar.",
           "The leash is to the dog."
-        ]
-      },
-      {
-        "definition": "showing how two things are similar or different",
-        "examples": [
+        ]},
+        { def: "showing how two things are similar or different", examples: [
           "Ice is cold compared to fire.",
           "My bag is bigger to yours.",
           "This book is easy to that one.",
           "The red car is fast to the blue one.",
           "Math is hard to some kids.",
           "Summer is hot to winter."
-        ]
-      },
-      {
-        "definition": "in agreement with",
-        "examples": [
+        ]},
+        { def: "in agreement with", examples: [
           "She is true to her word.",
           "He acted to the rules.",
           "The answer is right to the teacher.",
           "I will be kind to my friends.",
           "We listened to the leader.",
           "She played to the plan."
-        ]
-      }
-    ],
-    "Grade 6": [
-      {
-        "definition": "in or for each",
-        "examples": [
+        ]},
+        { def: "in or for each", examples: [
           "There are five apples to each basket.",
           "Two students to a desk.",
           "One cookie to every child.",
           "Ten points to a game.",
           "Four wheels to a car.",
           "Three books to a shelf."
-        ]
-      },
-      {
-        "definition": "showing who is receiving something",
-        "examples": [
+        ]},
+        { def: "showing who is receiving something", examples: [
           "Give the letter to Sam.",
           "She handed the toy to her brother.",
           "Pass the salt to me.",
           "Send the gift to your friend.",
           "The teacher gave homework to the class.",
           "I told the story to my mom."
-        ]
-      }
-    ]
-  },
-  "of": {
-    "Grade 1": [
-      {
-        "definition": "coming from",
-        "examples": [
+        ]}
+      ],
+      "of": [
+        { def: "coming from", examples: [
           "The smell of cookies is nice.",
           "A cup of water is on the table.",
           "The sound of music filled the room.",
           "A piece of cake for you.",
           "A group of kids played outside.",
           "A bag of apples is heavy."
-        ]
-      }
-    ],
-    "Grade 2": [
-      {
-        "definition": "resulting from",
-        "examples": [
+        ]},
+        { def: "resulting from", examples: [
           "The joy of winning is great.",
           "The pain of falling hurt.",
           "The fun of playing is the best.",
           "The noise of cars is loud.",
           "The mess of painting is big.",
           "The taste of candy is sweet."
-        ]
-      },
-      {
-        "definition": "at a distance from",
-        "examples": [
+        ]},
+        { def: "at a distance from", examples: [
           "The school is east of my house.",
           "The park is north of the library.",
           "The cat is far of the door.",
           "The tree is left of the bench.",
           "The ball is right of the chair.",
           "The store is south of the station."
-        ]
-      }
-    ],
-    "Grade 3": [
-      {
-        "definition": "by",
-        "examples": [
+        ]},
+        { def: "by", examples: [
           "A book of poems by Maya.",
           "A painting of the artist.",
           "A song of the singer.",
           "A letter of my friend.",
           "A story of the writer.",
           "A drawing of the child."
-        ]
-      },
-      {
-        "definition": "separated from",
-        "examples": [
+        ]},
+        { def: "separated from", examples: [
           "A piece of the puzzle is missing.",
           "A part of the cake was eaten.",
           "A slice of bread is on the plate.",
           "A bit of the toy broke.",
           "A drop of water fell.",
           "A chunk of ice melted."
-        ]
-      }
-    ],
-    "Grade 4": [
-      {
-        "definition": "taken out of a group or a whole number",
-        "examples": [
+        ]},
+        { def: "taken out of a group or a whole number", examples: [
           "Three of the five dogs barked.",
           "Half of the class left early.",
           "Most of the apples are red.",
           "Some of the kids are tall.",
           "Many of the books are new.",
           "One of the cars is blue."
-        ]
-      }
-    ],
-    "Grade 5": [
-      {
-        "definition": "made from",
-        "examples": [
+        ]},
+        { def: "made from", examples: [
           "A shirt of cotton feels soft.",
           "A table of wood is strong.",
           "A ring of gold is shiny.",
           "A cup of glass is clear.",
           "A hat of straw is light.",
           "A blanket of wool is warm."
-        ]
-      },
-      {
-        "definition": "belonging to",
-        "examples": [
+        ]},
+        { def: "belonging to", examples: [
           "The toys of the children are everywhere.",
           "The books of the library are old.",
           "The keys of the car are lost.",
           "The name of the school is long.",
           "The songs of the birds are pretty.",
           "The color of the sky is blue."
-        ]
-      },
-      {
-        "definition": "having or owning",
-        "examples": [
+        ]},
+        { def: "having or owning", examples: [
           "A girl of many talents.",
           "A man of great strength.",
           "A dog of quick speed.",
           "A team of good players.",
           "A house of many rooms.",
           "A boy of kind heart."
-        ]
-      },
-      {
-        "definition": "including",
-        "examples": [
+        ]},
+        { def: "including", examples: [
           "The bag of candy has gum, too.",
           "The box of toys has cars and dolls.",
           "The list of chores has sweeping.",
           "The set of crayons has red and blue.",
           "The class of students has boys and girls.",
           "The team of players has new members."
-        ]
-      }
-    ],
-    "Grade 6": [
-      {
-        "definition": "that is",
-        "examples": [
+        ]},
+        { def: "that is", examples: [
           "The city of Paris is in France.",
           "The month of June is hot.",
           "The animal of the year is the tiger.",
           "The color of the day is yellow.",
           "The book of the week is fun.",
           "The food of the day is pizza."
-        ]
-      },
-      {
-        "definition": "about or concerning",
-        "examples": [
+        ]},
+        { def: "about or concerning", examples: [
           "The story of the hero is exciting.",
           "The talk of the weather was long.",
           "The lesson of math is hard.",
           "The news of the day is sad.",
           "The question of the test is tricky.",
           "The problem of the puzzle is tough."
-        ]
-      },
-      {
-        "definition": "during",
-        "examples": [
+        ]},
+        { def: "during", examples: [
           "The fun of summer is swimming.",
           "The joy of holidays is gifts.",
           "The work of the day is done.",
           "The games of recess are fun.",
           "The study of night is quiet.",
           "The sleep of winter is deep."
-        ]
-      },
-      {
-        "definition": "before a certain time",
-        "examples": [
+        ]},
+        { def: "before a certain time", examples: [
           "The end of the week is Friday.",
           "The start of the day is morning.",
           "The close of school is June.",
           "The finish of the race is near.",
           "The last of the month is coming.",
           "The close of class is soon."
-        ]
-      }
-    ]
-  },
-  "in": {
-    "Grade 1": [
-      {
-        "definition": "inside or surrounded by something",
-        "examples": [
+        ]}
+      ],
+      "in": [
+        { def: "inside or surrounded by something", examples: [
           "The cat is in the box.",
           "Put the book in your bag.",
           "There is milk in the cup.",
           "The ball is in the basket.",
           "He is in the room.",
           "The dog sleeps in the bed."
-        ]
-      }
-    ],
-    "Grade 2": [
-      {
-        "definition": "during or after",
-        "examples": [
+        ]},
+        { def: "during or after", examples: [
           "In the morning, we eat breakfast.",
           "We play in the afternoon.",
           "The stars come out in the night.",
           "She reads in the evening.",
           "We swim in the summer.",
           "It snows in the winter."
-        ]
-      },
-      {
-        "definition": "not beyond or not past",
-        "examples": [
+        ]},
+        { def: "not beyond or not past", examples: [
           "Finish your work in ten minutes.",
           "Come back in an hour.",
           "We will leave in five days.",
           "The movie starts in a minute.",
           "I will be home in a while.",
           "He will call in a moment."
-        ]
-      }
-    ],
-    "Grade 3": [
-      {
-        "definition": "part of a group or category",
-        "examples": [
+        ]},
+        { def: "part of a group or category", examples: [
           "She is in the soccer team.",
           "He is in the choir.",
           "I am in the third grade.",
           "We are in the same class.",
           "The book is in the library.",
           "The painting is in the museum."
-        ]
-      }
-    ],
-    "Grade 4": [
-      {
-        "definition": "using something as a tool or method",
-        "examples": [
+        ]},
+        { def: "using something as a tool or method", examples: [
           "Write your answer in pencil.",
           "Say it in a loud voice.",
           "Draw in color.",
           "Explain in simple words.",
           "Sing in English.",
           "Count in twos."
-        ]
-      }
-    ],
-    "Grade 5": [
-      {
-        "definition": "because of",
-        "examples": [
+        ]},
+        { def: "because of", examples: [
           "He was late in traffic.",
           "She cried in pain.",
           "The team won in excitement.",
           "He laughed in surprise.",
           "She smiled in joy.",
           "They cheered in happiness."
-        ]
-      }
-    ],
-    "Grade 6": [
-      {
-        "definition": "moving inside something",
-        "examples": [
+        ]},
+        { def: "moving inside something", examples: [
           "The fish swam in the water.",
           "The car drove in the tunnel.",
           "The bird flew in the sky.",
           "The kids ran in the gym.",
           "The train moves in the city.",
           "The dog ran in the field."
-        ]
-      }
-    ]
-  },
-  "on": {
-    "Grade 1": [
-      {
-        "definition": "resting or attached to something",
-        "examples": [
+        ]}
+      ],
+      "on": [
+        { def: "resting or attached to something", examples: [
           "The book is on the table.",
           "Put your shoes on the floor.",
           "The cat sits on the chair.",
           "The hat is on my head.",
           "The picture is on the wall.",
           "The cup is on the desk."
-        ]
-      }
-    ],
-    "Grade 2": [
-      {
-        "definition": "on the surface of",
-        "examples": [
+        ]},
+        { def: "on the surface of", examples: [
           "The leaf is on the water.",
           "The bug is on the window.",
           "The snow is on the roof.",
           "The paint is on the paper.",
           "The crumbs are on the plate.",
           "The sticker is on the box."
-        ]
-      }
-    ],
-    "Grade 3": [
-      {
-        "definition": "next to or beside something",
-        "examples": [
+        ]},
+        { def: "next to or beside something", examples: [
           "Sit on my right.",
           "The dog is on my left.",
           "The lamp is on the side of the bed.",
           "The pen is on the edge of the desk.",
           "The shoes are on the side of the door.",
           "The bag is on the side of the chair."
-        ]
-      }
-    ],
-    "Grade 4": [
-      {
-        "definition": "at the time something happens",
-        "examples": [
+        ]},
+        { def: "at the time something happens", examples: [
           "On Monday, we have art class.",
           "The party is on my birthday.",
           "We go to the park on weekends.",
           "On holidays, we visit family.",
           "On rainy days, we stay inside.",
           "On the first day of school, we meet our teacher."
-        ]
-      }
-    ],
-    "Grade 5": [
-      {
-        "definition": "related to something",
-        "examples": [
+        ]},
+        { def: "related to something", examples: [
           "She gave a talk on science.",
           "The book is on animals.",
           "We worked on a project.",
           "He wrote a story on friendship.",
           "The lesson is on math.",
           "They watched a movie on space."
+        ]},
+        { def: "because of", examples: [
+          "He was late on account of traffic.",
+          "She stayed home on doctor's orders.",
+          "The game was canceled on account of rain.",
+          "He smiled on hearing the news.",
+          "She cried on seeing the puppy.",
+          "He left on short notice."
+        ]}
+      ]
+    };
+
+    // Simple dictionary for all other words/idioms/contractions
+    const wordDict = {
+      "Peter": {
+        def: "A rabbit's name in the story.",
+        ex: [
+          "Peter is a little rabbit.",
+          "Peter likes to hop.",
+          "Peter is curious.",
+          "Peter has a blue coat.",
+          "Peter loves carrots.",
+          "Peter is the main character."
+        ]
+      },
+      "hopped": {
+        def: "Jumped with both feet together.",
+        ex: [
+          "The frog hopped away.",
+          "She hopped on one foot.",
+          "The bunny hopped in the grass.",
+          "He hopped over a rock.",
+          "The bird hopped on the ground.",
+          "I hopped across the yard."
+        ]
+      },
+      "garden": {
+        def: "A place where plants and flowers grow.",
+        ex: [
+          "We have tomatoes in our garden.",
+          "The garden is full of flowers.",
+          "She waters the garden every day.",
+          "The rabbit ran into the garden.",
+          "There are carrots in the garden.",
+          "The garden is behind the house."
+        ]
+      },
+      "looking": {
+        def: "Trying to see or find something.",
+        ex: [
+          "She is looking for her shoe.",
+          "I am looking at the sky.",
+          "He is looking for his dog.",
+          "We are looking for the ball.",
+          "The cat is looking at the bird.",
+          "Are you looking for your book?"
+        ]
+      },
+      "for": {
+        def: "Trying to get or find something.",
+        ex: [
+          "She looks for her toy.",
+          "He is waiting for his friend.",
+          "We search for the answer.",
+          "I am looking for my hat.",
+          "Are you looking for the dog?",
+          "They are looking for food."
+        ]
+      },
+      "something": {
+        def: "An unknown thing.",
+        ex: [
+          "I see something in the box.",
+          "She wants something to eat.",
+          "He found something shiny.",
+          "There is something on the table.",
+          "We heard something outside.",
+          "Do you want something to drink?"
+        ]
+      },
+      "eat": {
+        def: "To put food in your mouth and chew it.",
+        ex: [
+          "I like to eat apples.",
+          "She will eat her lunch.",
+          "The dog likes to eat bones.",
+          "We eat together at dinner.",
+          "He wants to eat a snack.",
+          "Do you eat breakfast?"
+        ]
+      },
+      "squeezed": {
+        def: "Pushed through a tight space.",
+        ex: [
+          "He squeezed through the door.",
+          "The cat squeezed under the fence.",
+          "She squeezed into her seat.",
+          "The mouse squeezed into a hole.",
+          "I squeezed past the boxes.",
+          "We squeezed through the crowd."
+        ]
+      },
+      "under": {
+        def: "Below or beneath something.",
+        ex: [
+          "The cat is under the bed.",
+          "He hid under the table.",
+          "The dog sleeps under the chair.",
+          "She found her shoe under the couch.",
+          "The ball rolled under the car.",
+          "We sat under the tree."
+        ]
+      },
+      "gate": {
+        def: "A door or opening in a fence or wall.",
+        ex: [
+          "Open the gate to the garden.",
+          "The dog ran out the gate.",
+          "She closed the gate.",
+          "The gate is made of wood.",
+          "He painted the gate blue.",
+          "The gate swings open."
+        ]
+      },
+      "hoping": {
+        def: "Wishing for something to happen.",
+        ex: [
+          "I am hoping for good weather.",
+          "She is hoping to win the game.",
+          "He is hoping for a new toy.",
+          "We are hoping for a fun day.",
+          "Are you hoping to see your friend?",
+          "They are hoping for a treat."
+        ]
+      },
+      "find": {
+        def: "To discover or see something you are looking for.",
+        ex: [
+          "I want to find my book.",
+          "She can find her shoes.",
+          "He will find the answer.",
+          "We need to find the dog.",
+          "Can you find your pencil?",
+          "They find a treasure."
+        ]
+      },
+      "snack": {
+        def: "A small amount of food eaten between meals.",
+        ex: [
+          "I eat a snack after school.",
+          "She wants a snack.",
+          "He has a snack in his bag.",
+          "We share our snacks.",
+          "What snack do you like?",
+          "The snack is yummy."
+        ]
+      },
+      "row": {
+        def: "A line of things or people.",
+        ex: [
+          "The chairs are in a row.",
+          "We stand in a row.",
+          "There is a row of flowers.",
+          "The books are in a row.",
+          "She planted seeds in a row.",
+          "The ducks walk in a row."
+        ]
+      },
+      "carrots": {
+        def: "Orange vegetables that grow in the ground.",
+        ex: [
+          "Rabbits like carrots.",
+          "She eats carrots for lunch.",
+          "Carrots are orange.",
+          "We grow carrots in the garden.",
+          "He picked some carrots.",
+          "Carrots are good for you."
+        ]
+      },
+      "grew": {
+        def: "Became bigger or developed.",
+        ex: [
+          "The plant grew tall.",
+          "He grew fast last year.",
+          "The tree grew new leaves.",
+          "The puppy grew strong.",
+          "Flowers grew in the yard.",
+          "She grew her hair long."
+        ]
+      },
+      "soft": {
+        def: "Easy to press or not hard.",
+        ex: [
+          "The pillow is soft.",
+          "The kitten has soft fur.",
+          "The bread is soft.",
+          "She likes soft blankets.",
+          "The ground is soft after rain.",
+          "The toy is soft."
+        ]
+      },
+      "dirt": {
+        def: "Loose earth or soil.",
+        ex: [
+          "The plant is in the dirt.",
+          "He played in the dirt.",
+          "There is dirt on my shoes.",
+          "The dog dug in the dirt.",
+          "Wash the dirt off your hands.",
+          "The dirt is brown."
+        ]
+      },
+      "bright": {
+        def: "Giving lots of light or color.",
+        ex: [
+          "The sun is bright.",
+          "She wore a bright dress.",
+          "The room is bright.",
+          "The star is bright at night.",
+          "The light is very bright.",
+          "His smile is bright."
+        ]
+      },
+      "morning": {
+        def: "The time of day when the sun comes up.",
+        ex: [
+          "I eat breakfast in the morning.",
+          "She wakes up in the morning.",
+          "The birds sing in the morning.",
+          "We go to school in the morning.",
+          "It is cool in the morning.",
+          "Morning is my favorite time."
+        ]
+      },
+      "sun": {
+        def: "The bright star that lights the day.",
+        ex: [
+          "The sun is hot.",
+          "The sun rises in the east.",
+          "We play in the sun.",
+          "The sun shines in the sky.",
+          "The sun gives us light.",
+          "The sun sets at night."
+        ]
+      },
+      "nibbled": {
+        def: "Ate with small bites.",
+        ex: [
+          "The mouse nibbled cheese.",
+          "She nibbled on a cookie.",
+          "The rabbit nibbled a carrot.",
+          "He nibbled the apple.",
+          "The bird nibbled seeds.",
+          "I nibbled my snack."
+        ]
+      },
+      "leaf": {
+        def: "A flat, green part of a plant.",
+        ex: [
+          "The leaf is green.",
+          "A leaf fell from the tree.",
+          "The bug sits on the leaf.",
+          "She picked up a leaf.",
+          "The leaf is soft.",
+          "I drew a leaf."
+        ]
+      },
+      "feeling": {
+        def: "Having an emotion or sense.",
+        ex: [
+          "She is feeling happy.",
+          "I am feeling tired.",
+          "He is feeling sad.",
+          "We are feeling excited.",
+          "Are you feeling better?",
+          "The dog is feeling playful."
+        ]
+      },
+      "happy": {
+        def: "Glad or joyful.",
+        ex: [
+          "I am happy today.",
+          "She is happy with her toy.",
+          "He feels happy at school.",
+          "We are happy to see you.",
+          "The dog is happy.",
+          "Are you happy now?"
+        ]
+      },
+      "cool": {
+        def: "A little bit cold.",
+        ex: [
+          "The water is cool.",
+          "It is cool in the shade.",
+          "The breeze is cool.",
+          "I wear a jacket when it is cool.",
+          "The night is cool.",
+          "The room feels cool."
+        ]
+      },
+      "shade": {
+        def: "A place out of the sun.",
+        ex: [
+          "We sat in the shade.",
+          "The tree gives shade.",
+          "It is cool in the shade.",
+          "The dog sleeps in the shade.",
+          "She stood in the shade.",
+          "The shade is nice on hot days."
+        ]
+      },
+      "saw": {
+        def: "Looked at or noticed.",
+        ex: [
+          "I saw a bird.",
+          "She saw a rainbow.",
+          "He saw his friend.",
+          "We saw a movie.",
+          "The cat saw the mouse.",
+          "They saw the sun rise."
+        ]
+      },
+      "big": {
+        def: "Large in size.",
+        ex: [
+          "The dog is big.",
+          "She has a big smile.",
+          "The house is big.",
+          "The tree is big and tall.",
+          "He made a big cake.",
+          "The box is big."
+        ]
+      },
+      "cat": {
+        def: "A small animal with fur and whiskers.",
+        ex: [
+          "The cat is soft.",
+          "She has a pet cat.",
+          "The cat sleeps on the bed.",
+          "I see a black cat.",
+          "The cat likes to play.",
+          "The cat chased the mouse."
+        ]
+      },
+      "sitting": {
+        def: "Resting on your bottom.",
+        ex: [
+          "She is sitting on a chair.",
+          "The cat is sitting by the window.",
+          "He is sitting at the table.",
+          "We are sitting in a row.",
+          "The bird is sitting on a branch.",
+          "I am sitting with my friend."
+        ]
+      },
+      "wall": {
+        def: "A flat side of a room or building.",
+        ex: [
+          "The picture is on the wall.",
+          "He painted the wall blue.",
+          "The ball hit the wall.",
+          "She leaned against the wall.",
+          "There is a clock on the wall.",
+          "The wall is tall."
+        ]
+      },
+      "watching": {
+        def: "Looking at something for a while.",
+        ex: [
+          "I am watching TV.",
+          "She is watching the birds.",
+          "He is watching his dog.",
+          "They are watching a movie.",
+          "The cat is watching the fish.",
+          "Are you watching the game?"
+        ]
+      },
+      "from": {
+        def: "Starting at a place or time.",
+        ex: [
+          "I am from this town.",
+          "She walked from home.",
+          "He is from another school.",
+          "The letter is from my friend.",
+          "The smell comes from the kitchen.",
+          "We ran from the park."
+        ]
+      },
+      "above": {
+        def: "Over or higher than something.",
+        ex: [
+          "The bird flies above the trees.",
+          "The light is above the table.",
+          "The sun is above us.",
+          "The picture hangs above the bed.",
+          "The plane is above the clouds.",
+          "The stars are above the earth."
+        ]
+      },
+      "moved": {
+        def: "Changed place or position.",
+        ex: [
+          "He moved to a new house.",
+          "She moved her chair.",
+          "The dog moved fast.",
+          "We moved the table.",
+          "The car moved down the street.",
+          "I moved closer."
+        ]
+      },
+      "past": {
+        def: "Going by or beyond something.",
+        ex: [
+          "He walked past the store.",
+          "The car drove past my house.",
+          "She ran past her friend.",
+          "The ball rolled past the chair.",
+          "We went past the park.",
+          "The bird flew past the window."
+        ]
+      },
+      "careful": {
+        def: "Trying not to make mistakes or get hurt.",
+        ex: [
+          "Be careful with the glass.",
+          "She is careful when she cuts.",
+          "He is careful crossing the street.",
+          "We are careful with the dog.",
+          "I am careful not to fall.",
+          "They are careful at the pool."
+        ]
+      },
+      "not": {
+        def: "Shows something is not true.",
+        ex: [
+          "I am not tired.",
+          "She is not here.",
+          "We do not have school.",
+          "He is not my brother.",
+          "The cat is not big.",
+          "It is not raining."
+        ]
+      },
+      "make": {
+        def: "To create or do something.",
+        ex: [
+          "I make a cake.",
+          "She can make a drawing.",
+          "He will make a toy.",
+          "We make a plan.",
+          "They make a mess.",
+          "Can you make a sound?"
+        ]
+      },
+      "sound": {
+        def: "Something you can hear.",
+        ex: [
+          "I hear a sound.",
+          "The dog made a sound.",
+          "She likes music's sound.",
+          "The sound is loud.",
+          "What is that sound?",
+          "Birds make a sweet sound."
+        ]
+      },
+      "tiptoed": {
+        def: "Walked quietly on your toes.",
+        ex: [
+          "She tiptoed across the room.",
+          "He tiptoed past the dog.",
+          "I tiptoed to the door.",
+          "We tiptoed so we would not wake him.",
+          "The cat tiptoed on the rug.",
+          "They tiptoed around the toys."
+        ]
+      },
+      "behind": {
+        def: "At the back of something.",
+        ex: [
+          "The dog is behind the door.",
+          "She stood behind her friend.",
+          "The car is behind the house.",
+          "He hid behind the tree.",
+          "The cat is behind the couch.",
+          "We are behind the line."
+        ]
+      },
+      "bush": {
+        def: "A small, leafy plant.",
+        ex: [
+          "The bird is in the bush.",
+          "She hid behind the bush.",
+          "He picked berries from the bush.",
+          "The bush has green leaves.",
+          "There is a bush by the gate.",
+          "We planted a bush."
+        ]
+      },
+      "hiding": {
+        def: "Staying out of sight.",
+        ex: [
+          "The cat is hiding under the bed.",
+          "She is hiding from her friend.",
+          "He is hiding behind the door.",
+          "We are hiding in the closet.",
+          "The dog is hiding his bone.",
+          "Are you hiding from me?"
+        ]
+      },
+      "gardener": {
+        def: "A person who takes care of a garden.",
+        ex: [
+          "The gardener waters the plants.",
+          "She is a good gardener.",
+          "The gardener plants flowers.",
+          "He works as a gardener.",
+          "The gardener pulls weeds.",
+          "The gardener loves the garden."
+        ]
+      },
+      "bird": {
+        def: "An animal with feathers and wings.",
+        ex: [
+          "The bird sings in the tree.",
+          "She saw a blue bird.",
+          "The bird can fly.",
+          "He fed the bird.",
+          "The bird built a nest.",
+          "We heard the bird sing."
+        ]
+      },
+      "sang": {
+        def: "Made music with your voice.",
+        ex: [
+          "She sang a song.",
+          "The bird sang in the morning.",
+          "He sang with his friends.",
+          "We sang at school.",
+          "The class sang together.",
+          "I sang for my mom."
+        ]
+      },
+      "branch": {
+        def: "A part of a tree that grows out from the trunk.",
+        ex: [
+          "The bird sits on the branch.",
+          "She climbed the branch.",
+          "The branch is strong.",
+          "Leaves grow on the branch.",
+          "He broke a branch.",
+          "The branch is high."
+        ]
+      },
+      "filling": {
+        def: "Making something full.",
+        ex: [
+          "She is filling her cup.",
+          "The rain is filling the bucket.",
+          "He is filling the box with toys.",
+          "The room is filling with people.",
+          "The jar is filling with water.",
+          "The bag is filling with books."
+        ]
+      },
+      "air": {
+        def: "The invisible gas we breathe.",
+        ex: [
+          "We breathe air.",
+          "The air is fresh.",
+          "Birds fly in the air.",
+          "The air smells sweet.",
+          "The air is cool.",
+          "She felt the air on her face."
+        ]
+      },
+      "with": {
+        def: "Having or using something.",
+        ex: [
+          "I go with my friend.",
+          "She eats with a fork.",
+          "He plays with a ball.",
+          "We draw with crayons.",
+          "The dog sleeps with the cat.",
+          "Are you coming with us?"
+        ]
+      },
+      "sweet": {
+        def: "Tasting like sugar or very nice.",
+        ex: [
+          "The candy is sweet.",
+          "She has a sweet smile.",
+          "The fruit is sweet.",
+          "His voice is sweet.",
+          "The cake is sweet.",
+          "I like sweet apples."
+        ]
+      },
+      "music": {
+        def: "Sounds that people make to sing or play.",
+        ex: [
+          "I like to listen to music.",
+          "She plays music on the piano.",
+          "He sings music at school.",
+          "Music makes me happy.",
+          "We dance to music.",
+          "The music is loud."
+        ]
+      },
+      "hurried": {
+        def: "Moved quickly.",
+        ex: [
+          "She hurried to school.",
+          "He hurried home.",
+          "I hurried to the bus.",
+          "They hurried to the park.",
+          "We hurried to finish.",
+          "The dog hurried after the cat."
+        ]
+      },
+      "through": {
+        def: "Going in one side and out the other.",
+        ex: [
+          "He walked through the door.",
+          "She ran through the park.",
+          "The ball rolled through the gate.",
+          "We drove through the city.",
+          "The sun shines through the window.",
+          "The dog ran through the grass."
+        ]
+      },
+      "rows": {
+        def: "More than one row; lines of things.",
+        ex: [
+          "The chairs are in rows.",
+          "There are rows of flowers.",
+          "We sit in rows at school.",
+          "The corn grows in rows.",
+          "The books are in rows.",
+          "She planted rows of carrots."
+        ]
+      },
+      "dreaming": {
+        def: "Thinking about nice things while asleep or awake.",
+        ex: [
+          "She is dreaming of summer.",
+          "He is dreaming about his birthday.",
+          "I am dreaming of ice cream.",
+          "They are dreaming of fun times.",
+          "The dog is dreaming while he sleeps.",
+          "We are dreaming of a trip."
+        ]
+      },
+      "home": {
+        def: "The place where you live.",
+        ex: [
+          "I go home after school.",
+          "She loves her home.",
+          "He is at home now.",
+          "We play at home.",
+          "The dog waits at home.",
+          "Home is where my family is."
+        ]
+      },
+      "and": {
+        def: "Connects words or groups of words.",
+        ex: [
+          "I have a cat and a dog.",
+          "She likes apples and bananas.",
+          "He runs and jumps.",
+          "We sing and dance.",
+          "The sun and the moon are in the sky.",
+          "Mom and dad are home."
+        ]
+      },
+      "safety": {
+        def: "Being safe from harm or danger.",
+        ex: [
+          "Wear a helmet for safety.",
+          "Safety is important.",
+          "We talk about safety at school.",
+          "The seatbelt keeps you in safety.",
+          "She cares about safety.",
+          "Safety comes first."
         ]
       }
-    ]
-    // Grade 6 omitted for brevity
-  }
-};
+    };
 
-const prepositionList = Object.keys(jasonPrepositions);
+    // Helper for finding the sentence containing a word
+    function getSentenceForWord(wordSpan) {
+      const storyText = document.getElementById('storyText').textContent;
+      const text = storyText.replace(/\s+/g, ' ');
+      const word = wordSpan.textContent;
+      // Find the sentence containing the word (simple split by .)
+      const sentences = text.split(/(?<=[.?!])\s+/);
+      for (let s of sentences) {
+        if (s.includes(word)) return s.trim();
+      }
+      return '';
+    }
 
-const otherWordData = {
-  "Peter": {
-    definition: "A rabbit who is the main character in the story.",
-    examples: [
-      "Peter is a little rabbit.",
-      "Peter likes to explore.",
-      "Peter is curious and brave.",
-      "Peter has soft fur.",
-      "Peter lives with his family.",
-      "Peter loves to eat carrots."
-    ]
-  },
-  "hopped": {
-    definition: "Jumped forward with small jumps.",
-    examples: [
-      "The frog hopped away.",
-      "The bunny hopped in the grass.",
-      "I hopped on one foot.",
-      "The bird hopped on the branch.",
-      "She hopped over the puddle.",
-      "The squirrel hopped up the tree."
-    ]
-  },
-  "the": {
-    definition: "Used to talk about a certain thing or person.",
-    examples: [
-      "The cat is black.",
-      "I see the sun.",
-      "The book is on the table.",
-      "The dog is sleeping.",
-      "The tree is tall.",
-      "The ball is red."
-    ]
-  },
-  "garden": {
-    definition: "A place where plants, flowers, or vegetables grow.",
-    examples: [
-      "We have a garden at home.",
-      "The garden has many flowers.",
-      "Tom plays in the garden.",
-      "There are carrots in the garden.",
-      "The garden is green.",
-      "I water the garden."
-    ]
-  },
-  "looking": {
-    definition: "Trying to see or find something.",
-    examples: [
-      "I am looking for my shoes.",
-      "She is looking at the sky.",
-      "We are looking for our dog.",
-      "He is looking for his book.",
-      "They are looking at the map.",
-      "I am looking for my friend."
-    ]
-  },
-  "for": {
-    definition: "Trying to get or find something.",
-    examples: [
-      "I am looking for my toy.",
-      "She is waiting for her mom.",
-      "He asks for help.",
-      "They search for clues.",
-      "We hope for good weather.",
-      "I wish for ice cream."
-    ]
-  },
-  "something": {
-    definition: "A thing that is not named or known.",
-    examples: [
-      "I see something in the box.",
-      "She wants something to eat.",
-      "He found something new.",
-      "We made something fun.",
-      "There is something on the table.",
-      "I heard something outside."
-    ]
-  },
-  "eat": {
-    definition: "To put food in your mouth and swallow it.",
-    examples: [
-      "I eat breakfast every day.",
-      "She likes to eat apples.",
-      "He will eat lunch soon.",
-      "We eat together at dinner.",
-      "The dog likes to eat bones.",
-      "They eat cake at parties."
-    ]
-  },
-  "He": {
-    definition: "A word for a boy or a man.",
-    examples: [
-      "He is my brother.",
-      "He likes to run.",
-      "He has a blue hat.",
-      "He is very kind.",
-      "He can jump high.",
-      "He is reading a book."
-    ]
-  },
-  "squeezed": {
-    definition: "Pressed through a tight space.",
-    examples: [
-      "I squeezed through the door.",
-      "She squeezed the lemon.",
-      "He squeezed into the car.",
-      "The cat squeezed under the bed.",
-      "We squeezed past the crowd.",
-      "He squeezed his hand."
-    ]
-  },
-  "under": {
-    definition: "Below or beneath something.",
-    examples: [
-      "The cat is under the table.",
-      "I hid under the bed.",
-      "The ball rolled under the chair.",
-      "She put the shoes under the desk.",
-      "He looked under the couch.",
-      "The dog sleeps under the tree."
-    ]
-  },
-  "gate": {
-    definition: "A door in a fence or wall outside.",
-    examples: [
-      "Open the gate, please.",
-      "The dog ran through the gate.",
-      "The gate is made of wood.",
-      "She closed the gate.",
-      "The gate leads to the garden.",
-      "I painted the gate red."
-    ]
-  },
-  "hoping": {
-    definition: "Wanting something to happen.",
-    examples: [
-      "I am hoping for a sunny day.",
-      "She is hoping to win.",
-      "He is hoping for a new toy.",
-      "We are hoping for cake.",
-      "They are hoping to play.",
-      "I am hoping for a letter."
-    ]
-  },
-  "find": {
-    definition: "To discover or get something that was lost or hidden.",
-    examples: [
-      "I want to find my book.",
-      "She will find her shoes.",
-      "He can find the answer.",
-      "We find shells at the beach.",
-      "They find a new friend.",
-      "I find a coin on the ground."
-    ]
-  },
-  "a": {
-    definition: "One of something.",
-    examples: [
-      "I have a dog.",
-      "She has a book.",
-      "He wants a toy.",
-      "We see a bird.",
-      "They have a ball.",
-      "I want a cookie."
-    ]
-  },
-  "snack": {
-    definition: "A small amount of food eaten between meals.",
-    examples: [
-      "I eat a snack after school.",
-      "She likes a fruit snack.",
-      "He brought a snack to class.",
-      "We share a snack at lunch.",
-      "They have a snack before bed.",
-      "I want a snack now."
-    ]
-  },
-  "A": {
-    definition: "One of something.",
-    examples: [
-      "A cat is on the mat.",
-      "A bird can fly.",
-      "A dog barks.",
-      "A tree is tall.",
-      "A ball is round.",
-      "A car is fast."
-    ]
-  },
-  "row": {
-    definition: "A line of things or people, one after the other.",
-    examples: [
-      "We sat in a row.",
-      "There is a row of trees.",
-      "The books are in a row.",
-      "The chairs are in a row.",
-      "The cars are parked in a row.",
-      "I planted a row of flowers."
-    ]
-  },
-  "carrots": {
-    definition: "Orange vegetables that grow in the ground.",
-    examples: [
-      "Rabbits like carrots.",
-      "I eat carrots for lunch.",
-      "Carrots are orange.",
-      "She grows carrots in the garden.",
-      "He cut the carrots.",
-      "We cooked carrots for dinner."
-    ]
-  },
-  "grew": {
-    definition: "Became bigger or developed.",
-    examples: [
-      "The plant grew tall.",
-      "He grew fast last year.",
-      "The tree grew new leaves.",
-      "My hair grew long.",
-      "The puppy grew bigger.",
-      "The flowers grew in spring."
-    ]
-  },
-  "soft": {
-    definition: "Easy to press, not hard.",
-    examples: [
-      "The pillow is soft.",
-      "I like soft bread.",
-      "The kitten has soft fur.",
-      "The grass feels soft.",
-      "She wears a soft sweater.",
-      "The toy is soft and cuddly."
-    ]
-  },
-  "dirt": {
-    definition: "Soil or earth found on the ground.",
-    examples: [
-      "The dirt is brown.",
-      "I played in the dirt.",
-      "Plants grow in dirt.",
-      "My shoes are dirty from the dirt.",
-      "The dog dug in the dirt.",
-      "The dirt is soft after rain."
-    ]
-  },
-  "bright": {
-    definition: "Giving a lot of light or color.",
-    examples: [
-      "The sun is bright.",
-      "She wore a bright dress.",
-      "The room is bright.",
-      "The light is bright.",
-      "The flowers are bright colors.",
-      "The sky is bright blue."
-    ]
-  },
-  "morning": {
-    definition: "The early part of the day, before noon.",
-    examples: [
-      "I wake up in the morning.",
-      "We eat breakfast in the morning.",
-      "The sun rises in the morning.",
-      "She goes to school in the morning.",
-      "Birds sing in the morning.",
-      "The morning is cool."
-    ]
-  },
-  "sun": {
-    definition: "The bright star in the sky that gives us light and warmth.",
-    examples: [
-      "The sun is shining.",
-      "I see the sun in the sky.",
-      "The sun is hot.",
-      "Plants need the sun.",
-      "The sun rises in the east.",
-      "The sun sets at night."
-    ]
-  },
-  "nibbled": {
-    definition: "Ate something with small, quick bites.",
-    examples: [
-      "The mouse nibbled cheese.",
-      "She nibbled on her cookie.",
-      "The rabbit nibbled grass.",
-      "He nibbled his sandwich.",
-      "The squirrel nibbled a nut.",
-      "I nibbled on an apple."
-    ]
-  },
-  "leaf": {
-    definition: "The flat, green part of a plant or tree.",
-    examples: [
-      "The leaf is green.",
-      "A leaf fell from the tree.",
-      "She picked up a leaf.",
-      "The leaf is soft.",
-      "There is a bug on the leaf.",
-      "I drew a leaf."
-    ]
-  },
-  "feeling": {
-    definition: "Having an emotion or sense inside.",
-    examples: [
-      "I am feeling happy.",
-      "She is feeling sad.",
-      "He is feeling tired.",
-      "We are feeling excited.",
-      "They are feeling cold.",
-      "I am feeling hungry."
-    ]
-  },
-  "happy": {
-    definition: "Glad or joyful.",
-    examples: [
-      "I am happy today.",
-      "She is happy with her toy.",
-      "He feels happy at school.",
-      "The dog is happy to see me.",
-      "We are happy together.",
-      "They are happy at the park."
-    ]
-  },
-  "cool": {
-    definition: "A little bit cold, but nice.",
-    examples: [
-      "The water is cool.",
-      "It is cool in the shade.",
-      "The air feels cool.",
-      "I like cool weather.",
-      "The room is cool.",
-      "The breeze is cool."
-    ]
-  },
-  "shade": {
-    definition: "An area where the sun does not shine.",
-    examples: [
-      "We sit in the shade.",
-      "The tree gives shade.",
-      "It is cool in the shade.",
-      "The dog sleeps in the shade.",
-      "The shade is nice on hot days.",
-      "I rest in the shade."
-    ]
-  },
-  "saw": {
-    definition: "Looked at or noticed.",
-    examples: [
-      "I saw a bird.",
-      "She saw her friend.",
-      "He saw a dog.",
-      "We saw a rainbow.",
-      "They saw the moon.",
-      "I saw a butterfly."
-    ]
-  },
-  "big": {
-    definition: "Large in size.",
-    examples: [
-      "The dog is big.",
-      "She has a big hat.",
-      "He lives in a big house.",
-      "The tree is big.",
-      "We saw a big car.",
-      "The cake is big."
-    ]
-  },
-  "cat": {
-    definition: "A small animal with fur, whiskers, and a tail.",
-    examples: [
-      "The cat is sleeping.",
-      "She has a white cat.",
-      "The cat likes milk.",
-      "He pets the cat.",
-      "The cat climbs the tree.",
-      "I hear the cat meow."
-    ]
-  },
-  "sitting": {
-    definition: "Staying in a seat or resting on something.",
-    examples: [
-      "I am sitting on a chair.",
-      "She is sitting on the floor.",
-      "He is sitting by the window.",
-      "The cat is sitting on the mat.",
-      "We are sitting together.",
-      "They are sitting at the table."
-    ]
-  },
-  "wall": {
-    definition: "A flat, upright part that forms the side of a room or building.",
-    examples: [
-      "The wall is white.",
-      "She drew on the wall.",
-      "The picture is on the wall.",
-      "He leans on the wall.",
-      "The wall is tall.",
-      "We painted the wall."
-    ]
-  },
-  "watching": {
-    definition: "Looking at something for a time.",
-    examples: [
-      "I am watching TV.",
-      "She is watching the birds.",
-      "He is watching the game.",
-      "We are watching the show.",
-      "They are watching the sky.",
-      "I am watching my dog."
-    ]
-  },
-  "him": {
-    definition: "A word for a boy or man.",
-    examples: [
-      "I see him at school.",
-      "She likes him.",
-      "He is with him.",
-      "We play with him.",
-      "They talk to him.",
-      "I help him."
-    ]
-  },
-  "from": {
-    definition: "Starting at a place or time.",
-    examples: [
-      "I am from a small town.",
-      "She is from my class.",
-      "He comes from the park.",
-      "We walk from school.",
-      "They moved from the city.",
-      "I got a letter from her."
-    ]
-  },
-  "above": {
-    definition: "At a higher place.",
-    examples: [
-      "The bird flies above the tree.",
-      "The sun is above us.",
-      "The light is above the table.",
-      "The plane is above the clouds.",
-      "The picture is above the bed.",
-      "The stars are above at night."
-    ]
-  },
-  "moved": {
-    definition: "Changed place or position.",
-    examples: [
-      "I moved my chair.",
-      "She moved to a new house.",
-      "He moved the toy.",
-      "We moved the table.",
-      "They moved closer.",
-      "The car moved fast."
-    ]
-  },
-  "past": {
-    definition: "Going by or beyond something.",
-    examples: [
-      "I walked past the store.",
-      "She ran past the dog.",
-      "He drove past the school.",
-      "We went past the park.",
-      "They moved past the line.",
-      "The bus went past my house."
-    ]
-  },
-  "careful": {
-    definition: "Doing something with attention and not making mistakes.",
-    examples: [
-      "Be careful with the glass.",
-      "She is careful when she paints.",
-      "He is careful with his toys.",
-      "We are careful crossing the street.",
-      "They are careful with the dog.",
-      "I am careful with my homework."
-    ]
-  },
-  "not": {
-    definition: "Shows something is not true or is the opposite.",
-    examples: [
-      "I am not tired.",
-      "She is not here.",
-      "He does not like carrots.",
-      "We are not ready.",
-      "They are not coming.",
-      "It is not cold."
-    ]
-  },
-  "make": {
-    definition: "To create or do something.",
-    examples: [
-      "I make a cake.",
-      "She makes a drawing.",
-      "He can make a boat.",
-      "We make a plan.",
-      "They make a noise.",
-      "I make my bed."
-    ]
-  },
-  "sound": {
-    definition: "Something you can hear.",
-    examples: [
-      "I hear a sound.",
-      "The bell makes a sound.",
-      "She likes the sound of music.",
-      "He heard a sound outside.",
-      "We made a loud sound.",
-      "The sound was soft."
-    ]
-  },
-  "tiptoed": {
-    definition: "Walked quietly on the tips of your toes.",
-    examples: [
-      "I tiptoed into the room.",
-      "She tiptoed past the baby.",
-      "He tiptoed to the door.",
-      "We tiptoed in the house.",
-      "They tiptoed across the floor.",
-      "The cat tiptoed quietly."
-    ]
-  },
-  "behind": {
-    definition: "At the back of something.",
-    examples: [
-      "I stand behind my friend.",
-      "She hides behind the tree.",
-      "He is behind the door.",
-      "We are behind the house.",
-      "They wait behind the line.",
-      "The dog is behind the chair."
-    ]
-  },
-  "bush": {
-    definition: "A small plant with many branches.",
-    examples: [
-      "The bird is in the bush.",
-      "She hid behind the bush.",
-      "He planted a bush.",
-      "We saw a green bush.",
-      "The bush has flowers.",
-      "I watered the bush."
-    ]
-  },
-  "hiding": {
-    definition: "Staying where you cannot be seen.",
-    examples: [
-      "I am hiding under the bed.",
-      "She is hiding behind the door.",
-      "He is hiding in the closet.",
-      "We are hiding in the garden.",
-      "They are hiding from the dog.",
-      "The cat is hiding in the box."
-    ]
-  },
-  "gardener": {
-    definition: "A person who takes care of a garden.",
-    examples: [
-      "The gardener waters the plants.",
-      "She is a gardener.",
-      "The gardener plants flowers.",
-      "He is working as a gardener.",
-      "The gardener loves his job.",
-      "We met the gardener."
-    ]
-  },
-  "bird": {
-    definition: "An animal with wings and feathers that can fly.",
-    examples: [
-      "The bird is singing.",
-      "She saw a blue bird.",
-      "The bird flew away.",
-      "He feeds the bird.",
-      "We watched the bird.",
-      "The bird made a nest."
-    ]
-  },
-  "sang": {
-    definition: "Made music with your voice.",
-    examples: [
-      "I sang a song.",
-      "She sang to her baby.",
-      "He sang in the choir.",
-      "We sang together.",
-      "They sang loudly.",
-      "The bird sang in the tree."
-    ]
-  },
-  "branch": {
-    definition: "A part of a tree that grows out from the trunk.",
-    examples: [
-      "The bird sits on a branch.",
-      "She picked a branch.",
-      "He climbed the branch.",
-      "We saw apples on the branch.",
-      "The branch is strong.",
-      "A leaf fell from the branch."
-    ]
-  },
-  "filling": {
-    definition: "Making something full.",
-    examples: [
-      "I am filling my cup.",
-      "She is filling the box.",
-      "He is filling a bag.",
-      "We are filling the pool.",
-      "They are filling the basket.",
-      "The rain is filling the pond."
-    ]
-  },
-  "air": {
-    definition: "The invisible gas we breathe.",
-    examples: [
-      "The air is fresh.",
-      "She feels the air.",
-      "He jumps in the air.",
-      "We breathe the air.",
-      "The air is cool.",
-      "The bird flies in the air."
-    ]
-  },
-  "with": {
-    definition: "Having or using something.",
-    examples: [
-      "I go with my mom.",
-      "She plays with her dog.",
-      "He eats with a spoon.",
-      "We walk with our friends.",
-      "They sing with joy.",
-      "I draw with a pencil."
-    ]
-  },
-  "sweet": {
-    definition: "Tasting like sugar or honey.",
-    examples: [
-      "The candy is sweet.",
-      "She likes sweet apples.",
-      "He made a sweet cake.",
-      "We drink sweet juice.",
-      "The fruit is sweet.",
-      "I love sweet treats."
-    ]
-  },
-  "music": {
-    definition: "Sounds made by singing or playing instruments.",
-    examples: [
-      "I listen to music.",
-      "She likes music.",
-      "He plays music on the piano.",
-      "We dance to music.",
-      "They sing music at school.",
-      "The music is loud."
-    ]
-  },
-  "hurried": {
-    definition: "Moved quickly.",
-    examples: [
-      "I hurried to school.",
-      "She hurried home.",
-      "He hurried to the bus.",
-      "We hurried to the park.",
-      "They hurried to eat.",
-      "The dog hurried after the cat."
-    ]
-  },
-  "through": {
-    definition: "Going in one side and out the other.",
-    examples: [
-      "I walked through the door.",
-      "She ran through the park.",
-      "He looked through the window.",
-      "We drove through the tunnel.",
-      "They went through the gate.",
-      "The dog ran through the yard."
-    ]
-  },
-  "rows": {
-    definition: "Lines of things or people side by side.",
-    examples: [
-      "The chairs are in rows.",
-      "She planted rows of flowers.",
-      "He sat in the front rows.",
-      "We walked between the rows.",
-      "There are rows of books.",
-      "The trees are in rows."
-    ]
-  },
-  "dreaming": {
-    definition: "Thinking about something nice you want.",
-    examples: [
-      "I am dreaming of summer.",
-      "She is dreaming of cake.",
-      "He is dreaming of a puppy.",
-      "We are dreaming of fun.",
-      "They are dreaming of the beach.",
-      "I am dreaming of my birthday."
-    ]
-  },
-  "home": {
-    definition: "The place where you live.",
-    examples: [
-      "I go home after school.",
-      "She loves her home.",
-      "He is at home.",
-      "We play at home.",
-      "They stay home on rainy days.",
-      "My home is warm."
-    ]
-  },
-  "and": {
-    definition: "Used to join words or groups.",
-    examples: [
-      "I have a cat and a dog.",
-      "She likes apples and bananas.",
-      "He can jump and run.",
-      "We sing and dance.",
-      "They laugh and play.",
-      "I read and write."
-    ]
-  },
-  "safety": {
-    definition: "Being safe and not in danger.",
-    examples: [
-      "Wear a helmet for safety.",
-      "She cares about safety.",
-      "He checks for safety.",
-      "We talk about safety at school.",
-      "They follow safety rules.",
-      "Safety is important."
-    ]
-  }
-};
+    // Helper: escape HTML
+    function esc(str) {
+      return str.replace(/[&<>]/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;'
+      }[c]));
+    }
 
-function getPrepositionDefinitions(word) {
-  word = word.toLowerCase();
-  if (jasonPrepositions[word]) {
-    let defs = [];
-    for (let grade in jasonPrepositions[word]) {
-      for (let d of jasonPrepositions[word][grade]) {
-        defs.push({
-          grade,
-          definition: d.definition,
-          examples: d.examples
-        });
+    // Remove all popups and highlights
+    function closeAllPopups() {
+      document.querySelectorAll('.popup').forEach(p => p.remove());
+      document.querySelectorAll('.uword.active').forEach(w => w.classList.remove('active'));
+    }
+
+    // Position popup below the underlined word, inside #story
+    function positionPopup(wordSpan, popup) {
+      const story = document.getElementById('story');
+      const storyRect = story.getBoundingClientRect();
+      const wordRect = wordSpan.getBoundingClientRect();
+      // Find the top position: bottom of word relative to #story
+      let top = wordRect.bottom - storyRect.top + 4; // 4px gap
+      // Horizontal: popup is centered in #story
+      let left = storyRect.width/2;
+      popup.style.top = `${top}px`;
+      popup.style.left = `${left}px`;
+      popup.style.transform = 'translateX(-50%)';
+      // Make sure popup stays inside #story vertically
+      const popupRect = popup.getBoundingClientRect();
+      let maxTop = storyRect.height - popup.offsetHeight - 8;
+      if (top > maxTop) {
+        popup.style.top = `${Math.max(0, maxTop)}px`;
       }
     }
-    return defs;
-  }
-  return null;
-}
 
-function isPreposition(word) {
-  return prepositionList.includes(word.toLowerCase());
-}
+    // Position secondary popup below the clicked definition, inside #story
+    function positionDefPopup(defBtn, popup) {
+      const story = document.getElementById('story');
+      const storyRect = story.getBoundingClientRect();
+      const defRect = defBtn.getBoundingClientRect();
+      let top = defRect.bottom - storyRect.top + 4;
+      let left = storyRect.width/2;
+      popup.style.top = `${top}px`;
+      popup.style.left = `${left}px`;
+      popup.style.transform = 'translateX(-50%)';
+      // Keep inside story
+      let maxTop = storyRect.height - popup.offsetHeight - 8;
+      if (top > maxTop) {
+        popup.style.top = `${Math.max(0, maxTop)}px`;
+      }
+    }
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+    // Show popup for a non-preposition word
+    function showWordPopup(wordSpan, word) {
+      closeAllPopups();
+      wordSpan.classList.add('active');
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      popup.innerHTML = `
+        <button class="close-btn" aria-label="Close popup" tabindex="0">✕</button>
+        <div class="popup-word">${esc(word)}</div>
+        <div class="popup-def">${esc(wordDict[word].def)}</div>
+        <div class="popup-examples">
+          ${wordDict[word].ex.map(e => `<div class="popup-example">${esc(e)}</div>`).join('')}
+        </div>
+      `;
+      document.getElementById('story').appendChild(popup);
+      positionPopup(wordSpan, popup);
+      popup.querySelector('.close-btn').onclick = closeAllPopups;
+    }
 
-function removePopups() {
-  document.querySelectorAll('.popup').forEach(p => p.remove());
-  document.querySelectorAll('.highlighted').forEach(el => el.classList.remove('highlighted'));
-}
-
-function createPopup(word, rect, storyRect, isPreposition, prepositionDefs) {
-  removePopups();
-  let popup = document.createElement('div');
-  popup.className = 'popup';
-  popup.setAttribute('data-popup-for', word);
-
-  // Close button
-  let closeBtn = document.createElement('button');
-  closeBtn.className = 'close-btn';
-  closeBtn.textContent = '✕';
-  closeBtn.onclick = removePopups;
-  popup.appendChild(closeBtn);
-
-  // Word title
-  let wordDiv = document.createElement('div');
-  wordDiv.className = 'popup-word';
-  wordDiv.textContent = word;
-  popup.appendChild(wordDiv);
-
-  if (isPreposition && prepositionDefs && prepositionDefs.length > 0) {
-    // List all definitions as clickable
-    let defList = document.createElement('div');
-    defList.className = 'popup-def-list';
-    prepositionDefs.forEach((def, idx) => {
-      let defBtn = document.createElement('div');
-      defBtn.className = 'def-choice';
-      defBtn.tabIndex = 0;
-      defBtn.innerHTML = `<span style="font-size:0.8em;color:#3b5a7a;font-weight:bold;">${def.grade}:</span> ${def.definition}`;
-      defBtn.onclick = function(e) {
-        e.stopPropagation();
-        showExamplesPopup(word, def, defBtn, popup, storyRect);
-      };
-      defList.appendChild(defBtn);
-    });
-    popup.appendChild(defList);
-    let inst = document.createElement('div');
-    inst.className = 'popup-def';
-    inst.style.fontSize = '0.8em';
-    inst.style.marginTop = '0.4em';
-    inst.style.color = '#2d5c8a';
-    inst.style.fontWeight = 'bold';
-    inst.style.textAlign = 'center';
-    inst.textContent = 'Tap a definition to see examples.';
-    popup.appendChild(inst);
-  } else {
-    // Show definition and examples
-    let defDiv = document.createElement('div');
-    defDiv.className = 'popup-def';
-    defDiv.textContent = otherWordData[word] ? otherWordData[word].definition : "No definition found.";
-    popup.appendChild(defDiv);
-
-    let exDiv = document.createElement('div');
-    exDiv.className = 'popup-examples';
-    if (otherWordData[word] && otherWordData[word].examples) {
-      otherWordData[word].examples.forEach(ex => {
-        let exLine = document.createElement('div');
-        exLine.className = 'example';
-        exLine.textContent = ex;
-        exDiv.appendChild(exLine);
+    // Show popup for a preposition word
+    function showPrepPopup(wordSpan, word) {
+      closeAllPopups();
+      wordSpan.classList.add('active');
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      // Find all definitions for this preposition
+      const defs = jasonPreps[word.toLowerCase()];
+      // Get the story sentence for this word
+      const sentence = getSentenceForWord(wordSpan);
+      // Underline the preposition in the sentence
+      const prepRegex = new RegExp(`\\b${word}\\b`, 'i');
+      const underlinedSent = esc(sentence).replace(prepRegex, `<span style="text-decoration:underline;text-underline-offset:0.18em">${word}</span>`);
+      popup.innerHTML = `
+        <button class="close-btn" aria-label="Close popup" tabindex="0">✕</button>
+        <div class="popup-word">${esc(word)}</div>
+        <div class="popup-sentence">${underlinedSent}</div>
+        <div class="popup-prompt">Pick the best meaning below.</div>
+        <div class="popup-def-list">
+          ${
+            defs
+              ? defs.map((d, i) =>
+                `<button class="popup-def-choice" data-idx="${i}" tabindex="0">${esc(d.def)}</button>`
+              ).join('')
+              : `<button class="popup-def-choice" data-idx="0">${esc(wordDict[word].def)}</button>`
+          }
+        </div>
+      `;
+      document.getElementById('story').appendChild(popup);
+      positionPopup(wordSpan, popup);
+      popup.querySelector('.close-btn').onclick = closeAllPopups;
+      // Add click event for definition choices
+      popup.querySelectorAll('.popup-def-choice').forEach(btn => {
+        btn.onclick = function(e) {
+          e.stopPropagation();
+          showPrepDefExamples(wordSpan, word, btn, parseInt(btn.getAttribute('data-idx')));
+        };
       });
     }
-    popup.appendChild(exDiv);
-  }
 
-  // Positioning
-  let popupWidth = storyRect.width - 32; // 2em = 32px
-  popup.style.width = popupWidth + 'px';
-  let left = storyRect.left + (storyRect.width - popupWidth) / 2;
-  let top = rect.bottom - storyRect.top + 6; // 6px gap
+    // Show popup with example sentences for a preposition definition
+    function showPrepDefExamples(wordSpan, word, defBtn, defIdx) {
+      // Remove any existing secondary popups
+      document.querySelectorAll('.popup.def-popup').forEach(p => p.remove());
+      // Get the definition and examples
+      const defs = jasonPreps[word.toLowerCase()];
+      let def, examples;
+      if (defs && defs[defIdx]) {
+        def = defs[defIdx].def;
+        examples = defs[defIdx].examples;
+      } else {
+        def = wordDict[word].def;
+        examples = wordDict[word].ex;
+      }
+      // Build the popup
+      const popup = document.createElement('div');
+      popup.className = 'popup def-popup';
+      popup.innerHTML = `
+        <button class="close-btn" aria-label="Close popup" tabindex="0">✕</button>
+        <div class="popup-def">${esc(def)}</div>
+        <div class="popup-examples">
+          ${examples.map(e => `<div class="popup-example">${esc(e)}</div>`).join('')}
+        </div>
+      `;
+      document.getElementById('story').appendChild(popup);
+      positionDefPopup(defBtn, popup);
+      popup.querySelector('.close-btn').onclick = closeAllPopups;
+    }
 
-  // Clamp left/top if needed
-  if (left < storyRect.left + 2) left = storyRect.left + 2;
-  if (left + popupWidth > storyRect.right - 2) left = storyRect.right - popupWidth - 2;
-  if (top + 120 > storyRect.bottom) top = Math.max(storyRect.bottom - 120, rect.bottom - storyRect.top + 6);
+    // Click handler for underlined words
+    document.getElementById('storyText').addEventListener('click', function(e) {
+      let target = e.target;
+      if (!target.classList.contains('uword')) return;
+      const word = target.getAttribute('data-word');
+      const isPrep = target.hasAttribute('data-prep');
+      if (isPrep && jasonPreps[word.toLowerCase()]) {
+        showPrepPopup(target, word);
+      } else if (isPrep) {
+        // Preposition not in dictionary: treat as normal word
+        showWordPopup(target, word);
+      } else {
+        showWordPopup(target, word);
+      }
+    });
 
-  popup.style.left = (left - storyRect.left) + 'px';
-  popup.style.top = top + 'px';
-  document.getElementById('story').appendChild(popup);
+    // Remove popups when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.popup') && !e.target.classList.contains('uword')) {
+        closeAllPopups();
+      }
+    });
 
-  // Scroll popup into view if needed
-  let popupRect = popup.getBoundingClientRect();
-  if (popupRect.bottom > storyRect.bottom) {
-    popup.style.top = Math.max(storyRect.height - popup.offsetHeight - 8, 0) + 'px';
-  }
-}
+    // Keyboard accessibility for close buttons
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") closeAllPopups();
+    });
 
-function showExamplesPopup(word, def, defBtn, parentPopup, storyRect) {
-  // Remove old example popups
-  document.querySelectorAll('.popup[data-popup-for="__examples__"]').forEach(p => p.remove());
-  // Get defBtn rect
-  let defBtnRect = defBtn.getBoundingClientRect();
-  let popupWidth = storyRect.width - 32;
-  let left = storyRect.left + (storyRect.width - popupWidth) / 2;
-  let top = defBtnRect.bottom - storyRect.top + 6;
-
-  let exPopup = document.createElement('div');
-  exPopup.className = 'popup';
-  exPopup.setAttribute('data-popup-for', '__examples__');
-  exPopup.style.width = popupWidth + 'px';
-  exPopup.style.left = (left - storyRect.left) + 'px';
-  exPopup.style.top = top + 'px';
-
-  let closeBtn = document.createElement('button');
-  closeBtn.className = 'close-btn';
-  closeBtn.textContent = '✕';
-  closeBtn.onclick = function() {
-    exPopup.remove();
-  };
-  exPopup.appendChild(closeBtn);
-
-  let wordDiv = document.createElement('div');
-  wordDiv.className = 'popup-word';
-  wordDiv.textContent = word;
-  exPopup.appendChild(wordDiv);
-
-  let defDiv = document.createElement('div');
-  defDiv.className = 'popup-def';
-  defDiv.textContent = def.definition;
-  exPopup.appendChild(defDiv);
-
-  let exDiv = document.createElement('div');
-  exDiv.className = 'popup-examples';
-  def.examples.forEach(ex => {
-    let exLine = document.createElement('div');
-    exLine.className = 'example';
-    exLine.textContent = ex;
-    exDiv.appendChild(exLine);
-  });
-  exPopup.appendChild(exDiv);
-
-  document.getElementById('story').appendChild(exPopup);
-
-  // Clamp if needed
-  let exRect = exPopup.getBoundingClientRect();
-  if (exRect.bottom > storyRect.bottom) {
-    exPopup.style.top = Math.max(storyRect.height - exPopup.offsetHeight - 8, 0) + 'px';
-  }
-}
-
-document.getElementById('story-text').addEventListener('click', function(e) {
-  let target = e.target;
-  if (!target.classList.contains('clickable')) return;
-  removePopups();
-  target.classList.add('highlighted');
-  let word = target.getAttribute('data-word');
-  let rect = target.getBoundingClientRect();
-  let storyRect = document.getElementById('story').getBoundingClientRect();
-  let wordLower = word.toLowerCase();
-  if (isPreposition(wordLower)) {
-    let defs = getPrepositionDefinitions(wordLower);
-    createPopup(word, rect, storyRect, true, defs);
-  } else {
-    createPopup(word, rect, storyRect, false, null);
-  }
-});
-
-// Close popups on click outside
-document.addEventListener('click', function(e) {
-  let isPopup = e.target.closest('.popup');
-  let isClickable = e.target.classList.contains('clickable');
-  if (!isPopup && !isClickable) {
-    removePopups();
-  }
-});
-</script>
+    // Reposition popups on window resize
+    window.addEventListener('resize', function() {
+      const active = document.querySelector('.uword.active');
+      const popup = document.querySelector('.popup:not(.def-popup)');
+      if (active && popup) positionPopup(active, popup);
+      const defBtn = document.querySelector('.popup-def-choice.selected');
+      const defPopup = document.querySelector('.popup.def-popup');
+      if (defBtn && defPopup) positionDefPopup(defBtn, defPopup);
+    });
+  </script>
 </body>
 </html>
