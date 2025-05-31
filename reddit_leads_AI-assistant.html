@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Leads Assistant</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f6f7f8;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #ff4500;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            background-color: #f1f1f1;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab-button:hover {
+            background-color: #ddd;
+        }
+        
+        .tab-button.active {
+            background-color: #ff4500;
+            color: white;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #e03d00;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* Status Messages */
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            min-height: 40px; /* Ensure space for message */
+        }
+        
+        .status-error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .status-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .status-warning {
+            background-color: #fff8e1;
+            color: #f57f17;
+            border: 1px solid #ffe082;
+        }
+        
+        .status-info {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #90caf9;
+        }
+        
+        /* Results Styling */
+        .results-container {
+            max-height: 600px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        
+        .post-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .post-metadata {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .post-content {
+            margin-bottom: 15px;
+            white-space: pre-wrap; /* Preserve line breaks */
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+        }
+        
+        .post-actions button {
+            margin-left: 10px;
+            margin-top: 5px; /* Add space when wrapping */
+        }
+
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Checkbox Styling */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
+            
+            .post-actions {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            .post-actions button {
+                width: auto; /* Don't force full width */
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border-left-color: #ff4500;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .pagination button {
+            margin: 0 5px;
+        }
+        
+        /* Subreddit Pills */
+        .subreddit-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        
+        .subreddit-pill {
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+        
+        /* Copy Button */
+        .copy-button {
+            background-color: #4CAF50;
+        }
+        
+        .copy-button:hover {
+            background-color: #388e3c;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Reddit Leads Assistant</h1>
+        <p>Find and engage with posts about children's reading difficulties</p>
+    </header>
+    
+    <div class="tabs">
+        <button class="tab-button active" data-tab="find-posts">🔍 Find Posts</button>
+        <button class="tab-button" data-tab="review-results">📋 Review Results</button>
+        <button class="tab-button" data-tab="generate-response">💬 Generate Response</button>
+    </div>
+    
+    <!-- Find Posts Tab -->
+    <div id="find-posts" class="tab-content active">
+        <h2>Search for Posts</h2>
+        <div class="form-group">
+            <label for="search-term">Search Term:</label>
+            <select id="search-term">
+                <!-- Will be populated by JavaScript -->
+            </select>
+        </div>
+        
+        <div class="subreddit-list">
+            <div class="subreddit-pill">r/Parenting</div>
+            <div class="subreddit-pill">r/homeschool</div>
+            <div class="subreddit-pill">r/Teachers</div>
+            <div class="subreddit-pill">r/ADHD</div>
+            <div class="subreddit-pill">r/ElementaryTeachers</div>
+            <div class="subreddit-pill">r/ScienceBasedParenting</div>
+            <div class="subreddit-pill">r/Reading</div>
+            <div class="subreddit-pill">r/HomeworkHelp</div>
+        </div>
+        
+        <div class="checkbox-container">
+            <input type="checkbox" id="use-proxy" checked>
+            <label for="use-proxy">Use CORS Proxy (recommended)</label>
+        </div>
+        
+        <button id="search-button">Search Reddit</button>
+        
+        <div class="progress-container" id="search-progress-container" style="display: none;">
+            <div class="progress-bar" id="search-progress-bar"></div>
+        </div>
+        
+        <div id="search-status" class="status"></div>
+        
+        <div id="proxy-instructions" style="display: none;" class="status status-info">
+            <h3>Local Server Setup Instructions</h3>
+            <p>To run without a CORS proxy, you need to start a local Python HTTP server:</p>
+            <ol>
+                <li>Open a command prompt or terminal</li>
+                <li>Navigate to the directory containing this HTML file</li>
+                <li>Run: <code>python -m http.server 8000</code> (Python 3) or <code>python -m SimpleHTTPServer 8000</code> (Python 2)</li>
+                <li>Open <a href="http://localhost:8000" target="_blank">http://localhost:8000</a> in your browser</li>
+                <li>Navigate to this file</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Review Results Tab -->
+    <div id="review-results" class="tab-content">
+        <h2>Search Results</h2>
+        <div id="results-info"></div>
+        <div id="results-container" class="results-container"></div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+    
+    <!-- Generate Response Tab -->
+    <div id="generate-response" class="tab-content">
+        <h2>Generate Response</h2>
+        <div id="no-post-selected" class="status status-info">
+            <p>Please select a post from the Review Results tab first.</p>
+        </div>
+        
+        <div id="response-form" style="display: none;">
+            <div class="form-group">
+                <label for="post-title">Post Title:</label>
+                <input type="text" id="post-title" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="response-text">Response Message:</label>
+                <textarea id="response-text"></textarea>
+            </div>
+            
+            <div id="response-status" class="status"></div> <!-- Added status area here -->
+
+            <div class="post-actions">
+                <button id="copy-response" class="copy-button">Copy Response Only</button>
+                <button id="comment-button">Copy & Open Comment</button>
+                <button id="dm-button">Copy & Open DM</button>
+            </div>
+            <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">Note: Clicking 'Copy & Open Comment' or 'Copy & Open DM' will copy the message text to your clipboard and open the relevant Reddit page. You will need to manually paste the text on Reddit due to browser security restrictions.</p>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="server-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Local Server Setup</h2>
+            <p>To run without a CORS proxy, you need to start a local Python HTTP server:</p>
+            <ol>
+                <li>Open a command prompt or terminal</li>
+                <li>Navigate to the directory containing this HTML file</li>
+                <li>Run: <code>python -m http.server 8000</code> (Python 3) or <code>python -m SimpleHTTPServer 8000</code> (Python 2)</li>
+                <li>Open <a href="http://localhost:8000" target="_blank">http://localhost:8000</a> in your browser</li>
+                <li>Navigate to this file</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div id="mod-warning-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>⚠️ Warning: Moderator Post</h2>
+            <p>This post was created by a moderator. It is recommended not to DM or comment on moderator posts.</p>
+            <button id="close-mod-warning">I Understand</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Reddit Leads Assistant | Use responsibly and in compliance with Reddit's terms of service</p>
+    </footer>
+    
+    <script>
+        // Search Terms and Specific Problems Data
+        const searchTermsData = [
+            {
+                "Search-Term": "reading comprehension",
+                "Specific-Problem": "your reader not understanding what they read"
+            },
+            {
+                "Search-Term": "child struggles with reading",
+                "Specific-Problem": "your child struggling with reading"
+            },
+            {
+                "Search-Term": "can't understand what they read",
+                "Specific-Problem": "your child not understanding what they read"
+            },
+            {
+                "Search-Term": "trouble following stories",
+                "Specific-Problem": "your child having trouble following stories"
+            },
+            {
+                "Search-Term": "reads but doesn't remember",
+                "Specific-Problem": "your child reading but not remembering"
+            },
+            {
+                "Search-Term": "finds reading difficult",
+                "Specific-Problem": "your child finding reading difficult"
+            },
+            {
+                "Search-Term": "avoids reading",
+                "Specific-Problem": "your child avoiding reading"
+            },
+            {
+                "Search-Term": "frustrated with reading homework",
+                "Specific-Problem": "reading homework frustration"
+            },
+            {
+                "Search-Term": "worried about reading level",
+                "Specific-Problem": "worrying about your child's reading level"
+            },
+            {
+                "Search-Term": "child doesn't like reading",
+                "Specific-Problem": "your child not liking reading"
+            },
+            {
+                "Search-Term": "child gets lost in stories",
+                "Specific-Problem": "your child getting lost in stories"
+            },
+            {
+                "Search-Term": "child can't answer questions about reading",
+                "Specific-Problem": "your child can't answer reading questions"
+            },
+            {
+                "Search-Term": "child skips reading assignments",
+                "Specific-Problem": "your child skipping reading assignments"
+            },
+            {
+                "Search-Term": "reading takes too long for my child",
+                "Specific-Problem": "reading taking too long for your child"
+            },
+            {
+                "Search-Term": "child has trouble with reading tests",
+                "Specific-Problem": "your child having trouble with reading tests"
+            },
+            {
+                "Search-Term": "can't focus on reading",
+                "Specific-Problem": "your child not focusing on reading"
+            },
+            {
+                "Search-Term": "child feels embarrassed about reading",
+                "Specific-Problem": "your child feeling embarrassed about reading"
+            },
+            {
+                "Search-Term": "child falls behind in reading class",
+                "Specific-Problem": "your child falling behind in reading class"
+            },
+            {
+                "Search-Term": "child needs help with reading",
+                "Specific-Problem": "knowing how to help your child with reading"
+            },
+            {
+                "Search-Term": "child reads slowly",
+                "Specific-Problem": "your child reading slowly"
+            },
+            {
+                "Search-Term": "child can't retell what they read",
+                "Specific-Problem": "your child not being able to retell what they read"
+            },
+            {
+                "Search-Term": "child doesn't finish books",
+                "Specific-Problem": "your child not finishing books"
+            },
+            {
+                "Search-Term": "child struggles with new vocabulary",
+                "Specific-Problem": "your child struggling with new vocabulary"
+            },
+            {
+                "Search-Term": "child doesn't enjoy story time",
+                "Specific-Problem": "your child not enjoying story time"
+            },
+            {
+                "Search-Term": "child complains about reading",
+                "Specific-Problem": "your child complaining about reading"
+            },
+            {
+                "Search-Term": "child mixes up details in stories",
+                "Specific-Problem": "your child mixing up details in stories"
+            },
+            {
+                "Search-Term": "child forgets what they just read",
+                "Specific-Problem": "your child forgetting what they just read"
+            },
+            {
+                "Search-Term": "child forgets what they read right away",
+                "Specific-Problem": "your child forgetting what they read right away"
+            },
+            {
+                "Search-Term": "child reads words but doesn't grasp meaning",
+                "Specific-Problem": "your child reading words but not grasping meaning"
+            },
+            {
+                "Search-Term": "child can't summarize a story",
+                "Specific-Problem": "your child not being able to summarize a story"
+            },
+            {
+                "Search-Term": "child can't make connections between stories",
+                "Specific-Problem": "your child not making connections between stories"
+            },
+            {
+                "Search-Term": "child struggles with reading instructions",
+                "Specific-Problem": "your child struggling with reading instructions"
+            },
+            {
+                "Search-Term": "child gets anxious about reading aloud",
+                "Specific-Problem": "your child getting anxious about reading aloud"
+            },
+            {
+                "Search-Term": "child can't follow along during group reading",
+                "Specific-Problem": "your child not following along during group reading"
+            },
+            {
+                "Search-Term": "child doesn't ask questions about stories",
+                "Specific-Problem": "your child not asking questions about stories"
+            },
+            {
+                "Search-Term": "child can't identify main idea",
+                "Specific-Problem": "your child not identifying the main idea"
+            },
+            {
+                "Search-Term": "child can't pick out details from a text",
+                "Specific-Problem": "your child not picking out details from text"
+            },
+            {
+                "Search-Term": "child doesn't infer meaning from context",
+                "Specific-Problem": "your child not inferring meaning from context"
+            },
+            {
+                "Search-Term": "child guesses at words instead of reading",
+                "Specific-Problem": "your child guessing at words instead of reading"
+            },
+            {
+                "Search-Term": "child gets bored during reading",
+                "Specific-Problem": "your child getting bored during reading"
+            },
+            {
+                "Search-Term": "child avoids chapter books",
+                "Specific-Problem": "your child avoiding chapter books"
+            },
+            {
+                "Search-Term": "child only wants to look at pictures",
+                "Specific-Problem": "your child only wanting to look at pictures"
+            },
+            {
+                "Search-Term": "child struggles with comprehension questions",
+                "Specific-Problem": "your child struggling with comprehension questions"
+            },
+            {
+                "Search-Term": "child can't predict what will happen next in a story",
+                "Specific-Problem": "your child not predicting what happens next in stories"
+            },
+            {
+                "Search-Term": "child doesn't understand figurative language",
+                "Specific-Problem": "your child not understanding figurative language"
+            },
+            {
+                "Search-Term": "child reads but doesn't engage with the material",
+                "Specific-Problem": "your child reading but not engaging with the material"
+            },
+            {
+                "Search-Term": "child can't follow multi-step directions in reading",
+                "Specific-Problem": "your child not following multi-step directions in reading"
+            },
+            {
+                "Search-Term": "child's reading level is below grade average",
+                "Specific-Problem": "your child's reading level being below grade average"
+            },
+            {
+                "Search-Term": "child's teacher says they're behind in reading",
+                "Specific-Problem": "your child being behind in reading according to their teacher"
+            },
+            {
+                "Search-Term": "child tunes out during reading time",
+                "Specific-Problem": "your child tuning out during reading time"
+            },
+            {
+                "Search-Term": "child is easily distracted when reading",
+                "Specific-Problem": "your child being easily distracted when reading"
+            },
+            {
+                "Search-Term": "child doesn't participate in reading discussions",
+                "Specific-Problem": "your child not participating in reading discussions"
+            },
+            {
+                "Search-Term": "child can't retell stories in their own words",
+                "Specific-Problem": "your child not retelling stories in their own words"
+            },
+            {
+                "Search-Term": "child cannot sequence events from a story",
+                "Specific-Problem": "your child not sequencing events from a story"
+            },
+            {
+                "Search-Term": "child doesn't finish reading assignments",
+                "Specific-Problem": "your child not finishing reading assignments"
+            },
+            {
+                "Search-Term": "child complains reading is too hard",
+                "Specific-Problem": "your child complaining reading is too hard"
+            },
+            {
+                "Search-Term": "child says reading is boring",
+                "Specific-Problem": "your child saying reading is boring"
+            },
+            {
+                "Search-Term": "child doesn't like reading out loud",
+                "Specific-Problem": "your child not liking to read out loud"
+            },
+            {
+                "Search-Term": "child can't answer questions about a story",
+                "Specific-Problem": "your child not answering questions about stories"
+            },
+            {
+                "Search-Term": "child gets upset during reading homework",
+                "Specific-Problem": "your child getting upset during reading homework"
+            },
+            {
+                "Search-Term": "child struggles with reading comprehension tests",
+                "Specific-Problem": "your child struggling with reading comprehension tests"
+            },
+            {
+                "Search-Term": "child doesn't understand what characters are feeling",
+                "Specific-Problem": "your child not understanding what characters are feeling"
+            },
+            {
+                "Search-Term": "child can't relate stories to their own life",
+                "Specific-Problem": "your child not relating stories to their own life"
+            },
+            {
+                "Search-Term": "child's reading confidence is low",
+                "Specific-Problem": "your child's low reading confidence"
+            },
+            {
+                "Search-Term": "child's grades are dropping because of reading",
+                "Specific-Problem": "your child's grades dropping because of reading"
+            },
+            {
+                "Search-Term": "child's reading progress is slow",
+                "Specific-Problem": "your child's slow reading progress"
+            },
+            {
+                "Search-Term": "child says they hate reading",
+                "Specific-Problem": "your child saying they hate reading"
+            },
+            {
+                "Search-Term": "how can I get my child to read more",
+                "Specific-Problem": "getting your child to read more"
+            },
+            {
+                "Search-Term": "how can I get my child to enjoy reading",
+                "Specific-Problem": "getting your child to enjoy reading"
+            },
+            {
+                "Search-Term": "how can I get my child to finish books",
+                "Specific-Problem": "getting your child to finish books"
+            },
+            {
+                "Search-Term": "how can I get my child to understand what they read",
+                "Specific-Problem": "getting your child to understand what they read"
+            },
+            {
+                "Search-Term": "how can I get my child to remember what they read",
+                "Specific-Problem": "getting your child to remember what they read"
+            },
+            {
+                "Search-Term": "how can I get my child to focus on reading",
+                "Specific-Problem": "getting your child to focus on reading"
+            },
+            {
+                "Search-Term": "how can I get my child to answer questions about stories",
+                "Specific-Problem": "getting your child to answer questions about stories"
+            },
+            {
+                "Search-Term": "how can I get my child to read chapter books",
+                "Specific-Problem": "getting your child to read chapter books"
+            },
+            {
+                "Search-Term": "how can I get my child to read without complaining",
+                "Specific-Problem": "getting your child to read without complaining"
+            },
+            {
+                "Search-Term": "how can I get my child to participate in reading homework",
+                "Specific-Problem": "getting your child to participate in reading homework"
+            },
+            {
+                "Search-Term": "how can I get my child to read aloud with confidence",
+                "Specific-Problem": "getting your child to read aloud with confidence"
+            },
+            {
+                "Search-Term": "how can I get my child to stop skipping reading assignments",
+                "Specific-Problem": "getting your child to stop skipping reading assignments"
+            },
+            {
+                "Search-Term": "how can I get my child to talk about stories",
+                "Specific-Problem": "getting your child to talk about stories"
+            },
+            {
+                "Search-Term": "how can I get my child to ask questions while reading",
+                "Specific-Problem": "getting your child to ask questions while reading"
+            },
+            {
+                "Search-Term": "how can I get my child to read every day",
+                "Specific-Problem": "getting your child to read every day"
+            },
+            {
+                "Search-Term": "how can I get my child to try harder books",
+                "Specific-Problem": "getting your child to try harder books"
+            },
+            {
+                "Search-Term": "how can I get my child to enjoy story time",
+                "Specific-Problem": "getting your child to enjoy story time"
+            },
+            {
+                "Search-Term": "how can I get my child to improve reading comprehension",
+                "Specific-Problem": "getting your child to improve reading comprehension"
+            },
+            {
+                "Search-Term": "how can I get my child to retell stories",
+                "Specific-Problem": "getting your child to retell stories"
+            },
+            {
+                "Search-Term": "how can I get my child to like reading",
+                "Specific-Problem": "getting your child to like reading"
+            },
+            {
+                "Search-Term": "best books for reluctant readers",
+                "Specific-Problem": "finding books that engage reluctant readers"
+            },
+            {
+                "Search-Term": "how to make reading fun for kids",
+                "Specific-Problem": "making reading enjoyable for your child"
+            },
+            {
+                "Search-Term": "reading strategies for struggling readers",
+                "Specific-Problem": "helping your child with effective reading strategies"
+            },
+            {
+                "Search-Term": "how to build reading stamina in kids",
+                "Specific-Problem": "improving your child's reading endurance"
+            },
+            {
+                "Search-Term": "signs of dyslexia in children",
+                "Specific-Problem": "recognizing potential dyslexia in your child"
+            },
+            {
+                "Search-Term": "how to help a child with reading anxiety",
+                "Specific-Problem": "supporting your child with reading-related anxiety"
+            },
+            {
+                "Search-Term": "reading apps for struggling readers",
+                "Specific-Problem": "finding apps to help your child with reading"
+            },
+            {
+                "Search-Term": "how to encourage independent reading",
+                "Specific-Problem": "fostering your child's independent reading habits"
+            },
+            {
+                "Search-Term": "reading games for kids who hate reading",
+                "Specific-Problem": "engaging your child with reading through games"
+            },
+            {
+                "Search-Term": "how to improve fluency in reading",
+                "Specific-Problem": "helping your child read more fluently"
+            },
+            {
+                "Search-Term": "how to teach reading comprehension at home",
+                "Specific-Problem": "teaching reading comprehension skills at home"
+            },
+            {
+                "Search-Term": "how to motivate a child to read",
+                "Specific-Problem": "increasing your child's motivation to read"
+            },
+            {
+                "Search-Term": "reading rewards systems for kids",
+                "Specific-Problem": "using rewards to encourage reading"
+            },
+            {
+                "Search-Term": "how to choose the right books for my child's level",
+                "Specific-Problem": "selecting books that match your child's reading level"
+            },
+            {
+                "Search-Term": "how to help a child who reverses letters",
+                "Specific-Problem": "addressing letter reversal issues in reading"
+            },
+            {
+                "Search-Term": "reading tutors near me",
+                "Specific-Problem": "finding local reading tutors for your child"
+            },
+            {
+                "Search-Term": "how to make reading a habit",
+                "Specific-Problem": "helping your child develop a daily reading habit"
+            },
+            {
+                "Search-Term": "how to support a bilingual child with reading",
+                "Specific-Problem": "assisting your bilingual child with reading skills"
+            },
+            {
+                "Search-Term": "how to help a child who struggles with sight words",
+                "Specific-Problem": "improving your child's sight word recognition"
+            },
+            {
+                "Search-Term": "how to use graphic novels to improve reading",
+                "Specific-Problem": "using graphic novels to engage your child in reading"
+            },
+            {
+                "Search-Term": "how to help a child with reading retention",
+                "Specific-Problem": "improving your child's ability to retain what they read"
+            },
+            {
+                "Search-Term": "how to encourage critical thinking through reading",
+                "Specific-Problem": "fostering critical thinking skills in your child via reading"
+            },
+            {
+                "Search-Term": "how to help a child who struggles with nonfiction",
+                "Specific-Problem": "supporting your child with nonfiction reading"
+            },
+            {
+                "Search-Term": "how to set reading goals for my child",
+                "Specific-Problem": "establishing achievable reading goals for your child"
+            },
+            {
+                "Search-Term": "how to make reading a family activity",
+                "Specific-Problem": "incorporating reading into family time"
+            },
+            {
+                "Search-Term": "how to help a child who struggles with poetry",
+                "Specific-Problem": "supporting your child with poetry comprehension"
+            },
+            {
+                "Search-Term": "how to use technology to improve reading",
+                "Specific-Problem": "leveraging technology to enhance your child's reading skills"
+            },
+            {
+                "Search-Term": "how to help a child who struggles with reading aloud",
+                "Specific-Problem": "improving your child's confidence and skill in reading aloud"
+            }
+        ];
+        
+        // CORS Proxies
+        const corsProxies = [
+            { url: "https://corsproxy.io/?", status: "active", failures: 0 },
+            // { url: "https://cors-anywhere.herokuapp.com/", status: "active", failures: 0 }, // Often rate-limited or down
+            { url: "https://api.allorigins.win/raw?url=", status: "active", failures: 0 },
+            // { url: "https://cors.bridged.cc/", status: "active", failures: 0 }, // Often unreliable
+            { url: "https://thingproxy.freeboard.io/fetch/", status: "active", failures: 0 }
+        ];
+        
+        // Subreddits to search
+        const subreddits = [
+            "Parenting",
+            "homeschool",
+            "Teachers",
+            "ADHD",
+            "ElementaryTeachers",
+            "ScienceBasedParenting",
+            "Reading",
+            "HomeworkHelp"
+        ];
+        
+        // Global variables
+        let currentProxyIndex = 0;
+        let searchResults = [];
+        let currentPage = 1;
+        let postsPerPage = 5;
+        let selectedPost = null;
+        let lastSearchTime = 0;
+        let searchCooldown = 30000; // 30 seconds in milliseconds
+        let searchInProgress = false;
+        
+        // DOM Elements
+        const searchTermSelect = document.getElementById('search-term');
+        const useProxyCheckbox = document.getElementById('use-proxy');
+        const searchButton = document.getElementById('search-button');
+        const searchProgressContainer = document.getElementById('search-progress-container');
+        const searchProgressBar = document.getElementById('search-progress-bar');
+        const searchStatus = document.getElementById('search-status');
+        const proxyInstructions = document.getElementById('proxy-instructions');
+        const resultsContainer = document.getElementById('results-container');
+        const resultsInfo = document.getElementById('results-info');
+        const paginationContainer = document.getElementById('pagination');
+        const noPostSelected = document.getElementById('no-post-selected');
+        const responseForm = document.getElementById('response-form');
+        const postTitleInput = document.getElementById('post-title');
+        const responseTextarea = document.getElementById('response-text');
+        const responseStatus = document.getElementById('response-status'); // Added
+        const copyResponseButton = document.getElementById('copy-response');
+        const commentButton = document.getElementById('comment-button');
+        const dmButton = document.getElementById('dm-button');
+        const serverModal = document.getElementById('server-modal');
+        const modWarningModal = document.getElementById('mod-warning-modal');
+        const closeModals = document.querySelectorAll('.close-modal');
+        const closeModWarningButton = document.getElementById('close-mod-warning');
+        
+        // Initialize the application
+        function init() {
+            populateSearchTerms();
+            setupEventListeners();
+            checkLocalhost();
+            showStatus('Ready to search.', 'info', 'search-status');
+            showStatus('', 'info', 'response-status'); // Clear response status initially
+        }
+        
+        function populateSearchTerms() {
+            searchTermSelect.innerHTML = '';
+            searchTermsData.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item['Search-Term'];
+                option.textContent = item['Search-Term'];
+                searchTermSelect.appendChild(option);
+            });
+        }
+        
+        function setupEventListeners() {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            searchButton.addEventListener('click', startSearch);
+            useProxyCheckbox.addEventListener('change', toggleProxyInstructions);
+            copyResponseButton.addEventListener('click', copyResponseOnly);
+            commentButton.addEventListener('click', prepareComment);
+            dmButton.addEventListener('click', prepareDM);
+            closeModals.forEach(closeBtn => {
+                closeBtn.addEventListener('click', () => {
+                    serverModal.style.display = 'none';
+                    modWarningModal.style.display = 'none';
+                });
+            });
+            closeModWarningButton.addEventListener('click', () => {
+                modWarningModal.style.display = 'none';
+            });
+            window.addEventListener('click', (event) => {
+                if (event.target === serverModal) serverModal.style.display = 'none';
+                if (event.target === modWarningModal) modWarningModal.style.display = 'none';
+            });
+        }
+        
+        function checkLocalhost() {
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            if (isLocalhost) {
+                useProxyCheckbox.checked = false;
+                toggleProxyInstructions(); // Show instructions if local
+            }
+        }
+        
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
+        }
+        
+        function toggleProxyInstructions() {
+            if (!useProxyCheckbox.checked) {
+                proxyInstructions.style.display = 'block';
+                // Only show modal automatically if not on localhost already
+                if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+                     serverModal.style.display = 'flex'; // Use flex for centering
+                }
+            } else {
+                proxyInstructions.style.display = 'none';
+            }
+        }
+        
+        function startSearch() {
+            const now = Date.now();
+            const timeSinceLastSearch = now - lastSearchTime;
+            
+            if (searchInProgress) {
+                showStatus('A search is already in progress. Please wait.', 'warning', 'search-status');
+                return;
+            }
+            
+            if (timeSinceLastSearch < searchCooldown) {
+                const remainingTime = Math.ceil((searchCooldown - timeSinceLastSearch) / 1000);
+                showStatus(`Please wait ${remainingTime} seconds before searching again.`, 'warning', 'search-status');
+                return;
+            }
+            
+            const searchTerm = searchTermSelect.value;
+            if (!searchTerm) {
+                showStatus('Please select a search term.', 'error', 'search-status');
+                return;
+            }
+            
+            searchInProgress = true;
+            lastSearchTime = now;
+            searchResults = [];
+            currentPage = 1; // Reset page
+            resultsContainer.innerHTML = ''; // Clear previous results
+            resultsInfo.textContent = '';
+            paginationContainer.innerHTML = '';
+
+            showStatus('Searching Reddit...', 'info', 'search-status');
+            searchProgressContainer.style.display = 'block';
+            searchProgressBar.style.width = '0%';
+            searchButton.disabled = true;
+            
+            searchSubreddits(searchTerm, 0);
+        }
+        
+        function searchSubreddits(searchTerm, index) {
+            if (index >= subreddits.length) {
+                finishSearch();
+                return;
+            }
+            
+            const progress = Math.floor(((index + 1) / subreddits.length) * 100);
+            searchProgressBar.style.width = `${progress}%`;
+            
+            const subreddit = subreddits[index];
+            showStatus(`Searching r/${subreddit}... (${index + 1}/${subreddits.length})`, 'info', 'search-status');
+            
+            searchReddit(searchTerm, subreddit)
+                .then(results => {
+                    if (results && results.length > 0) {
+                        searchResults = searchResults.concat(results);
+                    }
+                    setTimeout(() => searchSubreddits(searchTerm, index + 1), 500 + Math.random() * 1000); // Shorter delay
+                })
+                .catch(error => {
+                    console.error(`Error searching r/${subreddit}:`, error);
+                    showStatus(`Error searching r/${subreddit}. Trying next...`, 'warning', 'search-status');
+                    setTimeout(() => searchSubreddits(searchTerm, index + 1), 500);
+                });
+        }
+        
+        function searchReddit(searchTerm, subreddit) {
+            return new Promise((resolve, reject) => {
+                const useProxy = useProxyCheckbox.checked;
+                let url = `https://www.reddit.com/r/${subreddit}/search.json?q=${encodeURIComponent(searchTerm)}&restrict_sr=on&sort=new&t=month&limit=50`; // Search last month, limit 50
+                let fetchUrl = url;
+                let currentProxy = null;
+
+                if (useProxy) {
+                    currentProxy = getActiveProxy();
+                    if (!currentProxy) {
+                        reject(new Error('No working CORS proxies available. Try again later or use local server mode.'));
+                        return;
+                    }
+                    fetchUrl = currentProxy.url + encodeURIComponent(url);
+                }
+                
+                fetch(fetchUrl, { signal: AbortSignal.timeout(15000) }) // 15 second timeout
+                    .then(response => {
+                        if (!response.ok) {
+                             throw new Error(`HTTP error ${response.status} from ${useProxy ? 'proxy' : 'Reddit'}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (useProxy && currentProxy) markProxySuccess(currentProxy.index);
+                        
+                        if (!data.data || !data.data.children) {
+                            resolve([]);
+                            return;
+                        }
+                        
+                        const processedResults = data.data.children
+                            .map(child => child.data) // Extract data object
+                            .filter(post => post && post.author && !post.author_is_mod) // Ensure author exists and is not mod
+                            .filter(post => {
+                                const title = (post.title || '').toLowerCase();
+                                const selftext = (post.selftext || '').toLowerCase();
+                                const term = searchTerm.toLowerCase();
+                                return title.includes(term) || selftext.includes(term);
+                            })
+                            .map(post => ({
+                                id: post.id,
+                                title: post.title,
+                                author: post.author,
+                                author_is_mod: post.author_is_mod || false,
+                                created_utc: post.created_utc,
+                                selftext: post.selftext,
+                                subreddit: post.subreddit,
+                                permalink: post.permalink,
+                                url: post.url,
+                                num_comments: post.num_comments,
+                                score: post.score,
+                                searchTerm: searchTerm
+                            }));
+                        
+                        resolve(processedResults);
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', url, error);
+                        if (useProxy && currentProxy) markProxyFailure(currentProxy.index);
+                        reject(error);
+                    });
+            });
+        }
+        
+        function getActiveProxy() {
+            const maxFailures = 3;
+            let attempts = 0;
+            while (attempts < corsProxies.length) {
+                 const proxy = corsProxies[currentProxyIndex];
+                 if (proxy.status === 'active' && proxy.failures < maxFailures) {
+                     return { url: proxy.url, index: currentProxyIndex };
+                 }
+                 currentProxyIndex = (currentProxyIndex + 1) % corsProxies.length;
+                 attempts++;
+            }
+
+            // If all proxies failed recently, maybe reset one?
+            // For now, just return null if none are suitable.
+            console.warn("No active proxies found.");
+            return null;
+        }
+        
+        function markProxySuccess(index) {
+            corsProxies[index].failures = 0; // Reset failures on success
+            corsProxies[index].status = 'active';
+            // console.log(`Proxy ${index} success.`);
+        }
+        
+        function markProxyFailure(index) {
+            corsProxies[index].failures++;
+            console.warn(`Proxy ${index} failure count: ${corsProxies[index].failures}`);
+            if (corsProxies[index].failures >= 3) {
+                corsProxies[index].status = 'inactive';
+                console.error(`Proxy ${index} marked as inactive.`);
+            }
+            // Move to next proxy immediately after failure
+            currentProxyIndex = (currentProxyIndex + 1) % corsProxies.length;
+        }
+        
+        function finishSearch() {
+            searchProgressBar.style.width = '100%';
+            searchInProgress = false;
+            searchButton.disabled = false;
+            
+            searchResults.sort((a, b) => b.created_utc - a.created_utc);
+            
+            if (searchResults.length === 0) {
+                showStatus('No relevant, non-moderator posts found. Try a different search term or check subreddits.', 'warning', 'search-status');
+            } else {
+                showStatus(`Found ${searchResults.length} potential leads.`, 'success', 'search-status');
+                displayResults();
+                switchTab('review-results');
+            }
+            
+            setTimeout(() => {
+                searchProgressContainer.style.display = 'none';
+            }, 2000);
+        }
+        
+        function displayResults() {
+            resultsInfo.textContent = `Showing ${searchResults.length} posts.`;
+            const totalPages = Math.ceil(searchResults.length / postsPerPage);
+            const startIndex = (currentPage - 1) * postsPerPage;
+            const endIndex = Math.min(startIndex + postsPerPage, searchResults.length);
+            
+            resultsContainer.innerHTML = '';
+            
+            if (searchResults.length === 0) {
+                 resultsContainer.innerHTML = '<p>No results to display.</p>';
+                 paginationContainer.innerHTML = '';
+                 return;
+            }
+
+            for (let i = startIndex; i < endIndex; i++) {
+                displayPost(searchResults[i]);
+            }
+            updatePagination(totalPages);
+        }
+        
+        function displayPost(post) {
+            const postElement = document.createElement('div');
+            postElement.className = 'post-card';
+            const date = new Date(post.created_utc * 1000);
+            const formattedDate = date.toLocaleString();
+            const highlightedTitle = highlightSearchTerm(post.title, post.searchTerm);
+            const highlightedContent = highlightSearchTerm(post.selftext, post.searchTerm);
+            
+            postElement.innerHTML = `
+                <div class="post-metadata">
+                    <strong>Date:</strong> ${formattedDate} | 
+                    <strong>Subreddit:</strong> r/${post.subreddit} | 
+                    <strong>Author:</strong> u/${post.author} | 
+                    <strong>Upvotes:</strong> ${post.score} | 
+                    <strong>Comments:</strong> ${post.num_comments} |
+                    <strong>Search Term:</strong> "${post.searchTerm}"
+                </div>
+                <div class="post-title">${highlightedTitle}</div>
+                <div class="post-content">${highlightedContent || '(No post text)'}</div>
+                <div class="post-actions">
+                    <button class="generate-response-button" data-post-id="${post.id}">Generate Response</button>
+                </div>
+            `;
+            
+            postElement.querySelector('.generate-response-button').addEventListener('click', () => {
+                // Find the full post object from the results array using ID
+                const fullPost = searchResults.find(p => p.id === post.id);
+                if (fullPost) {
+                    selectPost(fullPost);
+                } else {
+                    console.error("Could not find post data for ID:", post.id);
+                    showStatus("Error selecting post data.", 'error', 'response-status');
+                }
+            });
+            
+            resultsContainer.appendChild(postElement);
+        }
+        
+        function highlightSearchTerm(text, searchTerm) {
+            if (!text) return '';
+            const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escapedSearchTerm})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+        
+        function updatePagination(totalPages) {
+            paginationContainer.innerHTML = '';
+            if (totalPages <= 1) return;
+
+            const createButton = (text, pageNum, isDisabled = false) => {
+                const button = document.createElement('button');
+                button.textContent = text;
+                button.disabled = isDisabled;
+                if (pageNum) {
+                    button.addEventListener('click', () => {
+                        currentPage = pageNum;
+                        displayResults();
+                    });
+                }
+                return button;
+            };
+
+            paginationContainer.appendChild(createButton('Previous', currentPage - 1, currentPage === 1));
+
+            // Simplified pagination display (e.g., First ... Prev Current Next ... Last)
+            paginationContainer.appendChild(createButton(currentPage, null, true)); 
+
+            paginationContainer.appendChild(createButton('Next', currentPage + 1, currentPage === totalPages));
+        }
+        
+        function selectPost(post) {
+            selectedPost = post;
+            switchTab('generate-response');
+            noPostSelected.style.display = 'none';
+            responseForm.style.display = 'block';
+            postTitleInput.value = post.title;
+            generateResponse(post);
+            showStatus('', 'info', 'response-status'); // Clear previous response status
+        }
+        
+        function generateResponse(post) {
+            const searchTermData = searchTermsData.find(item => item['Search-Term'].toLowerCase() === post.searchTerm.toLowerCase());
+            const specificProblem = searchTermData ? searchTermData['Specific-Problem'] : post.searchTerm;
+            
+            const template = `
+Most parents struggle with the problem of ${specificProblem}. Here is what is really happening. Have you ever been reading and noticed you couldn't remember what you just read? Well, this also happens to your child reader. Here's the reason why.
+When your reader goes past a word that is not understood or wrongly understood, the next parts of that book will be blank in their memory. This leads to confusion, lack of understanding, and forgetting.
+When this happens, your reader gets more and more frustrated and doesn't want to read.
+What I do is specialize in showing parents and tutors a simple method you can learn and use, which will result in a reader who can fully understand what he's reading and enjoy reading.
+I recommend this because it's the single most effective way to handle the real cause of your ${specificProblem} problem. The benefit is a reader who can now understand and learn because you know how to handle what was preventing understanding. Soon your reader will know this too.
+`;
+            
+            responseTextarea.value = template;
+        }
+
+
+
+
+        // Helper function for clipboard operations
+        async function copyTextToClipboard(text, buttonElement, successMessage) {
+            let success = false;
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                    success = true;
+                } else {
+                    // Fallback using document.execCommand
+                    const textArea = document.createElement("textarea");
+                    textArea.value = text;
+                    textArea.style.position = "fixed"; 
+                    textArea.style.left = "-9999px";
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        success = document.execCommand('copy');
+                    } catch (err) {
+                        console.error('Fallback copy failed:', err);
+                        success = false;
+                    } finally {
+                        document.body.removeChild(textArea);
+                    }
+                }
+
+                if (success) {
+                    showStatus(successMessage, 'success', 'response-status');
+                    if (buttonElement) {
+                        const originalText = buttonElement.textContent;
+                        buttonElement.textContent = 'Copied!';
+                        setTimeout(() => { buttonElement.textContent = originalText; }, 2000);
+                    }
+                } else {
+                    throw new Error('Copy command failed or not supported');
+                }
+                return true;
+            } catch (err) {
+                console.error('Clipboard copy failed: ', err);
+                showStatus('Failed to copy text automatically. Please copy it manually from the text area.', 'error', 'response-status');
+                responseTextarea.focus();
+                responseTextarea.select();
+                return false;
+            }
+        }
+
+        async function copyResponseOnly() {
+             if (!selectedPost) {
+                showStatus('No post selected.', 'error', 'response-status');
+                return;
+            }
+            const textToCopy = responseTextarea.value;
+            await copyTextToClipboard(textToCopy, copyResponseButton, 'Response text copied to clipboard!');
+        }
+        
+        async function prepareComment() {
+            if (!selectedPost) {
+                showStatus('No post selected.', 'error', 'response-status');
+                return;
+            }
+            if (selectedPost.author_is_mod) {
+                modWarningModal.style.display = 'flex';
+                return;
+            }
+            
+            const commentText = responseTextarea.value;
+            const copySuccess = await copyTextToClipboard(commentText, commentButton, 'Comment text copied! Paste it on the Reddit page.');
+
+            if (copySuccess) {
+                const commentUrl = `https://www.reddit.com${selectedPost.permalink}`;
+                window.open(commentUrl, '_blank');
+                showStatus('Comment text copied! Please paste it into the comment box on the Reddit page that just opened.', 'success', 'response-status');
+            } 
+            // No 'else' needed, copyTextToClipboard shows error status
+        }
+        
+        async function prepareDM() {
+            if (!selectedPost) {
+                showStatus('No post selected.', 'error', 'response-status');
+                return;
+            }
+            if (selectedPost.author_is_mod) {
+                modWarningModal.style.display = 'flex';
+                return;
+            }
+            
+            const dmSubject = selectedPost.title;
+            const dmText = responseTextarea.value;
+            const copySuccess = await copyTextToClipboard(dmText, dmButton, 'DM text copied! Paste it on the Reddit page.');
+
+            if (copySuccess) {
+                const dmUrl = `https://www.reddit.com/message/compose/?to=${selectedPost.author}&subject=${encodeURIComponent(dmSubject)}`;
+                window.open(dmUrl, '_blank');
+                showStatus('DM text copied! Please paste it into the message box on the Reddit page that just opened.', 'success', 'response-status');
+            }
+             // No 'else' needed, copyTextToClipboard shows error status
+        }
+        
+        // Show status message in a specific area
+        function showStatus(message, type, areaId) {
+            const statusArea = document.getElementById(areaId);
+            if (!statusArea) return; // Exit if area doesn't exist
+
+            statusArea.textContent = message;
+            statusArea.className = 'status'; // Reset classes
+            
+            switch (type) {
+                case 'error': statusArea.classList.add('status-error'); break;
+                case 'success': statusArea.classList.add('status-success'); break;
+                case 'warning': statusArea.classList.add('status-warning'); break;
+                case 'info':
+                default: statusArea.classList.add('status-info'); break;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
